@@ -4,6 +4,13 @@
 
 #pragma once
 
+struct Gate {
+	int GateTypeId;
+	int x;
+	int y;
+	Gate() {}
+	Gate(int a, int b, int c) { GateTypeId = a, x = b, y = c; }
+};
 
 class CWinProg3_testView : public CView
 {
@@ -20,6 +27,9 @@ public:
 
 	//논리게이트 구분 변수
 	int typeOfGate;
+	//논리게이트 저장 배열 변수
+	CArray<Gate,Gate&> GateArray;
+	void loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
 
 // 작업입니다.
 public:

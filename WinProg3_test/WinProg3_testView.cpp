@@ -12,6 +12,8 @@
 #include "WinProg3_testDoc.h"
 #include "WinProg3_testView.h"
 
+#include <afxtempl.h>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -52,6 +54,33 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 	return CView::PreCreateWindow(cs);
 }
 
+void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
+	switch (bmindex)
+	{
+	case 1:
+		//bitmap.LoadBitmapW(IDB_AND);
+		break;
+	case 2:
+		//bitmap.LoadBitmapW(IDB_OR);
+		break;
+	case 3:
+		bit.LoadBitmapW(IDB_NOT);
+		break;
+	case 4:
+		//bitmap.LoadBitmapW(IDB_NAND);
+		break;
+	case 5:
+		bit.LoadBitmapW(IDB_NOR);
+		break;
+	case 6:
+		bit.LoadBitmapW(IDB_XOR);
+		break;
+	default:
+		break;
+	}
+
+	bit.GetBitmap(&bminfo);
+}
 // CWinProg3_testView ±×¸®±â
 
 void CWinProg3_testView::OnDraw(CDC* pDC)
@@ -66,39 +95,28 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	if(typeOfGate != 0){
 		CBitmap bitmap;
 		BITMAP bminfo;
-		switch (typeOfGate)
-		{
-		case 1:
-			//bitmap.LoadBitmapW(IDB_AND);
-			break;
-		case 2:
-			//bitmap.LoadBitmapW(IDB_OR);
-			break;
-		case 3:
-			bitmap.LoadBitmapW(IDB_NOT);
-			break;
-		case 4:
-			//bitmap.LoadBitmapW(IDB_NAND);
-			break;
-		case 5:
-			bitmap.LoadBitmapW(IDB_NOR);
-			break;
-		case 6:
-			bitmap.LoadBitmapW(IDB_XOR);
-			break;
-		default:
-			break;
-		}
-
-		bitmap.GetBitmap(&bminfo);
 		
-		
+		loadBitmap(bitmap, bminfo, typeOfGate);
 
+		Gate temp(typeOfGate,start_x,start_y);
+
+		GateArray.Add(temp);
+		
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
-		dcmem.SelectObject(&bitmap);
+		
 	
-		if(start_x != 0)	pDC->BitBlt(start_x, start_y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+		if (start_x != 0) {
+			for (int i = 0; i < GateArray.GetSize(); i++) {
+
+				loadBitmap(bitmap, bminfo, GateArray[i].GateTypeId);
+				dcmem.SelectObject(&bitmap);
+				pDC->BitBlt(GateArray[i].x, GateArray[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+				
+
+			}
+
+		}
 	}
 }
 
