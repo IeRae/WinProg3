@@ -161,6 +161,10 @@ BEGIN
         MENUITEM "NOR (Gate)",                  ID_NOR_GATE
         MENUITEM "XOR (Gate)",                  ID_XOR_GATE
     END
+    POPUP "입력/ 출력"
+    BEGIN
+        MENUITEM "출력",                          ID_OUTPUT_BUTTON
+    END
 END
 
 
