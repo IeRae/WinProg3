@@ -15,6 +15,12 @@ protected: // serialization에서만 만들어집니다.
 public:
 	CWinProg3_testDoc* GetDocument() const;
 
+	//위치 지정 변수
+	int start_x, start_y;
+
+	//논리게이트 구분 변수
+	int typeOfGate;
+
 // 작업입니다.
 public:
 
@@ -37,6 +43,14 @@ protected:
 // 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnNandGate();
+	afx_msg void OnAndGate();
+	afx_msg void OnOrGate();
+	afx_msg void OnNotGate();
+	afx_msg void OnNorGate();
+	afx_msg void OnXorGate();
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전
