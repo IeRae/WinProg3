@@ -80,15 +80,17 @@ IDR_WinProg3_testTYPE   ICON                    "res\\WinProg3_testDoc.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
-IDB_NOT                 BITMAP                  "res\\bitmap1.bmp"
+IDB_NOT                 BITMAP                  "res\\bitmap_not.bmp"
 
-IDB_NOR                 BITMAP                  "res\\bitmap2.bmp"
+IDB_NOR                 BITMAP                  "res\\bitmap_nor.bmp"
 
-IDB_XOR                 BITMAP                  "res\\bmp00001.bmp"
+IDB_XOR                 BITMAP                  "res\\bitmap_xor.bmp"
 
-IDB_OUTPUT_TRUE         BITMAP                  "res\\bmp00002.bmp"
+IDB_AND                 BITMAP                  "res\\bitmap1.bmp"
 
-IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap3.bmp"
+IDB_OR                  BITMAP                  "res\\bmp00001.bmp"
+
+IDB_NAND                BITMAP                  "res\\bmp00003.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -145,6 +147,15 @@ BEGIN
     POPUP "도움말(&H)"
     BEGIN
         MENUITEM "WinProg3_test 정보(&A)...",     ID_APP_ABOUT
+    END
+    POPUP "논리게이트"
+    BEGIN
+        MENUITEM "AND",                         ID_AND
+        MENUITEM "OR",                          ID_OR
+        MENUITEM "NOT",                         ID_NOT
+        MENUITEM "NAND",                        ID_NAND
+        MENUITEM "NOR",                         ID_NOR
+        MENUITEM "XOR",                         ID_32776
     END
 END
 
