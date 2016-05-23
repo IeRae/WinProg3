@@ -5,9 +5,10 @@
 #pragma once
 struct Gate {
 	int GateId;
-	CPoint site;
+	int x;
+	int y;
 	Gate() {}
-	Gate(int a, int b, int c) { GateId = a; site.x = b; site.y = c; }
+	Gate(int a, int b, int c) { GateId = a; x = b; y = c; }
 };
 
 class CWinProg3_testView : public CView
@@ -21,7 +22,8 @@ public:
 	CWinProg3_testDoc* GetDocument() const;
 
 	//위치 지정 변수
-	CPoint site_start;
+	int start_x;
+	int start_y;
 
 	CArray<Gate, Gate&> Gates; // 논리게이트 객체 리스트
 	int current; //좌표 리스트의 현재위치 변수
