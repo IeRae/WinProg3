@@ -46,14 +46,26 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CWinProg3_testView 그리기
 
-void CWinProg3_testView::OnDraw(CDC* /*pDC*/)
+void CWinProg3_testView::OnDraw(CDC* pDC)
 {
 	CWinProg3_testDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-
+	
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
+
+
+	CBitmap bitmap;
+	bitmap.LoadBitmapW(IDB_XOR);
+	BITMAP bminfo;
+	bitmap.GetBitmap(&bminfo);
+
+	CDC dcmem;
+	dcmem.CreateCompatibleDC(&(*pDC));
+	dcmem.SelectObject(&bitmap);
+	
+	pDC->BitBlt(10, 10, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 }
 
 
