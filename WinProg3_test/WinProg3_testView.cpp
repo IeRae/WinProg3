@@ -57,7 +57,6 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
-	//AfxMessageBox(_T("¡¯¿‘"));
 	switch (bmindex)
 	{
 	case 1:
