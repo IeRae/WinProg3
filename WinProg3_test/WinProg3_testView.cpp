@@ -38,8 +38,9 @@ END_MESSAGE_MAP()
 CWinProg3_testView::CWinProg3_testView()
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-	start_x = start_y = 0;
+	//start_x = 0; start_y = 0;
 	typeOfGate = 0;
+	//Gates.SetSize(100);
 }
 
 CWinProg3_testView::~CWinProg3_testView()
@@ -55,6 +56,7 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 }
 
 void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
+	//AfxMessageBox(_T("진입"));
 	switch (bmindex)
 	{
 	case 1:
@@ -78,8 +80,9 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 	default:
 		break;
 	}
-
+	//AfxMessageBox(_T("분류"));
 	bit.GetBitmap(&bminfo);
+	//AfxMessageBox(_T("완료"));
 }
 // CWinProg3_testView 그리기
 
@@ -93,38 +96,23 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
 	if(typeOfGate != 0){
-		CBitmap bitmap;
-		BITMAP bminfo;
-		
-		loadBitmap(bitmap, bminfo, typeOfGate);
 
-		Gate temp(typeOfGate,start_x,start_y);
-
-		Gates.Add(temp);
-		
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
 		
-		CString msg;
-
-		msg.Format(_T("gateId : %d, x : %d, y : %d"), Gates[0].GateId, Gates[0].x, Gates[0].y);
-
-		AfxMessageBox(msg);
-
-		loadBitmap(bitmap, bminfo, Gates[0].GateId);
-		dcmem.SelectObject(&bitmap);
-		pDC->BitBlt(Gates[0].x, Gates[0].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-
-		/*
 		if (start_x != 0) {
 			for (int i = 0; i < Gates.GetSize(); i++) {
+				CBitmap bitmap;
+				BITMAP bminfo;
+
 				loadBitmap(bitmap, bminfo, Gates[i].GateId);
+				
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 			}
 
 		}
-		*/
+		
 	}
 }
 
@@ -159,8 +147,18 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CView::OnLButtonDown(nFlags, point);
 
+	CString msg;
+
 	start_x = point.x;
 	start_y = point.y;
+
+	Gate temp(typeOfGate, start_x, start_y);
+
+	Gates.Add(temp);
+
+	//msg.Format(_T("site x : %d, y : %d"), start_x, start_y);
+
+	//AfxMessageBox(msg);
 
 	Invalidate();
 }
