@@ -4,13 +4,6 @@
 
 #pragma once
 
-struct Gate {
-	int GateTypeId;
-	int x;
-	int y;
-	Gate() {}
-	Gate(int a, int b, int c) { GateTypeId = a, x = b, y = c; }
-};
 
 class CWinProg3_testView : public CView
 {
@@ -18,29 +11,28 @@ protected: // serialization에서만 만들어집니다.
 	CWinProg3_testView();
 	DECLARE_DYNCREATE(CWinProg3_testView)
 
-// 특성입니다.
+	// 특성입니다.
 public:
 	CWinProg3_testDoc* GetDocument() const;
 
 	//위치 지정 변수
 	int start_x, start_y;
 
-	//논리게이트 구분 변수
+	CArray<CPoint, CPoint&> Points; // 좌표 객체 리스트
+	int current; //좌표 리스트의 현재위치 변수
+				 //논리게이트 구분 변수
 	int typeOfGate;
-	//논리게이트 저장 배열 변수
-	CArray<Gate,Gate&> GateArray;
-	void loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
 
-// 작업입니다.
+	// 작업입니다.
 public:
 
-// 재정의입니다.
+	// 재정의입니다.
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 protected:
 
-// 구현입니다.
+	// 구현입니다.
 public:
 	virtual ~CWinProg3_testView();
 #ifdef _DEBUG
@@ -50,7 +42,7 @@ public:
 
 protected:
 
-// 생성된 메시지 맵 함수
+	// 생성된 메시지 맵 함수
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
@@ -65,6 +57,8 @@ public:
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전
 inline CWinProg3_testDoc* CWinProg3_testView::GetDocument() const
-   { return reinterpret_cast<CWinProg3_testDoc*>(m_pDocument); }
+{
+	return reinterpret_cast<CWinProg3_testDoc*>(m_pDocument);
+}
 #endif
 

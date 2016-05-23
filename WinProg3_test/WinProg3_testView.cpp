@@ -12,8 +12,6 @@
 #include "WinProg3_testDoc.h"
 #include "WinProg3_testView.h"
 
-#include <afxtempl.h>
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -54,33 +52,6 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 	return CView::PreCreateWindow(cs);
 }
 
-void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
-	switch (bmindex)
-	{
-	case 1:
-		//bitmap.LoadBitmapW(IDB_AND);
-		break;
-	case 2:
-		//bitmap.LoadBitmapW(IDB_OR);
-		break;
-	case 3:
-		bit.LoadBitmapW(IDB_NOT);
-		break;
-	case 4:
-		//bitmap.LoadBitmapW(IDB_NAND);
-		break;
-	case 5:
-		bit.LoadBitmapW(IDB_NOR);
-		break;
-	case 6:
-		bit.LoadBitmapW(IDB_XOR);
-		break;
-	default:
-		break;
-	}
-
-	bit.GetBitmap(&bminfo);
-}
 // CWinProg3_testView 그리기
 
 void CWinProg3_testView::OnDraw(CDC* pDC)
@@ -89,34 +60,53 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-	
+
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
-	if(typeOfGate != 0){
+	if (typeOfGate != 0) {
 		CBitmap bitmap;
 		BITMAP bminfo;
-		
-		loadBitmap(bitmap, bminfo, typeOfGate);
+		switch (typeOfGate)
+		{
+		case 1:
 
-		Gate temp(typeOfGate,start_x,start_y);
+			bitmap.LoadBitmapW(IDB_AND);
+			break;
+		case 2:
+			bitmap.LoadBitmapW(IDB_OR);
+			break;
+		case 3:
+			bitmap.LoadBitmapW(IDB_NOT);
+			break;
+		case 4:
+			bitmap.LoadBitmapW(IDB_NAND);
+			break;
+		case 5:
+			bitmap.LoadBitmapW(IDB_NOR);
+			break;
+		case 6:
+			bitmap.LoadBitmapW(IDB_XOR);
+			break;
+		default:
 
-		GateArray.Add(temp);
-		
+			break;
+		}
+
+		bitmap.GetBitmap(&bminfo);
+
+		//
+
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
-		
-	
-		if (start_x != 0) {
-			for (int i = 0; i < GateArray.GetSize(); i++) {
+		dcmem.SelectObject(&bitmap);
 
-				loadBitmap(bitmap, bminfo, GateArray[i].GateTypeId);
-				dcmem.SelectObject(&bitmap);
-				pDC->BitBlt(GateArray[i].x, GateArray[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-				
 
-			}
+		for (int i = 0; i < Points.GetCount(); i++) {
+
+			if (start_x != 0)	pDC->BitBlt(Points[i].x, Points[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 
 		}
+		//...
 	}
 }
 
@@ -151,8 +141,15 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CView::OnLButtonDown(nFlags, point);
 
+
+	//	start_x = point.x;
+	//	start_y = point.y;  
+
+	CPoint* points = new CPoint(point.x, point.y);
 	start_x = point.x;
 	start_y = point.y;
+	Points.Add(point);
+	current = Points.GetCount() - 1;
 
 	Invalidate();
 }
