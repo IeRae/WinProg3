@@ -60,6 +60,7 @@ public:
 	afx_msg void OnNotGate();
 	afx_msg void OnNorGate();
 	afx_msg void OnXorGate();
+	afx_msg void OnOutputButton();
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

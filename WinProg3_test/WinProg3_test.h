@@ -27,6 +27,7 @@ public:
 // 구현입니다.
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
+	afx_msg void OnOutputButton();
 };
 
 extern CWinProg3_testApp theApp;

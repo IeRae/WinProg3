@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_NOT_GATE, &CWinProg3_testView::OnNotGate)
 	ON_COMMAND(ID_NOR_GATE, &CWinProg3_testView::OnNorGate)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
+	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -76,6 +77,9 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 		break;
 	case 6:
 		bit.LoadBitmapW(IDB_XOR);
+		break;
+	case 7:
+		bit.LoadBitmapW(IDB_OUTPUT_TRUE);
 		break;
 	default:
 		break;
@@ -201,4 +205,11 @@ void CWinProg3_testView::OnXorGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	typeOfGate = 6;
+}
+
+
+void CWinProg3_testView::OnOutputButton()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	typeOfGate = 7;
 }
