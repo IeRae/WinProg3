@@ -18,6 +18,7 @@
 #define IDB_FALSE                       320
 #define IDB_BITMAP4                     321
 #define IDB_TRUE                        321
+#define IDB_BITMAP5                     323
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -35,7 +36,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        322
+#define _APS_NEXT_RESOURCE_VALUE        324
 #define _APS_NEXT_COMMAND_VALUE         32783
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310

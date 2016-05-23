@@ -92,9 +92,9 @@ IDB_OR                  BITMAP                  "res\\bmp00001.bmp"
 
 IDB_NAND                BITMAP                  "res\\bitmap3.bmp"
 
-//IDB_FALSE               BITMAP                  "res\\bitmap_false.bmp"
+IDB_OUTPUT_TRUE         BITMAP                  "res\\bitmap_output_true.bmp"
 
-//IDB_TRUE                BITMAP                  "res\\bitmap_true.bmp"
+IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap_output_false.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
