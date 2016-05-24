@@ -3,7 +3,7 @@
 
 
 #pragma once
-
+#include "LogicInfo.h"
 
 class CWinProg3_testView : public CView
 {
