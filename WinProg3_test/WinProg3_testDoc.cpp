@@ -118,7 +118,7 @@ void CWinProg3_testDoc::SetSearchContent(const CString& value)
 }
 
 #endif // SHARED_HANDLERS
-
+//
 // CWinProg3_testDoc Áø´Ü
 
 #ifdef _DEBUG
