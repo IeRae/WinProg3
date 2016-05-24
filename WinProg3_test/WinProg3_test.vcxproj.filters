@@ -92,19 +92,10 @@
     <Image Include="res\bitmap_xor.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bitmap1.bmp">
+    <Image Include="res\bitmap_true.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bitmap2.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\bmp00002.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\bitmap3.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\bmp00001.bmp">
+    <Image Include="res\bitmap_false.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
