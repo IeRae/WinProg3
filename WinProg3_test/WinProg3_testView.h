@@ -3,7 +3,13 @@
 //
 
 #pragma once
-
+struct Gate {
+	int GateId;
+	int x;
+	int y;
+	Gate() {}
+	Gate(int a, int b, int c) { GateId = a; x = b; y = c; }
+};
 
 class CWinProg3_testView : public CView
 {
@@ -16,13 +22,14 @@ public:
 	CWinProg3_testDoc* GetDocument() const;
 
 	//위치 지정 변수
-	int start_x, start_y;
+	int start_x;
+	int start_y;
 
-	CArray<CPoint, CPoint&> Points; // 좌표 객체 리스트
+	CArray<Gate, Gate&> Gates; // 논리게이트 객체 리스트
 	int current; //좌표 리스트의 현재위치 변수
-				 //논리게이트 구분 변수
-	int typeOfGate;
 
+	int typeOfGate;
+	void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
 	// 작업입니다.
 public:
 
@@ -53,6 +60,8 @@ public:
 	afx_msg void OnNotGate();
 	afx_msg void OnNorGate();
 	afx_msg void OnXorGate();
+	afx_msg void OnOutputButton();
+	afx_msg void OnInputButton();
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

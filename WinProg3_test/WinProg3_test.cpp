@@ -23,6 +23,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testApp, CWinApp)
 	// 표준 파일을 기초로 하는 문서 명령입니다.
 	ON_COMMAND(ID_FILE_NEW, &CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinApp::OnFileOpen)
+	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testApp::OnOutputButton)
 END_MESSAGE_MAP()
 
 
@@ -142,3 +143,9 @@ void CWinProg3_testApp::OnAppAbout()
 
 
 
+
+
+void CWinProg3_testApp::OnOutputButton()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}

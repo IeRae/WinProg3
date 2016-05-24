@@ -12,6 +12,8 @@
 #include "WinProg3_testDoc.h"
 #include "WinProg3_testView.h"
 
+#include <afxtempl.h>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -29,6 +31,8 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_NOT_GATE, &CWinProg3_testView::OnNotGate)
 	ON_COMMAND(ID_NOR_GATE, &CWinProg3_testView::OnNorGate)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
+	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
+	ON_COMMAND(ID_INPUT_BUTTON, &CWinProg3_testView::OnInputButton)
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -36,8 +40,9 @@ END_MESSAGE_MAP()
 CWinProg3_testView::CWinProg3_testView()
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-	start_x = start_y = 0;
+	//start_x = 0; start_y = 0;
 	typeOfGate = 0;
+	//Gates.SetSize(100);
 }
 
 CWinProg3_testView::~CWinProg3_testView()
@@ -52,6 +57,40 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 	return CView::PreCreateWindow(cs);
 }
 
+void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
+	switch (bmindex)
+	{
+	case 1:
+		bit.LoadBitmapW(IDB_AND);
+		break;
+	case 2:
+		bit.LoadBitmapW(IDB_OR);
+		break;
+	case 3:
+		bit.LoadBitmapW(IDB_NOT);
+		break;
+	case 4:
+		bit.LoadBitmapW(IDB_NAND);
+		break;
+	case 5:
+		bit.LoadBitmapW(IDB_NOR);
+		break;
+	case 6:
+		bit.LoadBitmapW(IDB_XOR);
+		break;
+	case 7:
+		bit.LoadBitmapW(IDB_OUTPUT_TRUE);
+		break;
+	case 8:
+		bit.LoadBitmapW(IDB_INPUT_TRUE);
+		break;
+	default:
+		break;
+	}
+	//AfxMessageBox(_T("분류"));
+	bit.GetBitmap(&bminfo);
+	//AfxMessageBox(_T("완료"));
+}
 // CWinProg3_testView 그리기
 
 void CWinProg3_testView::OnDraw(CDC* pDC)
@@ -60,58 +99,32 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-
+	
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
-	if (typeOfGate != 0) {
-		CBitmap bitmap;
-		BITMAP bminfo;
-		switch (typeOfGate)
-		{
-		case 1:
-
-			bitmap.LoadBitmapW(IDB_AND);
-			break;
-		case 2:
-			bitmap.LoadBitmapW(IDB_OR);
-			break;
-		case 3:
-			bitmap.LoadBitmapW(IDB_NOT);
-			break;
-		case 4:
-			bitmap.LoadBitmapW(IDB_NAND);
-			break;
-		case 5:
-			bitmap.LoadBitmapW(IDB_NOR);
-			break;
-		case 6:
-			bitmap.LoadBitmapW(IDB_XOR);
-			break;
-		default:
-
-			break;
-		}
-
-		bitmap.GetBitmap(&bminfo);
-
-		//
+	if(typeOfGate != 0){
 
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
-		dcmem.SelectObject(&bitmap);
+		
+		if (start_x != 0) {
+			for (int i = 0; i < Gates.GetSize(); i++) {
+				CBitmap bitmap;
+				BITMAP bminfo;
 
-
-		for (int i = 0; i < Points.GetCount(); i++) {
-
-			if (start_x != 0)	pDC->BitBlt(Points[i].x, Points[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+				loadBitmap(bitmap, bminfo, Gates[i].GateId);
+				
+				dcmem.SelectObject(&bitmap);
+				pDC->BitBlt(Gates[i].x, Gates[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+			}
 
 		}
-		//...
+		
 	}
 }
 
 
-// CWinProg3_testView 진단
+// CWinProg3_testView 진단1
 
 #ifdef _DEBUG
 void CWinProg3_testView::AssertValid() const
@@ -141,15 +154,18 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CView::OnLButtonDown(nFlags, point);
 
+	CString msg;
 
-	//	start_x = point.x;
-	//	start_y = point.y;  
-
-	CPoint* points = new CPoint(point.x, point.y);
 	start_x = point.x;
 	start_y = point.y;
-	Points.Add(point);
-	current = Points.GetCount() - 1;
+
+	Gate temp(typeOfGate, start_x, start_y);
+
+	Gates.Add(temp);
+
+	//msg.Format(_T("site x : %d, y : %d"), start_x, start_y);
+
+	//AfxMessageBox(msg);
 
 	Invalidate();
 }
@@ -192,4 +208,18 @@ void CWinProg3_testView::OnXorGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	typeOfGate = 6;
+}
+
+
+void CWinProg3_testView::OnOutputButton()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	typeOfGate = 7;
+}
+
+
+void CWinProg3_testView::OnInputButton()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	typeOfGate = 8;
 }

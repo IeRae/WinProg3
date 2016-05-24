@@ -113,5 +113,17 @@
     <Image Include="res\bitmap_true.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\bitmap_output_true.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap_output_false.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bmp00003.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

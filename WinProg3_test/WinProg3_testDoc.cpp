@@ -50,7 +50,6 @@ BOOL CWinProg3_testDoc::OnNewDocument()
 
 
 
-
 // CWinProg3_testDoc serialization
 
 void CWinProg3_testDoc::Serialize(CArchive& ar)
