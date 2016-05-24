@@ -113,7 +113,20 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 				
-				pDoc->getLogic(Gates[i].GateId);
+				int index;
+				for (int j = 0; j < Lines.GetSize(); j++) {
+					index = Lines[j].startGateIndex;
+					//Gate의 출력값 할당
+					if(index == i)	Lines[j].startBoolValue = pDoc->getLogic(Gates[i].GateId);
+					index = Lines[j].endGateIndex;
+					//Gate의 입력값 할당
+					if (index == i) {
+						Gates[i].inputArray[Gates[i].inputArrayIndex++] = Lines[j].endBoolValue;
+					}
+						
+				}
+
+				
 			}
 
 		}

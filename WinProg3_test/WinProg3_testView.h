@@ -33,6 +33,9 @@ struct Line {
 	
 	//종료 Gate index
 	int endGateIndex;
+
+	Line() {}
+	Line(bool start, int start_in, bool end, int end_in) { startBoolValue = start; startGateIndex = start_in; endBoolValue = end; endGateIndex = end_in; }
 };
 
 class CWinProg3_testView : public CView
@@ -50,7 +53,7 @@ public:
 	int start_y;
 
 	CArray<Gate, Gate&> Gates; // 논리게이트 객체 리스트
-	int current; //좌표 리스트의 현재위치 변수
+	CArray<Line, Line&> Lines;	//논리 회로 선 객체 리스트
 
 	int typeOfGate;
 	void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
