@@ -100,9 +100,16 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	if(typeOfGate != 0){
 
+		//논리 회로 연산을 실행하는 부분
+		for (int i = 0; i < Gates.GetSize(); i++) {
+			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
+		}
+
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
 		
+
+		//논리 게이트를 그려주는 부분
 		if (start_x != 0) {
 			for (int i = 0; i < Gates.GetSize(); i++) {
 				CBitmap bitmap;
@@ -120,20 +127,22 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					//Gate의 입력값 할당
 					index = Lines[j].endGateIndex;
 					if (index == i) {
-						Gates[i].inputArray[Gates[i].inputArrayIndex++] = Lines[j].endBoolValue;
+						if(Gates[i].inputArrayIndex < Gates[i].fixedInputIndex)
+							Gates[i].inputArray[Gates[i].inputArrayIndex++] = Lines[j].endBoolValue;
+						else 
+							AfxMessageBox(_T("잘못된 논리 회로 연결"));
 					}
 
 					//Gate의 출력값 할당
 					index = Lines[j].startGateIndex;
-					if (index == i)	Lines[j].startBoolValue = Gates[i].outputArray[Gates[i].outputArrayIndex++];
-					
-						pDoc->getLogic(Gates[i]);
-						
-				}
-
-				
+					if (index == i) {
+						if (Gates[i].outputArrayIndex < Gates[i].fixedOutputIndex)
+							Lines[j].startBoolValue = Gates[i].outputArray[Gates[i].outputArrayIndex++];
+						else
+							AfxMessageBox(_T("잘못된 논리 회로 연결"));
+					}											
+				}				
 			}
-
 		}
 		
 	}
