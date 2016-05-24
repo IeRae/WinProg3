@@ -3,8 +3,12 @@
 //
 
 #include "stdafx.h"
+#include <GdiPlus.h> //header 포함
+using namespace Gdiplus; //네임스페이스 설정
+
 // SHARED_HANDLERS는 미리 보기, 축소판 그림 및 검색 필터 처리기를 구현하는 ATL 프로젝트에서 정의할 수 있으며
 // 해당 프로젝트와 문서 코드를 공유하도록 해 줍니다.
+
 #ifndef SHARED_HANDLERS
 #include "WinProg3_test.h"
 #endif
@@ -32,7 +36,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_NOR_GATE, &CWinProg3_testView::OnNorGate)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
-	ON_COMMAND(ID_INPUT_BUTTON, &CWinProg3_testView::OnInputButton)
+	ON_COMMAND(ID_32786, &CWinProg3_testView::OnInputButton)
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -61,7 +65,7 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 	switch (bmindex)
 	{
 	case 1:
-		bit.LoadBitmapW(IDB_AND);
+		bit.LoadBitmapW(IDB_AND);		
 		break;
 	case 2:
 		bit.LoadBitmapW(IDB_OR);

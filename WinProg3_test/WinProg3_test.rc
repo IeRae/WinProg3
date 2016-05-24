@@ -167,8 +167,8 @@ BEGIN
     END
     POPUP "입력/ 출력"
     BEGIN
+        MENUITEM "입력",                          ID_32786
         MENUITEM "출력",                          ID_OUTPUT_BUTTON
-        MENUITEM "입력",                          ID_OUTPUT_BUTTON
     END
 END
 
