@@ -11,12 +11,17 @@ struct Gate {
 	//입력값 정보
 	bool inputArray[MAX];
 	int inputArrayIndex;
+	int fixedInputIndex;
 
 	//출력값 정보
 	bool outputArray[MAX];
 	int outputArrayIndex;
-	Gate() {}
-	Gate(int a, int b, int c) { GateId = a; x = b; y = c; }
+	int fixedOutputIndex;
+
+	void fixed() {};
+
+	Gate();
+	Gate(int id, int x, int y);
 };
 
 struct Line {
@@ -32,6 +37,6 @@ struct Line {
 	//종료 Gate index
 	int endGateIndex;
 
-	Line() {}
-	Line(bool start, int start_in, bool end, int end_in) { startBoolValue = start; startGateIndex = start_in; endBoolValue = end; endGateIndex = end_in; }
+	Line();
+	Line(bool start, int start_in, bool end, int end_in);
 };

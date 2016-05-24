@@ -73,7 +73,7 @@ bool CWinProg3_testDoc::getLogic(Gate Gates) {
 	switch (Gates.GateId)
 	{
 	case 3:
-		return LFunction.Not_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		return LFunction.Not_Operator(Gates.inputArray[0]);
 	case 5:
 		return LFunction.Nor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
 	case 6:
