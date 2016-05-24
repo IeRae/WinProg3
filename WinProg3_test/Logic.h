@@ -8,11 +8,11 @@ class Logic :
 public:
 	Logic();
 	~Logic();
-	bool Not_Operator(Gate Gates);
-	bool Nor_Operator(Gate Gates);
-	bool Xor_Operator(Gate Gates);
-	bool And_Operator(Gate Gates);
-	bool Nand_Operator(Gate Gates);
-	bool Or_Operator(Gate Gates);
+	bool Not_Operator(bool A);
+	bool Nor_Operator(bool A1, bool A2);
+	bool Xor_Operator(bool A1, bool A2);
+	bool And_Operator(bool A1, bool A2);
+	bool Nand_Operator(bool A1, bool A2);
+	bool Or_Operator(bool A1, bool A2);
 };
 

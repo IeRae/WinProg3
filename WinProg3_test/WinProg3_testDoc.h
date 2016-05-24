@@ -4,7 +4,7 @@
 
 
 #pragma once
-
+#include "LogicInfo.h"
 
 class CWinProg3_testDoc : public CDocument
 {
@@ -17,7 +17,7 @@ public:
 
 // 작업입니다.
 public:
-	bool getLogic(int logicType);
+	bool getLogic(Gate Gates);
 
 // 재정의입니다.
 public:

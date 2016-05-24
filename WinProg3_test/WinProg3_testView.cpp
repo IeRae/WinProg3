@@ -116,8 +116,9 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				int index;
 				for (int j = 0; j < Lines.GetSize(); j++) {
 					index = Lines[j].startGateIndex;
+
 					//Gate의 출력값 할당
-					if(index == i)	Lines[j].startBoolValue = pDoc->getLogic(Gates[i].GateId);
+					if(index == i)	Lines[j].startBoolValue = pDoc->getLogic(Gates[i]);
 					index = Lines[j].endGateIndex;
 					//Gate의 입력값 할당
 					if (index == i) {

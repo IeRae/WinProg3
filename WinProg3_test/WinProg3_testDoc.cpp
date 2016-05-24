@@ -67,17 +67,17 @@ void CWinProg3_testDoc::Serialize(CArchive& ar)
 	}
 }
 
-bool CWinProg3_testDoc::getLogic(int logicType) {
+bool CWinProg3_testDoc::getLogic(Gate Gates) {
 	Logic LFunction;
 
-	switch (logicType)
+	switch (Gates.GateId)
 	{
 	case 3:
-		return LFunction.Not_Operator(bool1, bool2);
+		return LFunction.Not_Operator(Gates.inputArray[0], Gates.inputArray[1]);
 	case 5:
-		return LFunction.Nor_Operator(bool1, bool2);
+		return LFunction.Nor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
 	case 6:
-		return LFunction.Xor_Operator(bool1, bool2);
+		return LFunction.Xor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
 	default:
 		break;
 	}
