@@ -112,7 +112,9 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-}
+				
+				pDoc->getLogic(Gates[i].GateId);
+			}
 
 		}
 		

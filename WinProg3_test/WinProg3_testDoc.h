@@ -17,7 +17,7 @@ public:
 
 // 작업입니다.
 public:
-	void getLogic(int logicType);
+	bool getLogic(int logicType);
 
 // 재정의입니다.
 public:
