@@ -17,6 +17,8 @@
 #define new DEBUG_NEW
 #endif
 
+#include "Logic.h"
+
 // CWinProg3_testDoc
 
 IMPLEMENT_DYNCREATE(CWinProg3_testDoc, CDocument)
@@ -63,6 +65,20 @@ void CWinProg3_testDoc::Serialize(CArchive& ar)
 	{
 		// TODO: 여기에 로딩 코드를 추가합니다.
 	}
+}
+
+bool CWinProg3_testDoc::getLogic(int logicType) {
+	Logic LFunction;
+
+	switch (logicType)
+	{
+	case 3:
+		return LFunction.Not_Operator(bool1, bool2);
+	default:
+		break;
+	}
+
+	exit(1);
 }
 
 #ifdef SHARED_HANDLERS
