@@ -1,12 +1,18 @@
 
 // WinProg3_testView.h : CWinProg3_testView 클래스의 인터페이스
-//
+
+#define MAX 1024
 
 #pragma once
 struct Gate {
+	//비트맵 정보
 	int GateId;
 	int x;
 	int y;
+	//입력값 정보
+	bool inputArray[MAX];
+	//출력값 정보
+	bool outputArray[MAX];
 	Gate() {}
 	Gate(int a, int b, int c) { GateId = a; x = b; y = c; }
 };
