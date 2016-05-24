@@ -42,6 +42,9 @@
     <ClInclude Include="Logic.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="LogicInfo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinProg3_test.cpp">
@@ -95,13 +98,7 @@
     <Image Include="res\bitmap_true.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="res\bmp00001.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="res\bitmap3.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\bmp00002.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\bitmap_false.bmp">
@@ -117,6 +114,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\bitmap_output_false.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
