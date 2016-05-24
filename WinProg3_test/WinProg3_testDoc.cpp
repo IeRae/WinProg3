@@ -76,6 +76,8 @@ bool CWinProg3_testDoc::getLogic(int logicType) {
 		return LFunction.Not_Operator(bool1, bool2);
 	case 5:
 		return LFunction.Nor_Operator(bool1, bool2);
+	case 6:
+		return LFunction.Xor_Operator(bool1, bool2);
 	default:
 		break;
 	}
