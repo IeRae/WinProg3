@@ -86,9 +86,15 @@ IDB_NOR                 BITMAP                  "res\\bitmap_nor.bmp"
 
 IDB_XOR                 BITMAP                  "res\\bitmap_xor.bmp"
 
-IDB_TRUE                BITMAP                  "res\\bitmap_true.bmp"
+IDB_AND                 BITMAP                  "res\\bitmap1.bmp"
 
-IDB_FALSE               BITMAP                  "res\\bitmap_false.bmp"
+IDB_OR                  BITMAP                  "res\\bmp00001.bmp"
+
+IDB_NAND                BITMAP                  "res\\bitmap3.bmp"
+
+IDB_OUTPUT_TRUE         BITMAP                  "res\\bitmap_output_true.bmp"
+
+IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap_output_false.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -145,6 +151,19 @@ BEGIN
     POPUP "도움말(&H)"
     BEGIN
         MENUITEM "WinProg3_test 정보(&A)...",     ID_APP_ABOUT
+    END
+    POPUP "논리 게이트"
+    BEGIN
+        MENUITEM "AND (Gate)",                  ID_AND_GATE
+        MENUITEM "OR (Gate)",                   ID_OR_GATE
+        MENUITEM "NOT (Gate)",                  ID_NOT_GATE
+        MENUITEM "NAND (Gate)",                 ID_NAND_GATE
+        MENUITEM "NOR (Gate)",                  ID_NOR_GATE
+        MENUITEM "XOR (Gate)",                  ID_XOR_GATE
+    END
+    POPUP "입력/ 출력"
+    BEGIN
+        MENUITEM "출력",                          ID_OUTPUT_BUTTON
     END
 END
 
