@@ -86,11 +86,11 @@ IDB_NOR                 BITMAP                  "res\\bitmap_nor.bmp"
 
 IDB_XOR                 BITMAP                  "res\\bitmap_xor.bmp"
 
-IDB_AND                 BITMAP                  "res\\bitmap1.bmp"
+IDB_AND                 BITMAP                  "res\\bitmap_and.bmp"
 
-IDB_OR                  BITMAP                  "res\\bmp00001.bmp"
+IDB_OR                  BITMAP                  "res\\bitmap_or.bmp"
 
-IDB_NAND                BITMAP                  "res\\bitmap3.bmp"
+IDB_NAND                BITMAP                  "res\\bitmap_nand.bmp"
 
 IDB_OUTPUT_TRUE         BITMAP                  "res\\bitmap_output_true.bmp"
 
