@@ -36,6 +36,7 @@
 //Gate와 Line 클래스 선언
 #include "Gate.h"
 #include "Line.h"
+#include "Logic.h"
 
 
 

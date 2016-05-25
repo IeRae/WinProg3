@@ -48,6 +48,9 @@
     <ClInclude Include="Line.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="InfoDialog.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinProg3_test.cpp">
@@ -72,6 +75,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Line.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoDialog.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -126,6 +132,15 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\bitmap1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap_and.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap_or.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\bitmap_nand.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

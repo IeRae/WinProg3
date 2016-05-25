@@ -59,25 +59,25 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 	switch (bmindex)
 	{
-	case 1:
+	case ANDSHAPE:
 		bit.LoadBitmapW(IDB_AND);
 		break;
-	case 2:
+	case ORSHAPE:
 		bit.LoadBitmapW(IDB_OR);
 		break;
-	case 3:
+	case NOTSHAPE:
 		bit.LoadBitmapW(IDB_NOT);
 		break;
-	case 4:
+	case NANDSHAPE:
 		bit.LoadBitmapW(IDB_NAND);
 		break;
-	case 5:
+	case NORSHAPE:
 		bit.LoadBitmapW(IDB_NOR);
 		break;
-	case 6:
+	case XORSHAPE:
 		bit.LoadBitmapW(IDB_XOR);
 		break;
-	case 7:
+	case OUTPUTTRUE:
 		bit.LoadBitmapW(IDB_OUTPUT_TRUE);
 		break;
 	default:

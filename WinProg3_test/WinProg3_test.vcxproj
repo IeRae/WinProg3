@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="InfoDialog.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MainFrm.h" />
@@ -202,6 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="InfoDialog.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainFrm.cpp" />
@@ -225,9 +227,12 @@
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
+    <Image Include="res\bitmap_and.bmp" />
     <Image Include="res\bitmap_false.bmp" />
+    <Image Include="res\bitmap_nand.bmp" />
     <Image Include="res\bitmap_nor.bmp" />
     <Image Include="res\bitmap_not.bmp" />
+    <Image Include="res\bitmap_or.bmp" />
     <Image Include="res\bitmap_output_false.bmp" />
     <Image Include="res\bitmap_output_true.bmp" />
     <Image Include="res\bitmap_true.bmp" />
