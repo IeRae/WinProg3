@@ -33,7 +33,9 @@
 #include <afxcontrolbars.h>     // MFC의 리본 및 컨트롤 막대 지원
 
 
-
+//Gate와 Line 클래스 선언
+#include "Gate.h"
+#include "Line.h"
 
 
 

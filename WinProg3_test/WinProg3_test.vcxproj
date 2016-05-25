@@ -189,8 +189,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Gate.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Logic.h" />
-    <ClInclude Include="LogicInfo.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -200,8 +201,9 @@
     <ClInclude Include="WinProg3_testView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Logic.cpp" />
-    <ClCompile Include="LogicInfo.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

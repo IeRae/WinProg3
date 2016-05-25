@@ -42,7 +42,10 @@
     <ClInclude Include="Logic.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="LogicInfo.h">
+    <ClInclude Include="Gate.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,7 +68,10 @@
     <ClCompile Include="Logic.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="LogicInfo.cpp">
+    <ClCompile Include="Gate.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

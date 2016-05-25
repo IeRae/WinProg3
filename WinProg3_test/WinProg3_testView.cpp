@@ -99,12 +99,24 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
 	if(typeOfGate != 0){
-
+		
 		//논리 회로 연산을 실행하는 부분
 		for (int i = 0; i < Gates.GetSize(); i++) {
-			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
-		}
+			CString msg;
+			msg.Format(_T("true"));
+			
+			try{
+			if(pDoc->test(2))	AfxMessageBox(msg);
+			pDoc->getLogic(Gates[i]);
+			}
+			catch (int e) {
+				AfxMessageBox(_T("error : pDoc"));
+			}
 
+			//pDoc->getLogic(Gates[i]);
+			//Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
+		}
+		
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
 		
@@ -184,9 +196,9 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	start_x = point.x;
 	start_y = point.y;
 
-	Gate temp(typeOfGate, start_x, start_y);
+	Gate* temp = new Gate(typeOfGate, start_x, start_y);
 
-	Gates.Add(temp);
+	Gates.Add(*temp);
 
 	//msg.Format(_T("site x : %d, y : %d"), start_x, start_y);
 

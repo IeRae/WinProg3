@@ -1,7 +1,9 @@
 #pragma once
 #include "afxwin.h"
-#include "LogicInfo.h"
 
+enum BagicGateType {
+	ANDSHAPE, ORSHAPE, NOTSHAPE,NANDSHAPE,NORSHAPE,XORSHAPE
+};
 class Logic :
 	public CWnd
 {

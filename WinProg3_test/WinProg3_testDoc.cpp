@@ -67,7 +67,7 @@ void CWinProg3_testDoc::Serialize(CArchive& ar)
 	}
 }
 
-bool CWinProg3_testDoc::getLogic(Gate Gates) {
+bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 	Logic LFunction;
 
 	switch (Gates.GateId)
@@ -83,6 +83,11 @@ bool CWinProg3_testDoc::getLogic(Gate Gates) {
 	}
 
 	exit(1);
+}
+
+bool CWinProg3_testDoc::test(int i) {
+	if (i == 3) return true;
+	else return false;
 }
 
 #ifdef SHARED_HANDLERS
