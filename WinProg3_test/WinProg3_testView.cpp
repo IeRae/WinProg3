@@ -273,7 +273,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 		Gates[0].lable = _T("");
 		Invalidate();
 	}
-
+	//
 
 	CView::OnRButtonDown(nFlags, point);
 }
