@@ -13,6 +13,7 @@
 #include "WinProg3_testView.h"
 
 #include <afxtempl.h>
+#include "InfoDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,6 +33,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_NOR_GATE, &CWinProg3_testView::OnNorGate)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
+	ON_WM_RBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -252,4 +254,26 @@ void CWinProg3_testView::OnOutputButton()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	typeOfGate = 7;
+}
+
+
+void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	
+	CInfoDialog dlg;
+	dlg.lable = Gates[0].lable;	//대화 상자로 정보 초기화
+
+	int result = dlg.DoModal();
+	if (result == IDOK) {
+		Gates[0].lable = dlg.lable;
+		Invalidate();
+	}
+	else if (result == IDCANCEL) {
+		Gates[0].lable = _T("");
+		Invalidate();
+	}
+
+
+	CView::OnRButtonDown(nFlags, point);
 }

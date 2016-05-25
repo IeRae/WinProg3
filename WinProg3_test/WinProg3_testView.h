@@ -54,6 +54,7 @@ public:
 	afx_msg void OnNorGate();
 	afx_msg void OnXorGate();
 	afx_msg void OnOutputButton();
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

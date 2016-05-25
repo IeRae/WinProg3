@@ -29,4 +29,5 @@ public:
 //	afx_msg void OnBnClickedCancel();
 	virtual void OnOK();
 	afx_msg void OnBnClickedCancel();
+	virtual void OnCancel();
 };

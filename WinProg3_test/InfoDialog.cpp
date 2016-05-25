@@ -53,6 +53,8 @@ BOOL CInfoDialog::OnInitDialog()
 void CInfoDialog::OnBnClickedOk()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(true);
+
 	CDialogEx::OnOK();
 }
 
@@ -67,8 +69,10 @@ void CInfoDialog::OnBnClickedOk()
 void CInfoDialog::OnOK()
 {
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	UpdateData(true);
+	EndDialog(IDOK);
 
-	CDialogEx::OnOK();
+	//CDialogEx::OnOK();
 }
 
 
@@ -76,4 +80,12 @@ void CInfoDialog::OnBnClickedCancel()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CDialogEx::OnCancel();
+}
+
+
+void CInfoDialog::OnCancel()
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	EndDialog(IDCANCEL);
+	//CDialogEx::OnCancel();
 }

@@ -21,6 +21,8 @@ public:
 
 	void fixedIndex();
 
+	CString lable;
+
 	Gate();
 	~Gate();
 	Gate(int id, int x, int y);
