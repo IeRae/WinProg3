@@ -94,7 +94,7 @@ IDB_NAND                BITMAP                  "res\\bitmap_nand.bmp"
 
 IDB_OUTPUT_TRUE         BITMAP                  "res\\bitmap_output_true.bmp"
 
-IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap_output_false.bmp"
+//IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap_output_false.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

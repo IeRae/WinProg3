@@ -1,7 +1,7 @@
 
 // WinProg3_testView.h : CWinProg3_testView 클래스의 인터페이스
 
-
+#define IDC_TREE1 100
 #pragma once
 
 class CWinProg3_testView : public CView
@@ -13,7 +13,7 @@ protected: // serialization에서만 만들어집니다.
 	// 특성입니다.
 public:
 	CWinProg3_testDoc* GetDocument() const;
-
+	CTreeCtrl m_tree;
 	//위치 지정 변수
 	int start_x;
 	int start_y;

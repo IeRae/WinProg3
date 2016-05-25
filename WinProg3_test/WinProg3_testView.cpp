@@ -160,6 +160,37 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		}
 		
 	}
+
+
+
+	// 트리 컨트롤 생성
+	m_tree.Create(WS_CHILD | WS_VISIBLE | WS_BORDER |
+		TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT,
+		CRect(10, 10, 180, 180), this, IDC_TREE1);
+
+	// 이미지 리스트 생성과 초기화
+	CImageList il;
+	il.Create(IDB_BITMAP2, 16, 1, RGB(255, 255, 255));
+
+	// 이미지 리스트 설정
+	m_tree.SetImageList(&il, TVSIL_NORMAL);
+	il.Detach();
+
+	// 1레벨 초기화 
+	HTREEITEM hGate = m_tree.InsertItem(_T("논리게이트"), 0, 0, TVI_ROOT, TVI_LAST);
+	HTREEITEM hInOut = m_tree.InsertItem(_T("입력/출력"), 0, 0, TVI_ROOT, TVI_LAST);
+
+	// 2-레벨 초기화 
+	m_tree.InsertItem(_T("AND"), 1, 1, hGate, TVI_LAST);
+	m_tree.InsertItem(_T("OR"), 1, 1, hGate, TVI_LAST);
+	m_tree.InsertItem(_T("NOT"), 1, 1, hGate, TVI_LAST);
+	m_tree.InsertItem(_T("NAND"), 1, 1, hGate, TVI_LAST);
+	m_tree.InsertItem(_T("NOR"), 1, 1, hGate, TVI_LAST);
+	m_tree.InsertItem(_T("XOR"), 1, 1, hGate, TVI_LAST);
+
+	m_tree.InsertItem(_T("입력"), 1, 1, hInOut, TVI_LAST);
+	m_tree.InsertItem(_T("출력"), 1, 1, hInOut, TVI_LAST);
+
 }
 
 
