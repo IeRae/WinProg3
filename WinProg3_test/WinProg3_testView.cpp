@@ -307,6 +307,8 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 				
 				CInfoDialog dlg = new CInfoDialog;
 
+				dlg.lable = Gates[i].lable;	//대화 상자로 정보 초기화
+
 				int result = dlg.DoModal();
 				if (result == IDOK) {
 					Gates[i].lable = dlg.lable;
@@ -316,7 +318,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					Gates[i].lable = _T("");
 					Invalidate();
 				}
-				//dlg.lable = Gates[0].lable;	//대화 상자로 정보 초기화
+				
 			}
 		
 	}
