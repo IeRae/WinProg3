@@ -143,7 +143,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				int index;
 				for (int j = 0; j < Lines.GetSize(); j++) {
 					
-					
+					/*
 					//Gate의 입력값 할당
 					index = Lines[j].endGateIndex;
 					if (index == i) {
@@ -160,7 +160,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 							Lines[j].startBoolValue = Gates[i].outputArray[Gates[i].outputArrayIndex++];
 						else
 							AfxMessageBox(_T("잘못된 논리 회로 연결"));
-					}											
+					}
+					*/
 				}				
 			}
 		}
@@ -394,6 +395,7 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		end_point = point;
 	}
+	
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -420,5 +422,6 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 	Line* tempL = new Line(true, count, true, count, start_point, end_point);
 	Lines.Add(*tempL);
 
+	Invalidate();
 	CView::OnLButtonUp(nFlags, point);
 }
