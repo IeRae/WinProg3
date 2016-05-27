@@ -11,6 +11,9 @@ public:
 	int width;
 	int height;	
 
+	void setBmSize(int w, int h);
+	bool bmSizeFlag;
+
 	//입력값 정보
 	bool inputArray[MAX];
 	int inputArrayIndex;

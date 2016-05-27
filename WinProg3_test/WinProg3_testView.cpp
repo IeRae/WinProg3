@@ -131,9 +131,15 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				loadBitmap(bitmap, bminfo, Gates[i].GateId);
 				
+				if(Gates[i].bmSizeFlag == false){
+					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
+					Gates[i].bmSizeFlag = true;
+				}
+				
+
 				dcmem.SelectObject(&bitmap);
-				pDC->BitBlt(Gates[i].x, Gates[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
-				pDC->TextOut(Gates[i].x + 1, Gates[i].y + bminfo.bmHeight + 5, Gates[i].lable);
+				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
+				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				
 				int index;
 				for (int j = 0; j < Lines.GetSize(); j++) {
@@ -293,16 +299,11 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	
-	
-
-	CBitmap bitmap;
-	BITMAP bminfo;
-
+	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
 	for (int i = 0; i < Gates.GetSize(); i++){
-		loadBitmap(bitmap, bminfo, Gates[i].GateId);
 
-		if((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + bminfo.bmWidth)))
-			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + bminfo.bmHeight))) {
+		if((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
+			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
 				
 				CInfoDialog dlg = new CInfoDialog;
 
