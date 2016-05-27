@@ -78,7 +78,8 @@ bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 	case XORSHAPE:
 		return LFunction.Xor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
 	default:
-		break;
+		AfxMessageBox(_T("error : not find gate number"));
+		return false;
 	}
 
 	exit(1);

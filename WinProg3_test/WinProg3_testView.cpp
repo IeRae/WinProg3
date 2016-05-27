@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_NOR_GATE, &CWinProg3_testView::OnNorGate)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
+	ON_COMMAND(ID_INPUT_BUTTON, &CWinProg3_testView::OnInputButton)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
@@ -83,6 +84,9 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 	case OUTPUTTRUE:
 		bit.LoadBitmapW(IDB_OUTPUT_TRUE);
 		break;
+	case INPUTTRUE:
+		bit.LoadBitmapW(IDB_INPUT_TRUE);
+		break;
 	default:
 		break;
 	}
@@ -105,19 +109,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		
 		//논리 회로 연산을 실행하는 부분
 		for (int i = 0; i < Gates.GetSize(); i++) {
-			CString msg;
-			msg.Format(_T("true"));
-			/*
-			try{
-			//if(pDoc->test(2))	AfxMessageBox(msg);
 			//pDoc->getLogic(Gates[i]);
-			}
-			catch (int e) {
-				AfxMessageBox(_T("error : pDoc"));
-			}
-			*/
-			//pDoc->getLogic(Gates[i]);
-			//Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
+			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
 		}
 		
 		CDC dcmem;
@@ -358,4 +351,10 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 	}
 	*/
 	CView::OnMouseMove(nFlags, point);
+}
+
+
+void CWinProg3_testView::OnInputButton()
+{
+	typeOfGate = INPUTTRUE;
 }

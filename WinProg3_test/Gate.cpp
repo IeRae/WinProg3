@@ -43,15 +43,18 @@ void Gate::setBmSize(int w, int h) {
 void Gate::fixedIndex() {
 	switch (GateId)
 	{
-	case 1:
-	case 2:
-	case 4:
-	case 5:
-	case 6:
+	case ANDSHAPE:
+	case ORSHAPE:
+	case NANDSHAPE:
+	case NORSHAPE:
+	case XORSHAPE:
+	case OUTPUTTRUE:
+	case OUTPUTFALSE:
 		fixedInputIndex = 2;
+		fixedOutputIndex = 2;
 		break;
-	case 3:
-		fixedInputIndex = 2;
+	case NOTSHAPE:
+		fixedInputIndex = 1;
 		fixedOutputIndex = 1;
 		break;
 
