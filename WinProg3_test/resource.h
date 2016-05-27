@@ -22,7 +22,10 @@
 #define IDB_INPUT_TRUE                  327
 #define IDB_BITMAP5                     328
 #define IDB_INPUT_FALSE                 328
+#define IDD_DIALOG2                     327
 #define IDC_EDIT1                       1000
+#define IDC_CHECK1                      1001
+#define IDC_COMBO1                      1002
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773

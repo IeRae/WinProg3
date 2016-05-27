@@ -27,9 +27,11 @@ public:
 	CArray<Line, Line&> Lines;	//논리 회로 선 객체 리스트
 
 	int typeOfGate;
-	void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
+	
+	
 	// 작업입니다.
 public:
+	void loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
 
 	// 재정의입니다.
 public:
