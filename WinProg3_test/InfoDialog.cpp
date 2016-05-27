@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(CInfoDialog, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CInfoDialog::OnBnClickedOk)
 //	ON_BN_CLICKED(IDCANCEL, &CInfoDialog::OnBnClickedCancel)
 ON_BN_CLICKED(IDCANCEL, &CInfoDialog::OnBnClickedCancel)
+ON_EN_CHANGE(IDC_EDIT1, &CInfoDialog::OnEnChangeEdit1)
 END_MESSAGE_MAP()
 
 
@@ -88,4 +89,15 @@ void CInfoDialog::OnCancel()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	EndDialog(IDCANCEL);
 	//CDialogEx::OnCancel();
+}
+
+
+void CInfoDialog::OnEnChangeEdit1()
+{
+	// TODO:  RICHEDIT 컨트롤인 경우, 이 컨트롤은
+	// CDialogEx::OnInitDialog() 함수를 재지정 
+	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
+	// 이 알림 메시지를 보내지 않습니다.
+
+	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

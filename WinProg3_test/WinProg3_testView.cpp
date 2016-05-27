@@ -104,19 +104,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		
 		//논리 회로 연산을 실행하는 부분
 		for (int i = 0; i < Gates.GetSize(); i++) {
-			CString msg;
-			msg.Format(_T("true"));
-			/*
-			try{
-			//if(pDoc->test(2))	AfxMessageBox(msg);
 			//pDoc->getLogic(Gates[i]);
-			}
-			catch (int e) {
-				AfxMessageBox(_T("error : pDoc"));
-			}
-			*/
-			//pDoc->getLogic(Gates[i]);
-			//Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
+			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
 		}
 		
 		CDC dcmem;

@@ -94,8 +94,6 @@ IDB_NAND                BITMAP                  "res\\bitmap_nand.bmp"
 
 IDB_OUTPUT_TRUE         BITMAP                  "res\\bitmap_output_true.bmp"
 
-//IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap_output_false.bmp"
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -214,9 +212,9 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "확인",IDOK,149,107,50,14
     PUSHBUTTON      "취소",IDCANCEL,200,107,50,14
-    LTEXT           "Lable : ",IDC_STATIC,25,32,24,9,SS_REALSIZECONTROL
     LTEXT           "Logic Gate Infomation",IDC_STATIC,23,15,71,8
-    EDITTEXT        IDC_EDIT1,52,31,73,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT1,64,29,73,13,ES_AUTOHSCROLL
+    LTEXT           "Gate Name : ",IDC_STATIC,19,30,44,13
 END
 
 

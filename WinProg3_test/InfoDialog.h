@@ -30,4 +30,5 @@ public:
 	virtual void OnOK();
 	afx_msg void OnBnClickedCancel();
 	virtual void OnCancel();
+	afx_msg void OnEnChangeEdit1();
 };
