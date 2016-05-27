@@ -35,6 +35,8 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
 	ON_COMMAND(ID_INPUT_BUTTON, &CWinProg3_testView::OnInputButton)
+	ON_COMMAND(ID_LINE, &CWinProg3_testView::OnLine)
+	ON_COMMAND(ID_7SEGMENT, &CWinProg3_testView::OnSevenSegment)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONUP()
@@ -83,6 +85,10 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 		break;
 	case XORSHAPE:
 		bit.LoadBitmapW(IDB_XOR);
+		break;
+	case SEVENSEGMENT:
+		break;		
+	case LINESHAPE:
 		break;
 	case OUTPUTTRUE:
 		bit.LoadBitmapW(IDB_OUTPUT_TRUE);
@@ -144,11 +150,12 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
 				
+				
 				//라벨을 출력하는 부분
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				
 				int index;
-				for (int j = 0; j < Lines.GetSize(); j++) {
+				/*for (int j = 0; j < Lines.GetSize(); j++) {
 					
 					/*
 					//Gate의 입력값 할당
@@ -168,14 +175,131 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 						else
 							AfxMessageBox(_T("잘못된 논리 회로 연결"));
 					}
-					*/
-				}				
+				}*/				
 			}
 		}
 		
+		if (typeOfGate = SEVENSEGMENT & start_x !=0) {	//7세그먼트 그리기
+			time[0] = 0;
+			//펜 설정
+			CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
+			CBrush red = (RGB(255, 0, 0));
+			CBrush white = (RGB(255, 255, 255));
+		
+			int select;
+			Y = 50;
+			X = start_x;
+
+			select = time[0];
+				CPoint point_1[6] = { { X,Y },{ X + 10,Y - 5 },{ X + 40,Y - 5 },{ X + 50,Y },{ X + 40,Y + 5 },{ X + 10,Y + 5 } };	//시계 모양 좌표 그리기
+				CPoint point_6[6] = { { X + 53,Y + 3 },{ X + 58,Y + 13 },{ X + 58,Y + 43 },{ X + 53,Y + 53 },{ X + 48,Y + 43 },{ X + 48,Y + 13 } };
+				CPoint point_7[6] = { { X + 53,Y + 59 },{ X + 58, Y + 69 },{ X + 58,Y + 99 },{ X + 53,Y + 109 },{ X + 48,Y + 99 },{ X + 48,Y + 69 } };
+				CPoint point_2[6] = { { X,Y + 112 },{ X + 10,Y + 107 },{ X + 40,Y + 107 },{ X + 50,Y + 112 },{ X + 40,Y + 117 },{ X + 10,Y + 117 } };
+				CPoint point_5[6] = { { X - 3,Y + 59 },{ X + 3,Y + 69 },{ X + 3,Y + 99 },{ X - 3,Y + 109 },{ X - 8,Y + 99 },{ X - 8,Y + 69 } };
+				CPoint point_4[6] = { { X - 3,Y + 3 },{ X + 3,Y + 13 },{ X + 3,Y + 43 },{ X - 3,Y + 53 },{ X - 8,Y + 43 },{ X - 8,Y + 13 } };
+				CPoint point_3[6] = { { X,Y + 56 },{ X + 10,Y + 51 },{ X + 40,Y + 51 },{ X + 50,Y + 56 },{ X + 40,Y + 61 },{ X + 10,Y + 61 } };
+				pDC->SelectObject(pen);
+
+
+				//				  1
+				//			 ---------
+				//		4	|    3    | 6
+				//			 ---------
+				//		5	|         | 7
+				//			 ---------
+				//               2
+
+
+				seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = false;
+				switch (select)	//스위치문에 의해 세그먼트 결정
+				{
+				case 0: seg1 = seg2 = seg4 = seg5 = seg6 = seg7 = true;	break;
+				case 1:	seg6 = seg7 = true; break;
+				case 2: seg1 = seg6 = seg3 = seg5 = seg2 = true; break;
+				case 3: seg1 = seg6 = seg3 = seg7 = seg2 = true; break;
+				case 4: seg4 = seg3 = seg6 = seg7 = true;	break;
+				case 5: seg1 = seg4 = seg3 = seg7 = seg2 = true; break;
+				case 6: seg1 = seg4 = seg5 = seg2 = seg7 = seg3 = true; break;
+				case 7: seg1 = seg6 = seg7 = true; break;
+				case 8: seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = true; break;
+				case 9: seg1 = seg3 = seg4 = seg6 = seg7 = seg2 = true; break;
+				}
+
+
+
+				if (seg1) {	//각 세그먼트별 동작설정
+					pDC->SelectObject(red);
+					pDC->Polygon(point_1, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_1, 6);
+				}
+
+				if (seg2) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_2, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_2, 6);
+				}
+
+				if (seg3) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_3, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_3, 6);
+				}
+
+				if (seg4) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_4, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_4, 6);
+				}				
+
+				if (seg5) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_5, 6);
+			}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_5, 6);
+		}
+		
+				if (seg6) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_6, 6);
+	}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_6, 6);
+				}
+
+				if (seg7) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_7, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_7, 6);
+				}
+				InvalidateRect(NULL, false);
+
+		}
+
+		
+
+
 	}
 
 
+			//라인그리기
 	if (start_point.x != 0) {
 		for (int i = 0; i < Lines.GetSize(); i++) {
 
@@ -266,10 +390,32 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	//dc.MoveTo(point.x, point.y);
 
 
+
 	//라인생성부분
 	start_point = point;
-	//Line* tempL = new Line(true, 1, true, 1, start_point, end_point);
-	//Lines.Add(*tempL);
+	Line* tempL = new Line(true, 1, true, 1, start_point, end_point);
+	Lines.Add(*tempL);
+
+
+
+	for (int i = 0; i < Gates.GetSize(); i++) {
+		if ((point.x >= (Gates[i].x + Gates[i].width - 10)) && (point.x <= (Gates[i].x + Gates[i].width + 10)))
+			if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+				
+				//라인그리기
+				if (start_point.x != 0) {
+					for (int i = 0; i < Lines.GetSize(); i++) {
+
+						CClientDC dc(this);
+						dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+						dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
+					}
+				}
+
+
+			}
+	}
+
 
 	Invalidate();
 }
@@ -442,11 +588,39 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 
 	count = 1;
 	count++;
-	Line* tempL = new Line(true, count, true, count, start_point, end_point);
-	Lines.Add(*tempL);
+
+//******
+//	Line* tempL = new Line(true, count, true, count, start_point, end_point);
+//	Lines.Add(*tempL);
+
+
+
+	//drawline = TRUE;
+	
+
+	//출력일때만 선이 그려지기시작
+
+
+
 
 	Invalidate();
 	CView::OnLButtonUp(nFlags, point);
+}
+
+
+void CWinProg3_testView::OnLine()
+{
+	typeOfGate = LINESHAPE;
+	//drawline = TRUE;
+
+}
+
+
+void CWinProg3_testView::OnSevenSegment()
+{
+	typeOfGate = SEVENSEGMENT;
+	CClientDC dc(this);
+	OnDraw(&dc);	//정해진시간마다 OnDraw호출
 }
 
 

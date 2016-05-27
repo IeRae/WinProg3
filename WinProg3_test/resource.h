@@ -43,6 +43,10 @@
 #define ID_32785                        32785
 #define ID_INPUT_BUTTON                 32786
 #define ID_32787                        32787
+#define ID_LINE                         32788
+#define ID_32789                        32789
+#define ID_7SEGMENT                     32790
+#define ID_32787                        32787
 #define ID_32788                        32788
 #define ID_32789                        32789
 
@@ -51,7 +55,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        329
-#define _APS_NEXT_COMMAND_VALUE         32790
+#define _APS_NEXT_COMMAND_VALUE         32791
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

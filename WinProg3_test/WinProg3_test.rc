@@ -167,6 +167,8 @@ BEGIN
     BEGIN
         MENUITEM "입력",                          ID_INPUT_BUTTON
         MENUITEM "출력",                          ID_OUTPUT_BUTTON
+        MENUITEM "선",                           ID_LINE
+        MENUITEM "7-세그먼트",                      ID_7SEGMENT
     END
     POPUP "클럭"
     BEGIN

@@ -88,7 +88,7 @@ bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 	case INPUTFALSE:
 		return false;
 	default:
-		AfxMessageBox(_T("error : not find gate number"));
+		//AfxMessageBox(_T("error : not find gate number"));
 		return false;
 	}
 

@@ -13,6 +13,8 @@ public:
 	//Á¾·á Gate index
 	int endGateIndex;
 
+	bool Drawline;
+
 	CPoint s_point;
 	CPoint e_point;
 

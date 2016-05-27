@@ -17,8 +17,15 @@ public:
 	//위치 지정 변수
 	int start_x;
 	int start_y;
-
+	bool drawline;
 	int count;
+
+
+	int time[2];
+	int X, Y;
+	bool seg1, seg2, seg3, seg4, seg5, seg6, seg7;
+	
+	
 	CPoint start_point;
 	CPoint end_point;
 
@@ -65,6 +72,8 @@ public:
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	void OnInputButton();
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	void OnLine();
+	void OnSevenSegment();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
