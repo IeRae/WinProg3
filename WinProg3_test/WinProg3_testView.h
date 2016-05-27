@@ -76,6 +76,7 @@ public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	void OnLine();
 	void OnSevenSegment();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전
