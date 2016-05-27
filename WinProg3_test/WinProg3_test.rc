@@ -98,6 +98,8 @@ IDB_INPUT_TRUE          BITMAP                  "res\\bitmap1.bmp"
 
 IDB_INPUT_FALSE         BITMAP                  "res\\bitmap5.bmp"
 
+IDB_BITMAP1             BITMAP                  "res\\bmp00001.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -222,6 +224,7 @@ BEGIN
     LTEXT           "Logic Gate Infomation",IDC_STATIC,23,15,71,8
     EDITTEXT        IDC_EDIT1,64,29,73,13,ES_AUTOHSCROLL
     LTEXT           "Gate Name : ",IDC_STATIC,19,30,44,13
+    PUSHBUTTON      "Button1",IDC_BUTTON1,19,47,86,16
 END
 
 IDD_DIALOG2 DIALOGEX 0, 0, 257, 128
@@ -329,6 +332,7 @@ BEGIN
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 100, 100,
+    0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0
 END

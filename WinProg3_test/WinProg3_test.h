@@ -1,6 +1,9 @@
 
 // WinProg3_test.h : WinProg3_test 응용 프로그램에 대한 주 헤더 파일
 //
+
+#include <GdiPlus.h>
+using namespace Gdiplus;
 #pragma once
 
 #ifndef __AFXWIN_H__
@@ -9,8 +12,6 @@
 
 #include "resource.h"       // 주 기호입니다.
 
-#include <GdiPlus.h>
-using namespace Gdiplus;
 
 
 // CWinProg3_testApp:

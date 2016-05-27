@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CInfoDialog, CDialogEx)
 //	ON_BN_CLICKED(IDCANCEL, &CInfoDialog::OnBnClickedCancel)
 ON_BN_CLICKED(IDCANCEL, &CInfoDialog::OnBnClickedCancel)
 ON_EN_CHANGE(IDC_EDIT1, &CInfoDialog::OnEnChangeEdit1)
+ON_BN_CLICKED(IDC_BUTTON1, &CInfoDialog::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -101,4 +102,12 @@ void CInfoDialog::OnEnChangeEdit1()
 	// 이 알림 메시지를 보내지 않습니다.
 
 	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CInfoDialog::OnBnClickedButton1()
+{
+
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
