@@ -14,6 +14,7 @@
 
 #include <afxtempl.h>
 #include "InfoDialog.h"
+#include "InputInfoDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -121,6 +122,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				loadBitmap(bitmap, bminfo, Gates[i].GateId);
 				
+				//비트맵 크기를 지정하는 부분
 				if(Gates[i].bmSizeFlag == false){
 					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
 					Gates[i].bmSizeFlag = true;
@@ -129,6 +131,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
+				
+				//라벨을 출력하는 부분
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				
 				int index;
@@ -157,7 +161,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		}
 		
 	}
-
+	
 	/*
 
 	// 트리 컨트롤 생성
@@ -303,19 +307,40 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 		if((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
 				
-				CInfoDialog dlg = new CInfoDialog;
+				//입력 gate 일때 입력 대화 상자 호출
+				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
+					CInputInfoDialog dlg = new CInputInfoDialog;
+					//대화 상자로 정보 초기화
+					dlg.inputLable = Gates[i].lable;
 
-				//대화 상자로 정보 초기화
-				dlg.lable = Gates[i].lable;
+					int result = dlg.DoModal();
+					if (result == IDOK) {
+						Gates[i].lable = dlg.inputLable;
+						Invalidate();
+					}
+					else if (result == IDCANCEL) {
+						Gates[i].lable = _T("");
+						Invalidate();
+					}
+				}else{
+					
+					CInfoDialog dlg = new CInfoDialog;
 
-				int result = dlg.DoModal();
-				if (result == IDOK) {
-					Gates[i].lable = dlg.lable;
-					Invalidate();
-				}
-				else if (result == IDCANCEL) {
-					Gates[i].lable = _T("");
-					Invalidate();
+					//대화 상자로 정보 초기화
+					dlg.lable = Gates[i].lable;
+
+					int result = dlg.DoModal();
+					if (result == IDOK) {
+						Gates[i].lable = dlg.lable;
+						Invalidate();
+					}
+					else if (result == IDCANCEL) {
+						Gates[i].lable = _T("");
+						Invalidate();
+					}
+					
+		
+
 				}
 				
 			}

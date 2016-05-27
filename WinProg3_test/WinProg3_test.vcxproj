@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="Gate.h" />
     <ClInclude Include="InfoDialog.h" />
+    <ClInclude Include="InputInfoDialog.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MainFrm.h" />
@@ -204,6 +205,7 @@
   <ItemGroup>
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="InfoDialog.cpp" />
+    <ClCompile Include="InputInfoDialog.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainFrm.cpp" />
