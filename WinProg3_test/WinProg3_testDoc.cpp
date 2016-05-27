@@ -17,7 +17,6 @@
 #define new DEBUG_NEW
 #endif
 
-#include "Logic.h"
 
 // CWinProg3_testDoc
 

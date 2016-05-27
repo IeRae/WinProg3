@@ -107,15 +107,15 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		for (int i = 0; i < Gates.GetSize(); i++) {
 			CString msg;
 			msg.Format(_T("true"));
-			
+			/*
 			try{
-			if(pDoc->test(2))	AfxMessageBox(msg);
-			pDoc->getLogic(Gates[i]);
+			//if(pDoc->test(2))	AfxMessageBox(msg);
+			//pDoc->getLogic(Gates[i]);
 			}
 			catch (int e) {
 				AfxMessageBox(_T("error : pDoc"));
 			}
-
+			*/
 			//pDoc->getLogic(Gates[i]);
 			//Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
 		}
@@ -132,8 +132,15 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				loadBitmap(bitmap, bminfo, Gates[i].GateId);
 				
+				if(Gates[i].bmSizeFlag == false){
+					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
+					Gates[i].bmSizeFlag = true;
+				}
+				
+
 				dcmem.SelectObject(&bitmap);
-				pDC->BitBlt(Gates[i].x, Gates[i].y, bminfo.bmWidth, bminfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
+				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				
 				int index;
 				for (int j = 0; j < Lines.GetSize(); j++) {
@@ -162,7 +169,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		
 	}
 
-
+	/*
 
 	// 트리 컨트롤 생성
 	m_tree.Create(WS_CHILD | WS_VISIBLE | WS_BORDER |
@@ -191,7 +198,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	m_tree.InsertItem(_T("입력"), 1, 1, hInOut, TVI_LAST);
 	m_tree.InsertItem(_T("출력"), 1, 1, hInOut, TVI_LAST);
-
+	*/
 }
 
 
@@ -255,45 +262,45 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 void CWinProg3_testView::OnAndGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 1;
+	typeOfGate = ANDSHAPE;
 }
 
 void CWinProg3_testView::OnOrGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 2;
+	typeOfGate = ORSHAPE;
 }
 
 void CWinProg3_testView::OnNotGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 3;
+	typeOfGate = NOTSHAPE;
 }
 
 void CWinProg3_testView::OnNandGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 4;
+	typeOfGate = NANDSHAPE;
 }
 
 void CWinProg3_testView::OnNorGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 5;
+	typeOfGate = NORSHAPE;
 }
 
 
 void CWinProg3_testView::OnXorGate()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 6;
+	typeOfGate = XORSHAPE;
 }
 
 
 void CWinProg3_testView::OnOutputButton()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	typeOfGate = 7;
+	typeOfGate = OUTPUTTRUE;
 }
 
 
@@ -301,18 +308,34 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	
-	CInfoDialog dlg;
-	dlg.lable = Gates[0].lable;	//대화 상자로 정보 초기화
+	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
+	for (int i = 0; i < Gates.GetSize(); i++){
 
-	int result = dlg.DoModal();
-	if (result == IDOK) {
-		Gates[0].lable = dlg.lable;
-		Invalidate();
+		if((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
+			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+				
+				CInfoDialog dlg = new CInfoDialog;
+
+				//대화 상자로 정보 초기화
+				dlg.lable = Gates[i].lable;
+
+				int result = dlg.DoModal();
+				if (result == IDOK) {
+					Gates[i].lable = dlg.lable;
+					Invalidate();
+				}
+				else if (result == IDCANCEL) {
+					Gates[i].lable = _T("");
+					Invalidate();
+				}
+				
+			}
+		
 	}
-	else if (result == IDCANCEL) {
-		Gates[0].lable = _T("");
-		Invalidate();
-	}
+
+	
+
+	
 	//
 
 	CView::OnRButtonDown(nFlags, point);

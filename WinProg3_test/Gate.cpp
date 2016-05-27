@@ -7,6 +7,11 @@ Gate::Gate() {
 	
 	//inputArray[inputArrayIndex] = false;
 	//outputArray[outputArrayIndex] = false;
+
+
+	lable = _T("");
+
+	bmSizeFlag = false;
 }
 
 Gate::~Gate()
@@ -23,7 +28,16 @@ Gate::Gate(int id, int a, int b) {
 	//inputArray[inputArrayIndex] = false;
 	//outputArray[outputArrayIndex] = false;
 	
+	lable = _T("");
+
+	bmSizeFlag = false;
+
 	fixedIndex();
+}
+
+void Gate::setBmSize(int w, int h) {
+	width = w;
+	height = h;
 }
 
 void Gate::fixedIndex() {
