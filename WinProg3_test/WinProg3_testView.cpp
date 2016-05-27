@@ -143,7 +143,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
-
+				
 				
 				//라벨을 출력하는 부분
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
@@ -151,7 +151,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				int index;
 				/*for (int j = 0; j < Lines.GetSize(); j++) {
 					
-					
+					/*
 					//Gate의 입력값 할당
 					index = Lines[j].endGateIndex;
 					if (index == i) {
@@ -255,21 +255,21 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				else {
 					pDC->SelectObject(white);
 					pDC->Polygon(point_4, 6);
-				}
+				}				
 
 				if (seg5) {
 					pDC->SelectObject(red);
 					pDC->Polygon(point_5, 6);
-				}
+			}
 				else {
 					pDC->SelectObject(white);
 					pDC->Polygon(point_5, 6);
-				}
-
+		}
+		
 				if (seg6) {
 					pDC->SelectObject(red);
 					pDC->Polygon(point_6, 6);
-				}
+	}
 				else {
 					pDC->SelectObject(white);
 					pDC->Polygon(point_6, 6);
@@ -294,14 +294,14 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 
 			//라인그리기
-			if (start_point.x != 0) {
-				for (int i = 0; i < Lines.GetSize(); i++) {
+	if (start_point.x != 0) {
+		for (int i = 0; i < Lines.GetSize(); i++) {
 
-					CClientDC dc(this);
-					dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
-					dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
-				}
-			}
+			CClientDC dc(this);
+			dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+			dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
+		}
+	}
 
 	//Invalidate();
 	/*
@@ -542,6 +542,7 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		end_point = point;
 	}
+	
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -580,6 +581,7 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 
 
 
+	Invalidate();
 	CView::OnLButtonUp(nFlags, point);
 }
 
