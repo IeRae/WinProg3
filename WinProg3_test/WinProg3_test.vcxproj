@@ -229,6 +229,7 @@
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
+    <Image Include="res\bitmap5.bmp" />
     <Image Include="res\bitmap_and.bmp" />
     <Image Include="res\bitmap_false.bmp" />
     <Image Include="res\bitmap_nand.bmp" />

@@ -94,6 +94,10 @@ IDB_NAND                BITMAP                  "res\\bitmap_nand.bmp"
 
 IDB_OUTPUT_TRUE         BITMAP                  "res\\bitmap_output_true.bmp"
 
+IDB_INPUT_TRUE          BITMAP                  "res\\bitmap1.bmp"
+
+IDB_INPUT_FALSE         BITMAP                  "res\\bitmap5.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -161,6 +165,7 @@ BEGIN
     END
     POPUP "입력/ 출력"
     BEGIN
+        MENUITEM "입력",                          ID_INPUT_BUTTON
         MENUITEM "출력",                          ID_OUTPUT_BUTTON
     END
 END
