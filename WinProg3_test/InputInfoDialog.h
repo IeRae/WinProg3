@@ -28,4 +28,5 @@ public:
 	virtual void OnCancel();
 	CString inputLable;
 	int clock_number;
+	BOOL checkClock;
 };

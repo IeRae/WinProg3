@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONUP()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -86,8 +87,14 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 	case OUTPUTTRUE:
 		bit.LoadBitmapW(IDB_OUTPUT_TRUE);
 		break;
+	case OUTPUTFALSE:
+		bit.LoadBitmapW(IDB_OUTPUT_FALSE);
+		break;
 	case INPUTTRUE:
 		bit.LoadBitmapW(IDB_INPUT_TRUE);
+		break;
+	case INPUTFALSE:
+		bit.LoadBitmapW(IDB_INPUT_FALSE);
 		break;
 	default:
 		break;
@@ -327,6 +334,8 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 				
 				//입력 gate 일때 입력 대화 상자 호출
 				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
+					
+					int clocktype;
 					CInputInfoDialog dlg = new CInputInfoDialog;
 					//대화 상자로 정보 초기화
 					dlg.inputLable = Gates[i].lable;
@@ -334,6 +343,25 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					int result = dlg.DoModal();
 					if (result == IDOK) {
 						Gates[i].lable = dlg.inputLable;
+						clocktype = dlg.clock_number;
+
+						if(dlg.checkClock){
+							switch (clocktype) {
+							case HZTIMES_1:
+								SetTimer(1,1000,NULL);
+								break;
+							case HZTIMES_10:
+								SetTimer(1, 100, NULL);
+								break;
+							case HZTIMES_100:
+								SetTimer(1, 10, NULL);
+								break;
+							}
+						}
+						else {
+							KillTimer(1);
+						}
+
 						Invalidate();
 					}
 					else if (result == IDCANCEL) {
@@ -364,11 +392,6 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 			}
 		
 	}
-
-	
-
-	
-	//
 
 	CView::OnRButtonDown(nFlags, point);
 }
@@ -424,4 +447,12 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 
 	Invalidate();
 	CView::OnLButtonUp(nFlags, point);
+}
+
+
+void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CView::OnTimer(nIDEvent);
 }

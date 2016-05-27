@@ -6,7 +6,7 @@ enum BagicGateType {
 };
 
 enum ClockType {
-	HZTIMES_1,HZTIMES_10,HZTIMES_100
+	HZTIMES_1 = 0,HZTIMES_10,HZTIMES_100
 };
 
 class Logic :

@@ -14,6 +14,7 @@ IMPLEMENT_DYNAMIC(CInputInfoDialog, CDialogEx)
 CInputInfoDialog::CInputInfoDialog(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG2, pParent)
 	, inputLable(_T(""))
+	, checkClock(FALSE)
 {
 
 }
@@ -27,6 +28,7 @@ void CInputInfoDialog::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO1, clock_combo);
 	DDX_Text(pDX, IDC_EDIT1, inputLable);
+	DDX_Check(pDX, IDC_CHECK1, checkClock);
 }
 
 
@@ -42,7 +44,22 @@ BOOL CInputInfoDialog::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	
+	checkClock = true;
 
+	CString hzmsg;
+	hzmsg.Format(_T("1Hz"));
+	clock_combo.InsertString(HZTIMES_1, hzmsg);
+	hzmsg.Format(_T("10Hz"));
+	clock_combo.InsertString(HZTIMES_10, hzmsg);
+	hzmsg.Format(_T("100Hz"));
+	clock_combo.InsertString(HZTIMES_100, hzmsg);
+
+	clock_combo.SetCurSel(HZTIMES_1);
+
+	clock_combo.IsWindowEnabled();
+
+	
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
