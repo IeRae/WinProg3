@@ -1,7 +1,6 @@
 
 // WinProg3_test.cpp : 응용 프로그램에 대한 클래스 동작을 정의합니다.
 //
-
 #include "stdafx.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"
@@ -49,7 +48,8 @@ CWinProg3_testApp theApp;
 BOOL CWinProg3_testApp::InitInstance()
 {
 	CWinApp::InitInstance();
-
+	GdiplusStartupInput gdiplusStartupInput;
+	GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
 
 	EnableTaskbarInteraction(FALSE);
 
@@ -157,4 +157,12 @@ void CAboutDlg::OnOK()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
 	CDialogEx::OnOK();
+}
+
+
+int CWinProg3_testApp::ExitInstance()
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	GdiplusShutdown(gdiplusToken);
+	return CWinApp::ExitInstance();
 }

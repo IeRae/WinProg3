@@ -9,6 +9,9 @@
 
 #include "resource.h"       // 주 기호입니다.
 
+#include <GdiPlus.h>
+using namespace Gdiplus;
+
 
 // CWinProg3_testApp:
 // 이 클래스의 구현에 대해서는 WinProg3_test.cpp을 참조하십시오.
@@ -18,7 +21,7 @@ class CWinProg3_testApp : public CWinApp
 {
 public:
 	CWinProg3_testApp();
-
+	ULONG_PTR gdiplusToken;
 
 // 재정의입니다.
 public:
@@ -28,6 +31,7 @@ public:
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnOutputButton();
+	virtual int ExitInstance();
 };
 
 extern CWinProg3_testApp theApp;
