@@ -23,6 +23,8 @@ Gate::Gate(int id, int a, int b) {
 	//inputArray[inputArrayIndex] = false;
 	//outputArray[outputArrayIndex] = false;
 	
+	lable = _T("");
+
 	fixedIndex();
 }
 

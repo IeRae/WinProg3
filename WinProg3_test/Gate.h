@@ -8,6 +8,8 @@ public:
 	int GateId;
 	int x;
 	int y;
+	int width;
+	int height;	
 
 	//입력값 정보
 	bool inputArray[MAX];
@@ -22,6 +24,8 @@ public:
 	void fixedIndex();
 
 	CString lable;
+	
+	
 
 	Gate();
 	~Gate();
