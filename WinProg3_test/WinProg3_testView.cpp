@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_XOR_GATE, &CWinProg3_testView::OnXorGate)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testView::OnOutputButton)
 	ON_WM_RBUTTONDOWN()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -237,6 +238,14 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	//AfxMessageBox(msg);
 
+	CClientDC dc(this);
+	dc.MoveTo(point.x, point.y);
+
+	start_x = point.x;
+	start_y = point.y;
+
+
+
 	Invalidate();
 }
 
@@ -307,4 +316,23 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 	//
 
 	CView::OnRButtonDown(nFlags, point);
+}
+
+
+void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
+{/*
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	CClientDC dc(this);
+	CRect rect;
+	CBrush brush(HS_CROSS, RGB(255, 255, 255));
+	GetClientRect(rect);
+	dc.Rectangle(rect.left, rect.top, rect.right, rect.bottom);
+
+	if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
+	{
+		dc.MoveTo(start_x, start_y);
+//		dc.LineTo(start_x, start_y);
+	}
+	*/
+	CView::OnMouseMove(nFlags, point);
 }
