@@ -36,6 +36,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_INPUT_BUTTON, &CWinProg3_testView::OnInputButton)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
+	ON_WM_LBUTTONUP()
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -162,6 +163,17 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		
 	}
 
+
+	if (start_point.x != 0) {
+		for (int i = 0; i < Lines.GetSize(); i++) {
+
+			CClientDC dc(this);
+			dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+			dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
+		}
+	}
+
+	//Invalidate();
 	/*
 
 	// 트리 컨트롤 생성
@@ -231,7 +243,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	start_y = point.y;
 
 	Gate* temp = new Gate(typeOfGate, start_x, start_y);
-
+	
 	Gates.Add(*temp);
 
 	//msg.Format(_T("site x : %d, y : %d"), start_x, start_y);
@@ -239,12 +251,13 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	//AfxMessageBox(msg);
 
 	CClientDC dc(this);
-	dc.MoveTo(point.x, point.y);
-
-	start_x = point.x;
-	start_y = point.y;
+	//dc.MoveTo(point.x, point.y);
 
 
+	//라인생성부분
+	start_point = point;
+	//Line* tempL = new Line(true, 1, true, 1, start_point, end_point);
+	//Lines.Add(*tempL);
 
 	Invalidate();
 }
@@ -350,6 +363,12 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 //		dc.LineTo(start_x, start_y);
 	}
 	*/
+
+
+	if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
+	{
+		end_point = point;
+	}
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -357,4 +376,24 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 void CWinProg3_testView::OnInputButton()
 {
 	typeOfGate = INPUTTRUE;
+}
+
+
+void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CClientDC dc(this);
+
+	end_point = point;
+
+	//dc.MoveTo(start_point.x, start_point.y);
+	//dc.LineTo(end_point.x, end_point.y);
+
+	count = 1;
+	count++;
+	Line* tempL = new Line(true, count, true, count, start_point, end_point);
+	Lines.Add(*tempL);
+
+	CView::OnLButtonUp(nFlags, point);
 }

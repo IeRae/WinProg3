@@ -13,7 +13,10 @@ public:
 	//Á¾·á Gate index
 	int endGateIndex;
 
+	CPoint s_point;
+	CPoint e_point;
+
 	Line();
 	~Line();
-	Line(bool start, int start_in, bool end, int end_in);
+	Line(bool start, int start_in, bool end, int end_in, CPoint startpoint, CPoint endpoint);
 };

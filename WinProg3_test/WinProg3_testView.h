@@ -18,6 +18,11 @@ public:
 	int start_x;
 	int start_y;
 
+	int count;
+	CPoint start_point;
+	CPoint end_point;
+
+
 	CArray<Gate, Gate&> Gates; // 논리게이트 객체 리스트
 	CArray<Line, Line&> Lines;	//논리 회로 선 객체 리스트
 
@@ -57,6 +62,7 @@ public:
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	void OnInputButton();
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

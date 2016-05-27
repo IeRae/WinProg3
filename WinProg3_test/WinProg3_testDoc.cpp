@@ -71,6 +71,12 @@ bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 
 	switch (Gates.GateId)
 	{
+	case ANDSHAPE:
+		return LFunction.And_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+	case ORSHAPE:
+		return LFunction.Or_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+	case NANDSHAPE:
+		return LFunction.Nand_Operator(Gates.inputArray[0], Gates.inputArray[1]);
 	case NOTSHAPE:
 		return LFunction.Not_Operator(Gates.inputArray[0]);
 	case NORSHAPE:

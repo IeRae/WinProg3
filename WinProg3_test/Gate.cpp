@@ -44,7 +44,12 @@ void Gate::fixedIndex() {
 	switch (GateId)
 	{
 	case ANDSHAPE:
+		fixedInputIndex = 2;
+		fixedOutputIndex = 1;
 	case ORSHAPE:
+		fixedInputIndex = 2;
+		fixedOutputIndex = 1;
+
 	case NANDSHAPE:
 	case NORSHAPE:
 	case XORSHAPE:
