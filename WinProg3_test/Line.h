@@ -18,7 +18,11 @@ public:
 	CPoint s_point;
 	CPoint e_point;
 
+
+	void Draw(CPoint s_point, CPoint e_point);
+
 	Line();
 	~Line();
 	Line(bool start, int start_in, bool end, int end_in, CPoint startpoint, CPoint endpoint);
+
 };

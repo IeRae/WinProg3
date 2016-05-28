@@ -240,6 +240,7 @@
     <Image Include="res\bitmap_output_true.bmp" />
     <Image Include="res\bitmap_true.bmp" />
     <Image Include="res\bitmap_xor.bmp" />
+    <Image Include="res\bmp00001.bmp" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\WinProg3_test.ico" />
     <Image Include="res\WinProg3_testDoc.ico" />

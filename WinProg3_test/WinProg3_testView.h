@@ -25,6 +25,8 @@ public:
 	int start_x;
 	int start_y;
 	bool drawline;
+
+	bool drawline2;
 	int count;
 
 

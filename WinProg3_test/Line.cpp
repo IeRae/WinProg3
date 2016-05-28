@@ -20,3 +20,4 @@ Line::Line(bool start, int start_in, bool end, int end_in, CPoint startpoint, CP
 	e_point = endpoint;
 	
 }
+

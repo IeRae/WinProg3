@@ -292,13 +292,9 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				InvalidateRect(NULL, false);
 
 		}
+	*/
 
-
-
-
-	}
-
-
+	/*
 			//라인그리기
 	if (start_point.x != 0) {
 		for (int i = 0; i < Lines.GetSize(); i++) {
@@ -307,8 +303,9 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
 			dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
 		}
-	}
+	}*/
 
+/*
 	// 트리 컨트롤 생성
 	m_tree.Create(WS_CHILD | WS_VISIBLE | WS_BORDER |
 		TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT,
@@ -336,7 +333,62 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	m_tree.InsertItem(_T("입력"), 1, 1, hInOut, TVI_LAST);
 	m_tree.InsertItem(_T("출력"), 1, 1, hInOut, TVI_LAST);
+	
+
 	*/
+
+	if (start_point.x != 0) {
+		if (drawline == TRUE) {
+			for (int i = 0; i < Lines.GetSize(); i++) {
+
+				CClientDC dc(this);
+				dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+
+				dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
+
+				if ((end_point.x >= (Gates[i].x - 10)) && (end_point.x <= (Gates[i].x + 10)))
+					if ((end_point.y >= Gates[i].y + Gates[i].height / 4 - 10) && (end_point.y <= (Gates[i].y + Gates[i].height / 4 + 10))) {
+					//	dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+
+						dc.LineTo(Gates[i].y, Gates[i].y);
+					}
+			
+				/*
+				if ((end_point.x >= (Gates[i].x  - 10)) && (end_point.x <= (Gates[i].x + 10)))
+					if ((end_point.y >= Gates[i].y + Gates[i].height / 4 - 10) && (end_point.y <= (Gates[i].y + Gates[i].height / 4 + 10))) {
+						dc.LineTo(Gates[i].y + Gates[i].height / 4, Gates[i].y + Gates[i].height / 4);
+						AfxMessageBox(_T("위끝점 잘잡았네"));
+					}
+					else if ((end_point.y >= Gates[i].y + Gates[i].height / 4 * 3 - 10) && (end_point.y <= (Gates[i].y + Gates[i].height / 4 * 3 + 10)))
+					{
+						dc.LineTo(Gates[i].y + Gates[i].height / 2, Gates[i].y + Gates[i].height / 2);
+						AfxMessageBox(_T("아래끝점 잘잡았네"));
+
+
+					}
+
+				*/
+
+
+			}
+		}
+	}
+	
+
+
+
+
+	/*
+	//회전부분
+	Graphics ScreenG(pDC->GetSafeHdc());
+	Bitmap *pBitmap;
+	pBitmap = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP1));
+	pBitmap->RotateFlip(Rotate90FlipX);
+	ScreenG.DrawImage(pBitmap, 0, 0);
+	delete pBitmap;
+	*/
+
+
 	}
 }
 
@@ -385,35 +437,33 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	//AfxMessageBox(msg);
 
 	CClientDC dc(this);
-	//dc.MoveTo(point.x, point.y);
 
 
-	/*
 	//라인생성부분
 	start_point = point;
-	Line* tempL = new Line(true, 1, true, 1, start_point, end_point);
-	Lines.Add(*tempL);
 
+	//drawline = TRUE;
+
+	Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
 
 
 	for (int i = 0; i < Gates.GetSize(); i++) {
-		if ((point.x >= (Gates[i].x + Gates[i].width - 10)) && (point.x <= (Gates[i].x + Gates[i].width + 10)))
+		if ((point.x >= (Gates[i].x + Gates[i].width - 5)) && (point.x <= (Gates[i].x + Gates[i].width + 5)))
 			if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+				//AfxMessageBox(_T("시작점 잘잡았네"));
+				drawline = TRUE;
 				
-				//라인그리기
-				if (start_point.x != 0) {
-					for (int i = 0; i < Lines.GetSize(); i++) {
+				tempL->Drawline = TRUE;
+				tempL->s_point = point;
 
-						CClientDC dc(this);
-						dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
-						dc.LineTo(Lines[i].e_point.x, Lines[i].e_point.y);
-					}
-				}
 
 
 			}
 	}
-	*/
+
+
+	Lines.Add(*tempL);
+
 
 	Invalidate();
 }
@@ -471,9 +521,9 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	
 	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
-	for (int i = 0; i < Gates.GetSize(); i++){
+	for (int i = 0; i < Gates.GetSize(); i++) {
 
-		if((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
+		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
 				
 				//입력 gate 일때 입력 대화 상자 호출
@@ -493,7 +543,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 						clockinfo temp;
 						temp.gateIndex = i;
 
-						if(dlg.checkClock){
+						if (dlg.checkClock) {
 							switch (clocktype) {
 							case HZTIMES_1:
 								temp.clocktype = 100;
@@ -525,7 +575,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 						Gates[i].lable = _T("");
 						//Invalidate();
 					}
-				}else{
+				else {
 					
 				CInfoDialog dlg = new CInfoDialog;
 
@@ -548,33 +598,33 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 				
 			}
 		
-	}
+
 
 	CView::OnRButtonDown(nFlags, point);
+}
 }
 
 
 void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
-{/*
+{
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
-	CRect rect;
-	CBrush brush(HS_CROSS, RGB(255, 255, 255));
-	GetClientRect(rect);
-	dc.Rectangle(rect.left, rect.top, rect.right, rect.bottom);
-
-	if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
-	{
-		dc.MoveTo(start_x, start_y);
-//		dc.LineTo(start_x, start_y);
-	}
-	*/
+	drawline == FALSE;
 
 
+	/*
 	if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
 	{
 		end_point = point;
+		CClientDC dc(this);
+		dc.MoveTo(start_point.x, start_point.y);
+		dc.LineTo(end_point.x, end_point.y);
+		
 	}
+	*/
+
+		end_point = point;
+
 	
 	CView::OnMouseMove(nFlags, point);
 }
@@ -597,8 +647,15 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 	//dc.MoveTo(start_point.x, start_point.y);
 	//dc.LineTo(end_point.x, end_point.y);
 
-	count = 1;
-	count++;
+
+
+	//Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
+	//Lines.Add(*tempL);
+
+
+
+
+	drawline == FALSE;
 
 //******
 //	Line* tempL = new Line(true, count, true, count, start_point, end_point);
@@ -631,7 +688,7 @@ void CWinProg3_testView::OnSevenSegment()
 {
 	typeOfGate = SEVENSEGMENT;
 	CClientDC dc(this);
-	OnDraw(&dc);	//정해진시간마다 OnDraw호출
+	OnDraw(&dc);
 }
 
 
