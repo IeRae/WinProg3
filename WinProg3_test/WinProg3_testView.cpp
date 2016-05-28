@@ -519,11 +519,11 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 							//KillTimer(1);
 						}
 
-						Invalidate();
+						//Invalidate();
 					}
 					else if (result == IDCANCEL) {
 						Gates[i].lable = _T("");
-						Invalidate();
+						//Invalidate();
 					}
 				}else{
 					
@@ -535,11 +535,11 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 				int result = dlg.DoModal();
 				if (result == IDOK) {
 					Gates[i].lable = dlg.lable;
-					Invalidate();
+					//Invalidate();
 				}
 				else if (result == IDCANCEL) {
 					Gates[i].lable = _T("");
-					Invalidate();
+					//Invalidate();
 				}
 				
 		
@@ -638,7 +638,7 @@ void CWinProg3_testView::OnSevenSegment()
 void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-
+	Rect r;
 	for (int i = 0; i < Clocks.GetSize(); i++) {
 		if(((Clocks[i].clocktime)++)%Clocks[i].clocktype== 0){
 			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
@@ -648,8 +648,13 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
 			}
 		}
+		r = { Gates[i].x,Gates[i].y,Gates[i].width,Gates[i].height };
+		
+		//InvalidateRect((LPRECT)&r, 1);
 	}
 
 	Invalidate();
+	
+
 	CView::OnTimer(nIDEvent);
 }
