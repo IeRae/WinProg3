@@ -26,6 +26,7 @@ public:
 
 	void fixedIndex();
 
+	//라벨 정보
 	CString lable;
 	
 	

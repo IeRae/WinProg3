@@ -50,7 +50,6 @@ CWinProg3_testView::CWinProg3_testView()
 	// TODO: 여기에 생성 코드를 추가합니다.
 	//start_x = 0; start_y = 0;
 	typeOfGate = 0;
-	test = false;
 	//Gates.SetSize(100);
 }
 
@@ -484,33 +483,40 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					CInputInfoDialog dlg = new CInputInfoDialog;
 					//대화 상자로 정보 초기화
 					dlg.inputLable = Gates[i].lable;
-					dlg.checkClock = test;
 
 					int result = dlg.DoModal();
 					if (result == IDOK) {
 						//대화상자로 부터 정보를 받음
 						Gates[i].lable = dlg.inputLable;
 						clocktype = dlg.clock_number;
-						test = dlg.checkClock;
+
+						clockinfo temp;
+						temp.gateIndex = i;
 
 						if(dlg.checkClock){
 							switch (clocktype) {
 							case HZTIMES_1:
-								SetTimer(1,1000,NULL);
-								AfxMessageBox(_T("1"));
+								temp.clocktype = 100;
+								//SetTimer(1,1000,NULL);
+								//AfxMessageBox(_T("1"));
 								break;
 							case HZTIMES_10:
-								SetTimer(1, 100, NULL);
-								AfxMessageBox(_T("10"));
+								temp.clocktype = 10;
+								//SetTimer(1, 100, NULL);
+								//AfxMessageBox(_T("10"));
+
 								break;
 							case HZTIMES_100:
-								SetTimer(1, 10, NULL);
-								AfxMessageBox(_T("100"));
+								temp.clocktype = 1;
+								//SetTimer(1, 10, NULL);
+								//AfxMessageBox(_T("100"));
 								break;
 							}
+							Clocks.Add(temp);
+							SetTimer(1, 10, NULL);
 						}
 						else {
-							KillTimer(1);
+							//KillTimer(1);
 						}
 
 						Invalidate();
@@ -633,5 +639,17 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
+	for (int i = 0; i < Clocks.GetSize(); i++) {
+		if(((Clocks[i].clocktime)++)%Clocks[i].clocktype== 0){
+			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
+				Gates[Clocks[i].gateIndex].GateId = INPUTFALSE;
+			}
+			else if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
+				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
+			}
+		}
+	}
+
+	Invalidate();
 	CView::OnTimer(nIDEvent);
 }
