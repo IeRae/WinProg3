@@ -120,7 +120,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
-	if(typeOfGate != 0){
+	if (typeOfGate != 0) {
 		
 		//논리 회로 연산을 실행하는 부분
 		for (int i = 0; i < Gates.GetSize(); i++) {
@@ -141,7 +141,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				loadBitmap(bitmap, bminfo, Gates[i].GateId);
 				
 				//비트맵 크기를 지정하는 부분
-				if(Gates[i].bmSizeFlag == false){
+				if (Gates[i].bmSizeFlag == false) {
 					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
 					Gates[i].bmSizeFlag = true;
 				}
@@ -155,13 +155,13 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				
 				int index;
-				/*for (int j = 0; j < Lines.GetSize(); j++) {
+				for (int j = 0; j < Lines.GetSize(); j++) {
 					
-					/*
+
 					//Gate의 입력값 할당
 					index = Lines[j].endGateIndex;
 					if (index == i) {
-						if(Gates[i].inputArrayIndex < Gates[i].fixedInputIndex)
+						if (Gates[i].inputArrayIndex < Gates[i].fixedInputIndex)
 							Gates[i].inputArray[Gates[i].inputArrayIndex++] = Lines[j].endBoolValue;
 						else 
 							AfxMessageBox(_T("잘못된 논리 회로 연결"));
@@ -175,129 +175,123 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 						else
 							AfxMessageBox(_T("잘못된 논리 회로 연결"));
 					}
-				}*/				
 			}
 		}
+		}
+		/*
+		if (typeOfGate = SEVENSEGMENT & start_x !=0) {	//7세그먼트 그리기
+			time[0] = 0;
+			//펜 설정
+			CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
+			CBrush red = (RGB(255, 0, 0));
+			CBrush white = (RGB(255, 255, 255));
 		
+			int select;
+			Y = 50;
+			X = start_x;
 
+			select = time[0];
+				CPoint point_1[6] = { { X,Y },{ X + 10,Y - 5 },{ X + 40,Y - 5 },{ X + 50,Y },{ X + 40,Y + 5 },{ X + 10,Y + 5 } };	//시계 모양 좌표 그리기
+				CPoint point_6[6] = { { X + 53,Y + 3 },{ X + 58,Y + 13 },{ X + 58,Y + 43 },{ X + 53,Y + 53 },{ X + 48,Y + 43 },{ X + 48,Y + 13 } };
+				CPoint point_7[6] = { { X + 53,Y + 59 },{ X + 58, Y + 69 },{ X + 58,Y + 99 },{ X + 53,Y + 109 },{ X + 48,Y + 99 },{ X + 48,Y + 69 } };
+				CPoint point_2[6] = { { X,Y + 112 },{ X + 10,Y + 107 },{ X + 40,Y + 107 },{ X + 50,Y + 112 },{ X + 40,Y + 117 },{ X + 10,Y + 117 } };
+				CPoint point_5[6] = { { X - 3,Y + 59 },{ X + 3,Y + 69 },{ X + 3,Y + 99 },{ X - 3,Y + 109 },{ X - 8,Y + 99 },{ X - 8,Y + 69 } };
+				CPoint point_4[6] = { { X - 3,Y + 3 },{ X + 3,Y + 13 },{ X + 3,Y + 43 },{ X - 3,Y + 53 },{ X - 8,Y + 43 },{ X - 8,Y + 13 } };
+				CPoint point_3[6] = { { X,Y + 56 },{ X + 10,Y + 51 },{ X + 40,Y + 51 },{ X + 50,Y + 56 },{ X + 40,Y + 61 },{ X + 10,Y + 61 } };
+				pDC->SelectObject(pen);
+
+
+				//				  1
+				//			 ---------
+				//		4	|    3    | 6
+				//			 ---------
+				//		5	|         | 7
+				//			 ---------
+				//               2
+
+
+				seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = false;
+				switch (select)	//스위치문에 의해 세그먼트 결정
+				{
+				case 0: seg1 = seg2 = seg4 = seg5 = seg6 = seg7 = true;	break;
+				case 1:	seg6 = seg7 = true; break;
+				case 2: seg1 = seg6 = seg3 = seg5 = seg2 = true; break;
+				case 3: seg1 = seg6 = seg3 = seg7 = seg2 = true; break;
+				case 4: seg4 = seg3 = seg6 = seg7 = true;	break;
+				case 5: seg1 = seg4 = seg3 = seg7 = seg2 = true; break;
+				case 6: seg1 = seg4 = seg5 = seg2 = seg7 = seg3 = true; break;
+				case 7: seg1 = seg6 = seg7 = true; break;
+				case 8: seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = true; break;
+				case 9: seg1 = seg3 = seg4 = seg6 = seg7 = seg2 = true; break;
+				}
+
+
+
+				if (seg1) {	//각 세그먼트별 동작설정
+					pDC->SelectObject(red);
+					pDC->Polygon(point_1, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_1, 6);
+				}
+
+				if (seg2) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_2, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_2, 6);
+				}
+
+				if (seg3) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_3, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_3, 6);
+				}
+
+				if (seg4) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_4, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_4, 6);
+				}				
+
+				if (seg5) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_5, 6);
+			}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_5, 6);
+		}
+		
+				if (seg6) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_6, 6);
 	}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_6, 6);
+				}
 
+				if (seg7) {
+					pDC->SelectObject(red);
+					pDC->Polygon(point_7, 6);
+				}
+				else {
+					pDC->SelectObject(white);
+					pDC->Polygon(point_7, 6);
+				}
+				InvalidateRect(NULL, false);
 
-	/*
-	//////7세그먼트/////////
-	if (typeOfGate = SEVENSEGMENT && start_x != 0) {	//7세그먼트 그리기
-		time[0] = 0;
-		//펜 설정
-		CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
-		CBrush red = (RGB(255, 0, 0));
-		CBrush white = (RGB(255, 255, 255));
-
-		int select;
-		Y = 50;
-		X = start_x;
-
-		select = time[0];
-		CPoint point_1[6] = { { X,Y },{ X + 10,Y - 5 },{ X + 40,Y - 5 },{ X + 50,Y },{ X + 40,Y + 5 },{ X + 10,Y + 5 } };	//시계 모양 좌표 그리기
-		CPoint point_6[6] = { { X + 53,Y + 3 },{ X + 58,Y + 13 },{ X + 58,Y + 43 },{ X + 53,Y + 53 },{ X + 48,Y + 43 },{ X + 48,Y + 13 } };
-		CPoint point_7[6] = { { X + 53,Y + 59 },{ X + 58, Y + 69 },{ X + 58,Y + 99 },{ X + 53,Y + 109 },{ X + 48,Y + 99 },{ X + 48,Y + 69 } };
-		CPoint point_2[6] = { { X,Y + 112 },{ X + 10,Y + 107 },{ X + 40,Y + 107 },{ X + 50,Y + 112 },{ X + 40,Y + 117 },{ X + 10,Y + 117 } };
-		CPoint point_5[6] = { { X - 3,Y + 59 },{ X + 3,Y + 69 },{ X + 3,Y + 99 },{ X - 3,Y + 109 },{ X - 8,Y + 99 },{ X - 8,Y + 69 } };
-		CPoint point_4[6] = { { X - 3,Y + 3 },{ X + 3,Y + 13 },{ X + 3,Y + 43 },{ X - 3,Y + 53 },{ X - 8,Y + 43 },{ X - 8,Y + 13 } };
-		CPoint point_3[6] = { { X,Y + 56 },{ X + 10,Y + 51 },{ X + 40,Y + 51 },{ X + 50,Y + 56 },{ X + 40,Y + 61 },{ X + 10,Y + 61 } };
-		pDC->SelectObject(pen);
-
-
-		//				  1
-		//			 ---------
-		//		4	|    3    | 6
-		//			 ---------
-		//		5	|         | 7
-		//			 ---------
-		//               2
-
-
-		seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = false;
-		switch (select)	//스위치문에 의해 세그먼트 결정
-		{
-		case 0: seg1 = seg2 = seg4 = seg5 = seg6 = seg7 = true;	break;
-		case 1:	seg6 = seg7 = true; break;
-		case 2: seg1 = seg6 = seg3 = seg5 = seg2 = true; break;
-		case 3: seg1 = seg6 = seg3 = seg7 = seg2 = true; break;
-		case 4: seg4 = seg3 = seg6 = seg7 = true;	break;
-		case 5: seg1 = seg4 = seg3 = seg7 = seg2 = true; break;
-		case 6: seg1 = seg4 = seg5 = seg2 = seg7 = seg3 = true; break;
-		case 7: seg1 = seg6 = seg7 = true; break;
-		case 8: seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = true; break;
-		case 9: seg1 = seg3 = seg4 = seg6 = seg7 = seg2 = true; break;
 		}
-
-
-
-		if (seg1) {	//각 세그먼트별 동작설정
-			pDC->SelectObject(red);
-			pDC->Polygon(point_1, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_1, 6);
-		}
-
-		if (seg2) {
-			pDC->SelectObject(red);
-			pDC->Polygon(point_2, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_2, 6);
-		}
-
-		if (seg3) {
-			pDC->SelectObject(red);
-			pDC->Polygon(point_3, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_3, 6);
-		}
-
-		if (seg4) {
-			pDC->SelectObject(red);
-			pDC->Polygon(point_4, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_4, 6);
-		}
-
-		if (seg5) {
-			pDC->SelectObject(red);
-			pDC->Polygon(point_5, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_5, 6);
-		}
-
-		if (seg6) {
-			pDC->SelectObject(red);
-			pDC->Polygon(point_6, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_6, 6);
-		}
-
-		if (seg7) {
-			pDC->SelectObject(red);
-			pDC->Polygon(point_7, 6);
-		}
-		else {
-			pDC->SelectObject(white);
-			pDC->Polygon(point_7, 6);
-		}
-		InvalidateRect(NULL, false);
-
-	}
 	*/
 
 	/*
@@ -311,9 +305,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		}
 	}*/
 
-	//Invalidate();
-	/*
-
+/*
 	// 트리 컨트롤 생성
 	m_tree.Create(WS_CHILD | WS_VISIBLE | WS_BORDER |
 		TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT,
@@ -341,7 +333,10 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	m_tree.InsertItem(_T("입력"), 1, 1, hInOut, TVI_LAST);
 	m_tree.InsertItem(_T("출력"), 1, 1, hInOut, TVI_LAST);
+	
+
 	*/
+
 	if (start_point.x != 0) {
 		if (drawline == TRUE) {
 			for (int i = 0; i < Lines.GetSize(); i++) {
@@ -395,6 +390,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 
 }
+}
 
 
 // CWinProg3_testView 진단
@@ -442,10 +438,10 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	CClientDC dc(this);
 
-
+	
 	//라인생성부분
 	start_point = point;
-	
+
 	//drawline = TRUE;
 
 	Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
@@ -456,18 +452,17 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 			if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
 				//AfxMessageBox(_T("시작점 잘잡았네"));
 				drawline = TRUE;
-
+				
 				tempL->Drawline = TRUE;
 				tempL->s_point = point;
 
 				
 		
-			}
-	}
-	
+					}
+				}
+
 
 	Lines.Add(*tempL);
-
 
 
 	Invalidate();
@@ -524,16 +519,16 @@ void CWinProg3_testView::OnOutputButton()
 void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	
-	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
-	for (int i = 0; i < Gates.GetSize(); i++){
 
-		if((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
+	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
+	for (int i = 0; i < Gates.GetSize(); i++) {
+
+		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
-				
+
 				//입력 gate 일때 입력 대화 상자 호출
 				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
-					
+
 					int clocktype;
 					CInputInfoDialog dlg = new CInputInfoDialog;
 					//대화 상자로 정보 초기화
@@ -541,24 +536,37 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 					int result = dlg.DoModal();
 					if (result == IDOK) {
+						//대화상자로 부터 정보를 받음
 						Gates[i].lable = dlg.inputLable;
 						clocktype = dlg.clock_number;
-						/*
-						if(dlg.checkClock){
+
+						clockinfo temp;
+						temp.gateIndex = i;
+
+						if (dlg.checkClock) {
 							switch (clocktype) {
 							case HZTIMES_1:
-								SetTimer(1,1000,NULL);
+								temp.clocktype = 100;
+								//SetTimer(1,1000,NULL);
+								//AfxMessageBox(_T("1"));
 								break;
 							case HZTIMES_10:
-								SetTimer(1, 100, NULL);
+								temp.clocktype = 10;
+								//SetTimer(1, 100, NULL);
+								//AfxMessageBox(_T("10"));
+
 								break;
 							case HZTIMES_100:
-								SetTimer(1, 10, NULL);
+								temp.clocktype = 1;
+								//SetTimer(1, 10, NULL);
+								//AfxMessageBox(_T("100"));
 								break;
-							}*/
+							}
+							Clocks.Add(temp);
+							SetTimer(1, 10, NULL);
 						}
 						else {
-							KillTimer(1);
+							//KillTimer(1);
 						}
 
 						Invalidate();
@@ -567,32 +575,34 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 						//Gates[i].lable = _T("");
 						//Invalidate();
 				//	}
-				}else{
-					
-				CInfoDialog dlg = new CInfoDialog;
-
-				//대화 상자로 정보 초기화
-				dlg.lable = Gates[i].lable;
-
-				int result = dlg.DoModal();
-				if (result == IDOK) {
-					Gates[i].lable = dlg.lable;
-					Invalidate();
 				}
-				else if (result == IDCANCEL) {
-					Gates[i].lable = _T("");
-					Invalidate();
-				}
-				
-		
+				else {
+
+					CInfoDialog dlg = new CInfoDialog;
+
+					//대화 상자로 정보 초기화
+					dlg.lable = Gates[i].lable;
+
+					int result = dlg.DoModal();
+					if (result == IDOK) {
+						Gates[i].lable = dlg.lable;
+						Invalidate();
+					}
+					else if (result == IDCANCEL) {
+						Gates[i].lable = _T("");
+						Invalidate();
+					}
+
+
 
 				}
-				
+
 			}
-		
 
 
-	CView::OnRButtonDown(nFlags, point);
+
+		CView::OnRButtonDown(nFlags, point);
+	}
 }
 
 
@@ -647,7 +657,7 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 
 
 	drawline == FALSE;
-	
+
 //******
 //	Line* tempL = new Line(true, count, true, count, start_point, end_point);
 //	Lines.Add(*tempL);
@@ -674,7 +684,7 @@ void CWinProg3_testView::OnLine()
 
 }
 
-
+//??
 void CWinProg3_testView::OnSevenSegment()
 {
 	typeOfGate = SEVENSEGMENT;
@@ -687,5 +697,17 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
+	for (int i = 0; i < Clocks.GetSize(); i++) {
+		if(((Clocks[i].clocktime)++)%Clocks[i].clocktype== 0){
+			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
+				Gates[Clocks[i].gateIndex].GateId = INPUTFALSE;
+			}
+			else if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
+				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
+			}
+		}
+	}
+
+	Invalidate();
 	CView::OnTimer(nIDEvent);
 }

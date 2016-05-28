@@ -33,6 +33,7 @@ void CInputInfoDialog::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CInputInfoDialog, CDialogEx)
+	ON_BN_CLICKED(IDC_CHECK1, &CInputInfoDialog::OnBnClickedCheck1)
 END_MESSAGE_MAP()
 
 
@@ -45,7 +46,8 @@ BOOL CInputInfoDialog::OnInitDialog()
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	
-	checkClock = true;
+	
+
 
 	CString hzmsg;
 	hzmsg.Format(_T("1Hz"));
@@ -81,4 +83,21 @@ void CInputInfoDialog::OnCancel()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	EndDialog(IDCANCEL);
 	CDialogEx::OnCancel();
+}
+
+
+void CInputInfoDialog::OnBnClickedCheck1()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	checkClock = IsDlgButtonChecked(IDC_CHECK1);
+
+	//체크박스 상태에 따른 콤보박스 변화 설정
+	if (checkClock) {
+		GetDlgItem(IDC_COMBO1)->EnableWindow(true);
+	}
+	else
+	{
+		GetDlgItem(IDC_COMBO1)->EnableWindow(false);
+	}
 }

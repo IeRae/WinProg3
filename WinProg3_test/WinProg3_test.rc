@@ -175,7 +175,7 @@ BEGIN
     POPUP "Å¬·°"
     BEGIN
         MENUITEM "1Hz",                         ID_32787
-        MENUITEM "10Hz",                        ID_32788
+        MENUITEM "10Hz",                        ID_LINE
         MENUITEM "100Hz",                       ID_32789
     END
 END

@@ -4,6 +4,13 @@
 #define IDC_TREE1 100
 #pragma once
 
+//입력 클럭 게이트 마다 각각의 정보를 저장 하기 위한 구조체
+struct clockinfo {
+	int gateIndex;
+	int clocktype;
+	int clocktime = 0;
+};
+
 class CWinProg3_testView : public CView
 {
 protected: // serialization에서만 만들어집니다.
@@ -34,6 +41,8 @@ public:
 
 	CArray<Gate, Gate&> Gates; // 논리게이트 객체 리스트
 	CArray<Line, Line&> Lines;	//논리 회로 선 객체 리스트
+	CArray<clockinfo, clockinfo&> Clocks;	//클럭 입력 게이트 리스트
+	
 
 	int typeOfGate;
 	
