@@ -448,6 +448,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	
 	//drawline = TRUE;
 
+	Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
 
 	
 	for (int i = 0; i < Gates.GetSize(); i++) {
@@ -456,12 +457,17 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 				//AfxMessageBox(_T("시작점 잘잡았네"));
 				drawline = TRUE;
 
+				tempL->Drawline = TRUE;
+				tempL->s_point = point;
+
 				
 		
 			}
 	}
-
 	
+
+	Lines.Add(*tempL);
+
 
 
 	Invalidate();
@@ -537,7 +543,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					if (result == IDOK) {
 						Gates[i].lable = dlg.inputLable;
 						clocktype = dlg.clock_number;
-
+						/*
 						if(dlg.checkClock){
 							switch (clocktype) {
 							case HZTIMES_1:
@@ -549,7 +555,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 							case HZTIMES_100:
 								SetTimer(1, 10, NULL);
 								break;
-							}
+							}*/
 						}
 						else {
 							KillTimer(1);
@@ -557,10 +563,10 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 						Invalidate();
 					}
-					else if (result == IDCANCEL) {
-						Gates[i].lable = _T("");
-						Invalidate();
-					}
+					//else if (result == IDCANCEL) {
+						//Gates[i].lable = _T("");
+						//Invalidate();
+				//	}
 				}else{
 					
 				CInfoDialog dlg = new CInfoDialog;
@@ -584,7 +590,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 				
 			}
 		
-	}
+
 
 	CView::OnRButtonDown(nFlags, point);
 }
@@ -609,6 +615,7 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 	*/
 
 	end_point = point;
+
 	
 	CView::OnMouseMove(nFlags, point);
 }
@@ -631,8 +638,13 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 	//dc.MoveTo(start_point.x, start_point.y);
 	//dc.LineTo(end_point.x, end_point.y);
 
-	Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
-	Lines.Add(*tempL);
+
+
+	//Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
+	//Lines.Add(*tempL);
+
+
+
 
 	drawline == FALSE;
 	
