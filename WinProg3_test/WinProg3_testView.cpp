@@ -626,7 +626,7 @@ void CWinProg3_testView::OnLine()
 
 }
 
-
+//??
 void CWinProg3_testView::OnSevenSegment()
 {
 	typeOfGate = SEVENSEGMENT;
