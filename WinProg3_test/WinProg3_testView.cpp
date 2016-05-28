@@ -50,6 +50,7 @@ CWinProg3_testView::CWinProg3_testView()
 	// TODO: 여기에 생성 코드를 추가합니다.
 	//start_x = 0; start_y = 0;
 	typeOfGate = 0;
+	test = false;
 	//Gates.SetSize(100);
 }
 
@@ -120,17 +121,17 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
-	if(typeOfGate != 0){
-		
+	if (typeOfGate != 0) {
+
 		//논리 회로 연산을 실행하는 부분
 		for (int i = 0; i < Gates.GetSize(); i++) {
 			//pDoc->getLogic(Gates[i]);
 			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
 		}
-		
+
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
-		
+
 
 		//논리 게이트를 그려주는 부분
 		if (start_x != 0) {
@@ -139,31 +140,31 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				BITMAP bminfo;
 
 				loadBitmap(bitmap, bminfo, Gates[i].GateId);
-				
+
 				//비트맵 크기를 지정하는 부분
-				if(Gates[i].bmSizeFlag == false){
+				if (Gates[i].bmSizeFlag == false) {
 					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
 					Gates[i].bmSizeFlag = true;
 				}
-				
+
 
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
-				
-				
+
+
 				//라벨을 출력하는 부분
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
-				
+
 				int index;
-				/*for (int j = 0; j < Lines.GetSize(); j++) {
-					
-					/*
+				for (int j = 0; j < Lines.GetSize(); j++) {
+
+
 					//Gate의 입력값 할당
 					index = Lines[j].endGateIndex;
 					if (index == i) {
-						if(Gates[i].inputArrayIndex < Gates[i].fixedInputIndex)
+						if (Gates[i].inputArrayIndex < Gates[i].fixedInputIndex)
 							Gates[i].inputArray[Gates[i].inputArrayIndex++] = Lines[j].endBoolValue;
-						else 
+						else
 							AfxMessageBox(_T("잘못된 논리 회로 연결"));
 					}
 
@@ -175,17 +176,17 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 						else
 							AfxMessageBox(_T("잘못된 논리 회로 연결"));
 					}
-				}*/				
+				}
 			}
 		}
-		
+		/*
 		if (typeOfGate = SEVENSEGMENT & start_x !=0) {	//7세그먼트 그리기
 			time[0] = 0;
 			//펜 설정
 			CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
 			CBrush red = (RGB(255, 0, 0));
 			CBrush white = (RGB(255, 255, 255));
-		
+
 			int select;
 			Y = 50;
 			X = start_x;
@@ -261,7 +262,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				else {
 					pDC->SelectObject(white);
 					pDC->Polygon(point_4, 6);
-				}				
+				}
 
 				if (seg5) {
 					pDC->SelectObject(red);
@@ -271,7 +272,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					pDC->SelectObject(white);
 					pDC->Polygon(point_5, 6);
 		}
-		
+
 				if (seg6) {
 					pDC->SelectObject(red);
 					pDC->Polygon(point_6, 6);
@@ -293,7 +294,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 		}
 
-		
+
 
 
 	}
@@ -309,9 +310,6 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 		}
 	}
 
-	//Invalidate();
-	/*
-
 	// 트리 컨트롤 생성
 	m_tree.Create(WS_CHILD | WS_VISIBLE | WS_BORDER |
 		TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT,
@@ -325,11 +323,11 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	m_tree.SetImageList(&il, TVSIL_NORMAL);
 	il.Detach();
 
-	// 1레벨 초기화 
+	// 1레벨 초기화
 	HTREEITEM hGate = m_tree.InsertItem(_T("논리게이트"), 0, 0, TVI_ROOT, TVI_LAST);
 	HTREEITEM hInOut = m_tree.InsertItem(_T("입력/출력"), 0, 0, TVI_ROOT, TVI_LAST);
 
-	// 2-레벨 초기화 
+	// 2-레벨 초기화
 	m_tree.InsertItem(_T("AND"), 1, 1, hGate, TVI_LAST);
 	m_tree.InsertItem(_T("OR"), 1, 1, hGate, TVI_LAST);
 	m_tree.InsertItem(_T("NOT"), 1, 1, hGate, TVI_LAST);
@@ -340,6 +338,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	m_tree.InsertItem(_T("입력"), 1, 1, hInOut, TVI_LAST);
 	m_tree.InsertItem(_T("출력"), 1, 1, hInOut, TVI_LAST);
 	*/
+	}
 }
 
 
@@ -390,7 +389,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	//dc.MoveTo(point.x, point.y);
 
 
-
+	/*
 	//라인생성부분
 	start_point = point;
 	Line* tempL = new Line(true, 1, true, 1, start_point, end_point);
@@ -415,7 +414,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 			}
 	}
-
+	*/
 
 	Invalidate();
 }
@@ -485,22 +484,28 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					CInputInfoDialog dlg = new CInputInfoDialog;
 					//대화 상자로 정보 초기화
 					dlg.inputLable = Gates[i].lable;
+					dlg.checkClock = test;
 
 					int result = dlg.DoModal();
 					if (result == IDOK) {
+						//대화상자로 부터 정보를 받음
 						Gates[i].lable = dlg.inputLable;
 						clocktype = dlg.clock_number;
+						test = dlg.checkClock;
 
 						if(dlg.checkClock){
 							switch (clocktype) {
 							case HZTIMES_1:
 								SetTimer(1,1000,NULL);
+								AfxMessageBox(_T("1"));
 								break;
 							case HZTIMES_10:
 								SetTimer(1, 100, NULL);
+								AfxMessageBox(_T("10"));
 								break;
 							case HZTIMES_100:
 								SetTimer(1, 10, NULL);
+								AfxMessageBox(_T("100"));
 								break;
 							}
 						}

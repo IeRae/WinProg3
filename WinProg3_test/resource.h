@@ -44,11 +44,9 @@
 #define ID_INPUT_BUTTON                 32786
 #define ID_32787                        32787
 #define ID_LINE                         32788
-#define ID_32789                        32789
-#define ID_7SEGMENT                     32790
-#define ID_32787                        32787
 #define ID_32788                        32788
 #define ID_32789                        32789
+#define ID_7SEGMENT                     32790
 
 // Next default values for new objects
 // 

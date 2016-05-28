@@ -29,4 +29,5 @@ public:
 	CString inputLable;
 	int clock_number;
 	BOOL checkClock;
+	afx_msg void OnBnClickedCheck1();
 };

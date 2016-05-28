@@ -24,7 +24,7 @@ public:
 	int time[2];
 	int X, Y;
 	bool seg1, seg2, seg3, seg4, seg5, seg6, seg7;
-	
+	bool test;
 	
 	CPoint start_point;
 	CPoint end_point;
