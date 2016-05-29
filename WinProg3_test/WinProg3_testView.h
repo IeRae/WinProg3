@@ -25,6 +25,8 @@ public:
 	int start_x;
 	int start_y;
 	bool drawline;
+	bool finish;
+	int from, to;
 
 	bool drawline2;
 	int count;
@@ -50,6 +52,7 @@ public:
 	// 작업입니다.
 public:
 	void loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
+	void RotateBitmap(Bitmap *pBitmap, int bmindex, CDC *pDC);
 
 	// 재정의입니다.
 public:
@@ -86,6 +89,7 @@ public:
 	void OnLine();
 	void OnSevenSegment();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedButton1();
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

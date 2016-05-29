@@ -178,6 +178,12 @@ BEGIN
         MENUITEM "10Hz",                        ID_LINE
         MENUITEM "100Hz",                       ID_32789
     END
+    POPUP "플립플롭"
+    BEGIN
+        MENUITEM "D-플립플롭",                      ID_DFF
+        MENUITEM "JK-플립플롭",                     ID_JKFF
+        MENUITEM "T-플립플롭",                      ID_TFF
+    END
 END
 
 
@@ -230,7 +236,6 @@ BEGIN
     LTEXT           "Logic Gate Infomation",IDC_STATIC,23,15,71,8
     EDITTEXT        IDC_EDIT1,64,29,73,13,ES_AUTOHSCROLL
     LTEXT           "Gate Name : ",IDC_STATIC,19,30,44,13
-    PUSHBUTTON      "Button1",IDC_BUTTON1,19,47,86,16
 END
 
 IDD_DIALOG2 DIALOGEX 0, 0, 257, 128
@@ -338,7 +343,6 @@ BEGIN
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 100, 100,
-    0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0
 END
