@@ -146,13 +146,13 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
 					Gates[i].bmSizeFlag = true;
 				}
-
+				
 
 
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
 				
-
+				
 
 
 				
@@ -183,26 +183,26 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			}
 		}
 		}
+		
 
 
-	
 
 
 	//라인생성
-		if (start_point.x != 0) {
-			for (int i = 0; i < Lines.GetSize(); i++) {
+	if (start_point.x != 0) {
+		for (int i = 0; i < Lines.GetSize(); i++) {
 				if (Lines[i].Drawline == TRUE) {
-					CClientDC dc(this);
-					dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+			CClientDC dc(this);
+			dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
 					dc.LineTo(Gates[Lines[i].endGateIndex].x, Gates[Lines[i].endGateIndex].y + Gates[Lines[i].endGateIndex].height / 2);
-				}
-			}
 		}
-	}
+					}
+					}
+					}
+
+
+
 	
-
-
-
 
 
 }
@@ -240,34 +240,34 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	CView::OnLButtonDown(nFlags, point);
 
 	if (typeOfGate != LINESHAPE) {
-		CString msg;
+	CString msg;
 
-		start_x = point.x;
-		start_y = point.y;
+	start_x = point.x;
+	start_y = point.y;
 
-		Gate* temp = new Gate(typeOfGate, start_x, start_y);
+	Gate* temp = new Gate(typeOfGate, start_x, start_y);
 
-		Gates.Add(*temp);
+	Gates.Add(*temp);
 
 	}
 	else {
-		CClientDC dc(this);
+	CClientDC dc(this);
 		drawline = FALSE;
-		//라인생성부분
-		start_point = point;
+	//라인생성부분
+	start_point = point;
 		//old_end_point = start_point;
-		for (int i = 0; i < Gates.GetSize(); i++) {
-			if ((point.x >= (Gates[i].x + Gates[i].width - 5)) && (point.x <= (Gates[i].x + Gates[i].width + 5)))
-				if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+	for (int i = 0; i < Gates.GetSize(); i++) {
+		if ((point.x >= (Gates[i].x + Gates[i].width - 5)) && (point.x <= (Gates[i].x + Gates[i].width + 5)))
+			if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
 					//	dc.MoveTo(point.x, point.y);	
-					drawline = TRUE;
+				drawline = TRUE;
 					from = i;
 					//	AfxMessageBox(_T("시작점 잘잡았네"));
-
+		
 					//	drawline = TRUE;
 				}
-		}
-	}
+					}
+				}
 
 	Invalidate();
 }
@@ -373,39 +373,39 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 							//KillTimer(1);
 						}
 
-						Invalidate();
-					}
-					//else if (result == IDCANCEL) {
-						//Gates[i].lable = _T("");
 						//Invalidate();
-				//	}
-				}
-				else {
-
-					CInfoDialog dlg = new CInfoDialog;
-
-					//대화 상자로 정보 초기화
-					dlg.lable = Gates[i].lable;
-
-					int result = dlg.DoModal();
-					if (result == IDOK) {
-						Gates[i].lable = dlg.lable;
-						Invalidate();
 					}
 					else if (result == IDCANCEL) {
 						Gates[i].lable = _T("");
-						Invalidate();
+						//Invalidate();
 					}
+					else {
+
+						CInfoDialog dlg = new CInfoDialog;
+
+						//대화 상자로 정보 초기화
+						dlg.lable = Gates[i].lable;
+
+						int result = dlg.DoModal();
+						if (result == IDOK) {
+							Gates[i].lable = dlg.lable;
+							//Invalidate();
+						}
+						else if (result == IDCANCEL) {
+							Gates[i].lable = _T("");
+							//Invalidate();
+						}
 
 
+
+					}
 
 				}
 
+
+
+				CView::OnRButtonDown(nFlags, point);
 			}
-
-
-
-		CView::OnRButtonDown(nFlags, point);
 	}
 }
 
@@ -486,7 +486,7 @@ void CWinProg3_testView::OnSevenSegment()
 void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-
+	Rect r;
 	for (int i = 0; i < Clocks.GetSize(); i++) {
 		if(((Clocks[i].clocktime)++)%Clocks[i].clocktype== 0){
 			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
@@ -496,9 +496,14 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
 			}
 		}
+		r = { Gates[i].x,Gates[i].y,Gates[i].width,Gates[i].height };
+		
+		//InvalidateRect((LPRECT)&r, 1);
 	}
 
 	Invalidate();
+	
+
 	CView::OnTimer(nIDEvent);
 }
 
