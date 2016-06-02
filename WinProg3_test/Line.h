@@ -14,6 +14,8 @@ public:
 	int endGateIndex;
 
 	bool Drawline;
+	bool Finish;
+	
 
 	CPoint s_point;
 	CPoint e_point;

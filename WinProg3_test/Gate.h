@@ -34,4 +34,5 @@ public:
 	Gate();
 	~Gate();
 	Gate(int id, int x, int y);
+	void SevenSegment();
 };
