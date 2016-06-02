@@ -28,6 +28,9 @@ public:
 
 	//라벨 정보
 	CString lable;
+
+	//플립플롭 정보
+	bool edge;
 	
 	
 

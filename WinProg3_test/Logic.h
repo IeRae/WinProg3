@@ -21,8 +21,8 @@ public:
 	bool And_Operator(bool A1, bool A2);
 	bool Nand_Operator(bool A1, bool A2);
 	bool Or_Operator(bool A1, bool A2);
-	bool Logic::DFlipFlop_Operator(bool A1, bool A2);
-	bool Logic::JKFlipFlop_Opertor(bool A1, bool A2, bool A3);
+	bool DFlipFlop_Operator(bool A1, bool A2);
+	bool JKFlipFlop_Opertor(bool A1, bool A2, bool A3);
 
 };
 
