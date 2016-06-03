@@ -39,6 +39,7 @@ public:
 	
 	CPoint start_point;
 	CPoint end_point;
+	CPoint old_end_point;
 
 
 	CArray<Gate, Gate&> Gates; // 논리게이트 객체 리스트

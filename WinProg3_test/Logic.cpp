@@ -27,7 +27,8 @@ bool Logic::Xor_Operator(bool A1, bool A2) { return A1^A2; }
 bool Logic::DFlipFlop_Operator(bool A1, bool A2) { 
 	if (((Clocks[i].clocktime)++) % Clocks[i].clocktype == 0) {
 		if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
-			return bool A1;
+
+			return A1;
 		}
 	}	
 }

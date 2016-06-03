@@ -12,6 +12,7 @@ Gate::Gate() {
 	lable = _T("");
 
 	bmSizeFlag = false;
+	edge = false;
 }
 
 Gate::~Gate()
@@ -31,7 +32,7 @@ Gate::Gate(int id, int a, int b) {
 	lable = _T("");
 
 	bmSizeFlag = false;
-
+	edge = false;
 	fixedIndex();
 }
 
