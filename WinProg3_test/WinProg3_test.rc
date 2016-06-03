@@ -186,6 +186,10 @@ BEGIN
         MENUITEM "JK-플립플롭",                     ID_JKFF
         MENUITEM "T-플립플롭",                      ID_TFF
     END
+    POPUP "라이브러리"
+    BEGIN
+        MENUITEM "지정",                          ID_SET_LIB
+    END
 END
 
 

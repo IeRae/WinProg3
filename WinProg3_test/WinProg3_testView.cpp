@@ -42,6 +42,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_WM_LBUTTONUP()
 	ON_WM_TIMER()
 	//ON_BN_CLICKED(IDC_BUTTON1, &CWinProg3_testView::OnBnClickedButton1)
+	ON_COMMAND(ID_SET_LIB, &CWinProg3_testView::OnSetLib)
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -156,7 +157,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 						//AfxMessageBox(msg);
 					}
 							
-
+							*/
 					loadBitmap(bitmap, bminfo, Gates[i].GateId);
 				
 					/*
@@ -358,17 +359,34 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
+	if(m_pTracker){
+		
+
+		if (m_pTracker->TrackRubberBand(this, point, 0)) {
+
+		}
+
+		if (m_pTracker->HitTest(point) > 0) {
+			if (m_pTracker->Track(this, point, 0)) {
+			
+			}
+		}
+	}
+
 	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
 	for (int i = 0; i < Gates.GetSize(); i++) {
 
 		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
-
+				/*
 				if ((Gates[i].GateId == OUTPUTTRUE) || (Gates[i].GateId == OUTPUTFALSE)) {
 					CString msg;
 					msg.Format(_T("%d"), Gates[i].outputArray[0]);
 					AfxMessageBox(msg);
-				}
+				}*/
+				CString msg;
+				msg.Format(_T("%d"), Gates[i].outputArray[0]);
+				AfxMessageBox(msg);
 
 				//입력 gate 일때 입력 대화 상자 호출
 				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
@@ -623,3 +641,16 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 	CView::OnTimer(nIDEvent);
 }
 
+
+
+void CWinProg3_testView::OnSetLib()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_pTracker = new CRectTracker;
+	/*
+	if (m_pTracker->TrackRubberBand(this, POINT, 0)) {
+	
+	}
+	*/
+	m_pTracker = new CRectTracker;
+}

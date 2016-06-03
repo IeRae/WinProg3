@@ -49,6 +49,7 @@ public:
 
 	int typeOfGate;
 	
+	CRectTracker *m_pTracker;
 	
 	// 작업입니다.
 public:
@@ -91,6 +92,7 @@ public:
 	void OnSevenSegment();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnSetLib();
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전
