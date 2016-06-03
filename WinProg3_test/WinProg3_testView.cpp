@@ -121,16 +121,16 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
-
+		
 		//논리 회로 연산을 실행하는 부분
 		for (int i = 0; i < Gates.GetSize(); i++) {
 			//pDoc->getLogic(Gates[i]);
 			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
 		}
-
+		
 		CDC dcmem;
 		dcmem.CreateCompatibleDC(&(*pDC));
-
+		
 
 		//논리 게이트를 그려주는 부분
 		if (start_x != 0) {
@@ -139,8 +139,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				BITMAP bminfo;
 
 				if((Gates[i].GateId != LINESHAPE) || (Gates[i].GateId != NONE)){
-					loadBitmap(bitmap, bminfo, Gates[i].GateId);
-
+				loadBitmap(bitmap, bminfo, Gates[i].GateId);
+				
 					/*
 					if (rotate == TRUE) {
 						Bitmap *pBitmap3;
@@ -159,27 +159,27 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					}
 					*/
 
-					//비트맵 크기를 지정하는 부분
-					if (Gates[i].bmSizeFlag == false) {
-						Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
-						Gates[i].bmSizeFlag = true;
-					}
+				//비트맵 크기를 지정하는 부분
+				if (Gates[i].bmSizeFlag == false) {
+					Gates[i].setBmSize(bminfo.bmWidth, bminfo.bmHeight);
+					Gates[i].bmSizeFlag = true;
+				}
+				
 
 
-
-					dcmem.SelectObject(&bitmap);
-					pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
-
-
+				dcmem.SelectObject(&bitmap);
+				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
+				
+				
 
 
 				
-					//라벨을 출력하는 부분
-					pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
+				//라벨을 출력하는 부분
+				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				}
 				//int index;
 				for (int j = 0; j < Lines.GetSize(); j++) {
-
+					
 					/*
 					//Gate의 입력값 할당
 					index = Lines[j].endGateIndex;
@@ -198,7 +198,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					//	else
 					//		AfxMessageBox(_T("잘못된 논리 회로 연결"));
 					}*/
-				}
+					}
 				
 			//typeOfGate = LINESHAPE;
 			}
@@ -211,30 +211,36 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			CBrush red = (RGB(255, 0, 0));
 			CBrush white = (RGB(255, 255, 255));
 		}
+		
+		if (typeOfGate == SEVENSEGMENT && start_x != 0) {	//7세그먼트 그리기
+			time[0] = 0;
+			//펜 설정
+			CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
+			CBrush red = (RGB(255, 0, 0));
+			CBrush white = (RGB(255, 255, 255));
 
 
 
-
+		}
 
 	//라인생성
 	if (start_point.x != 0) {
 		for (int i = 0; i < Lines.GetSize(); i++) {
 				if (Lines[i].Drawline == TRUE) {
-					CClientDC dc(this);
-					dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+			CClientDC dc(this);
+			dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
 					dc.LineTo(Gates[Lines[i].endGateIndex].x, Gates[Lines[i].endGateIndex].y + Gates[Lines[i].endGateIndex].height / 2);
+		}
 					}
-				}
-			}
+					}
+
+
+
 	
-	
-
-
-
-
 
 
 	}
+
 
 
 
@@ -271,35 +277,35 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	//if (typeOfGate != LINESHAPE) {
 		//CString msg;
 
-		start_x = point.x;
-		start_y = point.y;
+	start_x = point.x;
+	start_y = point.y;
 		if (typeOfGate != LINESHAPE) {
-			Gate* temp = new Gate(typeOfGate, start_x, start_y);
+	Gate* temp = new Gate(typeOfGate, start_x, start_y);
 
-			Gates.Add(*temp);
+	Gates.Add(*temp);
 
-		}
+	}
 		else if(typeOfGate == LINESHAPE){
-			CClientDC dc(this);
-			drawline = FALSE;
+	CClientDC dc(this);
+		drawline = FALSE;
 			
 			//AfxMessageBox(_T("진입"));
-			//old_end_point = start_point;
-			for (int i = 0; i < Gates.GetSize(); i++) {
+		//old_end_point = start_point;
+	for (int i = 0; i < Gates.GetSize(); i++) {
 				//AfxMessageBox(_T("탐색"));
 				if ((point.x >= (Gates[i].x + Gates[i].width - 50)) && (point.x <= (Gates[i].x + Gates[i].width + 50))){
-					if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+			if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
 						//AfxMessageBox(_T("in"));
-						//	dc.MoveTo(point.x, point.y);	
+					//	dc.MoveTo(point.x, point.y);	
 						
 						start_point = point;
-						drawline = TRUE;
-						from = i;
+				drawline = TRUE;
+					from = i;
 							//AfxMessageBox(_T("시작점 잘잡았네"));
-
+		
+				}
 					}
 				}
-			}
 		}
 		//AfxMessageBox(_T("시작점 종료"));
 		Invalidate();
@@ -356,19 +362,19 @@ void CWinProg3_testView::OnOutputButton()
 
 void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 {
-	
+
 
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	
+
 	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
 	for (int i = 0; i < Gates.GetSize(); i++) {
 
 		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
-				
+
 				//입력 gate 일때 입력 대화 상자 호출
 				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
-					
+
 					int clocktype;
 					CInputInfoDialog dlg = new CInputInfoDialog;
 					//대화 상자로 정보 초기화
@@ -405,7 +411,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 							Clocks.Add(temp);
 							SetTimer(1, 10, NULL);
 						}
-						else if(dlg.checkClock == false){
+						else if (dlg.checkClock == false) {
 							//개별 클럭 기능 수정
 							for (int j = 0; j < Clocks.GetSize(); j++) {
 								if (Clocks[j].gateIndex == i)
@@ -419,8 +425,9 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					else if (result == IDCANCEL) {
 						Gates[i].lable = _T("");
 						//Invalidate();
-					}				
-			}else {
+					}
+				}
+				else {
 
 					CInfoDialog dlg = new CInfoDialog;
 
@@ -439,15 +446,15 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 
 
+					Invalidate();
+
+					Invalidate();
+
+					CView::OnRButtonDown(nFlags, point);
 				}
-		
-				Invalidate();
-
-	CView::OnRButtonDown(nFlags, point);
+			}
+	}
 }
-}
-}
-
 
 void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 {
@@ -473,8 +480,8 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 	}*/
 
 	if ((typeOfGate == LINESHAPE) && (drawline == true)) {
-		if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
-		{
+	if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
+	{
 
 			end_point = point;
 			CClientDC dc(this);
@@ -495,9 +502,10 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 			old_end_point = end_point;
 		}
 	}
+		
+
+
 	
-
-
 	
 	CView::OnMouseMove(nFlags, point);
 }
@@ -522,11 +530,11 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 			if ((end_point.y >= (Gates[j].y + Gates[j].height / 2 - 10)) && (end_point.y <= (Gates[j].y + Gates[j].height / 2 + 10))) {
 				to = j;
 
-				tempL->Drawline = drawline;
+	tempL->Drawline = drawline;
 				tempL->Finish = finish;
-				tempL->startGateIndex = from;
-				tempL->endGateIndex = to;
-				Lines.Add(*tempL);
+	tempL->startGateIndex = from;
+	tempL->endGateIndex = to;
+	Lines.Add(*tempL);
 
 			}
 	}
