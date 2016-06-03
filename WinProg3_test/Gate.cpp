@@ -23,6 +23,11 @@ Gate::Gate(int id, int a, int b) {
 	GateId = id; 
 	x = a; y = b;
 	
+	if (id == INPUTTRUE)
+		outputArray[0] = true;
+	else if (id == INPUTFALSE)
+		outputArray[0] = false;
+
 	inputArrayIndex = 0; 
 	outputArrayIndex = 0;
 	
@@ -44,20 +49,23 @@ void Gate::setBmSize(int w, int h) {
 void Gate::fixedIndex() {
 	switch (GateId)
 	{
-	case ANDSHAPE:
-		fixedInputIndex = 2;
-		fixedOutputIndex = 1;
+	case ANDSHAPE:		
 	case ORSHAPE:
-		fixedInputIndex = 2;
-		fixedOutputIndex = 1;
-
 	case NANDSHAPE:
 	case NORSHAPE:
 	case XORSHAPE:
+		fixedInputIndex = 2;
+		fixedOutputIndex = 1;	
+		break;
 	case OUTPUTTRUE:
 	case OUTPUTFALSE:
-		fixedInputIndex = 2;
-		fixedOutputIndex = 2;
+		fixedInputIndex = 0;
+		fixedOutputIndex = 1;
+		break;
+	case INPUTFALSE:
+	case INPUTTRUE:
+		fixedInputIndex = 1;
+		fixedOutputIndex = 0;
 		break;
 	case NOTSHAPE:
 		fixedInputIndex = 1;
@@ -67,6 +75,8 @@ void Gate::fixedIndex() {
 	default:
 		break;
 	}
+
+	//inputArrayIndex = fixedInputIndex-1;
 }
 
 

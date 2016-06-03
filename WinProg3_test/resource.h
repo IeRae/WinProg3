@@ -24,6 +24,7 @@
 #define IDB_BITMAP5                     328
 #define IDB_INPUT_FALSE                 328
 #define IDB_BITMAP1                     329
+#define IDB_BITMAP6                     330
 #define IDC_EDIT1                       1000
 #define IDC_CHECK1                      1001
 #define IDC_BUTTON1                     1001
@@ -60,7 +61,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        330
+#define _APS_NEXT_RESOURCE_VALUE        331
 #define _APS_NEXT_COMMAND_VALUE         32797
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           310

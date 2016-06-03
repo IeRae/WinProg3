@@ -139,7 +139,25 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				BITMAP bminfo;
 
 				if((Gates[i].GateId != LINESHAPE) || (Gates[i].GateId != NONE)){
-				loadBitmap(bitmap, bminfo, Gates[i].GateId);
+
+					/*
+					//output 게이트의 정보 확인
+					if ((Gates[i].GateId == OUTPUTFALSE) && (Gates[i].outputArray[0] == true)) {
+						Gates[i].GateId = OUTPUTTRUE;
+					}
+					else if ((Gates[i].GateId == OUTPUTTRUE) && (Gates[i].outputArray[0] == false))
+						Gates[i].GateId = OUTPUTFALSE;
+						
+
+
+					if ((Gates[i].GateId == INPUTFALSE) || (Gates[i].GateId == INPUTTRUE)) {
+						CString msg;
+						msg.Format(_T("%d"), Gates[i].outputArray[0]);
+						//AfxMessageBox(msg);
+					}
+							
+
+					loadBitmap(bitmap, bminfo, Gates[i].GateId);
 				
 					/*
 					if (rotate == TRUE) {
@@ -170,36 +188,10 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				dcmem.SelectObject(&bitmap);
 				pDC->BitBlt(Gates[i].x, Gates[i].y, Gates[i].width, Gates[i].height, &dcmem, 0, 0, SRCCOPY);
 				
-				
-
-
-				
-				//라벨을 출력하는 부분
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				}
-				//int index;
-				for (int j = 0; j < Lines.GetSize(); j++) {
-					
-					/*
-					//Gate의 입력값 할당
-					index = Lines[j].endGateIndex;
-					if (index == i) {
-						if (Gates[i].inputArrayIndex < Gates[i].fixedInputIndex)
-							Gates[i].inputArray[Gates[i].inputArrayIndex++] = Lines[j].endBoolValue;
-						//else 
-						//	AfxMessageBox(_T("잘못된 논리 회로 연결"));
-					}
-
-					//Gate의 출력값 할당
-					index = Lines[j].startGateIndex;
-					if (index == i) {
-						if (Gates[i].outputArrayIndex < Gates[i].fixedOutputIndex)
-							Lines[j].startBoolValue = Gates[i].outputArray[Gates[i].outputArrayIndex++];
-					//	else
-					//		AfxMessageBox(_T("잘못된 논리 회로 연결"));
-					}*/
-					}
 				
+							
 			//typeOfGate = LINESHAPE;
 			}
 		}
@@ -227,18 +219,18 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	if (start_point.x != 0) {
 		for (int i = 0; i < Lines.GetSize(); i++) {
 				if (Lines[i].Drawline == TRUE) {
-			CClientDC dc(this);
-			dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
+					CClientDC dc(this);
+					dc.MoveTo(Lines[i].s_point.x, Lines[i].s_point.y);
 					dc.LineTo(Gates[Lines[i].endGateIndex].x, Gates[Lines[i].endGateIndex].y + Gates[Lines[i].endGateIndex].height / 2);
+				
+					CString msg;
+					msg.Format(_T("%d : in %d "), Lines[i].startGateIndex, Lines[i].BoolValue);
+					//AfxMessageBox(msg);
+
+
+				}
+			}
 		}
-					}
-					}
-
-
-
-	
-
-
 	}
 
 
@@ -279,34 +271,34 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	start_x = point.x;
 	start_y = point.y;
-		if (typeOfGate != LINESHAPE) {
-	Gate* temp = new Gate(typeOfGate, start_x, start_y);
+	
+	if (typeOfGate != LINESHAPE) {
+		Gate* temp = new Gate(typeOfGate, start_x, start_y);
 
-	Gates.Add(*temp);
+		Gates.Add(*temp);
 
-	}
-		else if(typeOfGate == LINESHAPE){
-	CClientDC dc(this);
+	}else if(typeOfGate == LINESHAPE){
+		CClientDC dc(this);
+	
 		drawline = FALSE;
 			
 			//AfxMessageBox(_T("진입"));
 		//old_end_point = start_point;
-	for (int i = 0; i < Gates.GetSize(); i++) {
+		for (int i = 0; i < Gates.GetSize(); i++) {
 				//AfxMessageBox(_T("탐색"));
 				if ((point.x >= (Gates[i].x + Gates[i].width - 50)) && (point.x <= (Gates[i].x + Gates[i].width + 50))){
-			if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+					if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
 						//AfxMessageBox(_T("in"));
 					//	dc.MoveTo(point.x, point.y);	
 						
 						start_point = point;
-				drawline = TRUE;
-					from = i;
+						drawline = TRUE;
+						from = i;
 							//AfxMessageBox(_T("시작점 잘잡았네"));
-		
-				}
 					}
 				}
 		}
+	}
 		//AfxMessageBox(_T("시작점 종료"));
 		Invalidate();
 	
@@ -371,6 +363,12 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+
+				if ((Gates[i].GateId == OUTPUTTRUE) || (Gates[i].GateId == OUTPUTFALSE)) {
+					CString msg;
+					msg.Format(_T("%d"), Gates[i].outputArray[0]);
+					AfxMessageBox(msg);
+				}
 
 				//입력 gate 일때 입력 대화 상자 호출
 				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
@@ -448,8 +446,6 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 					Invalidate();
 
-					Invalidate();
-
 					CView::OnRButtonDown(nFlags, point);
 				}
 			}
@@ -521,7 +517,7 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	Line* tempL = new Line(TRUE, 1, TRUE, 1, start_point, end_point);
+	Line* tempL = new Line(TRUE, 1, 1, start_point, end_point);
 
 	end_point = point;
 
@@ -530,13 +526,52 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 			if ((end_point.y >= (Gates[j].y + Gates[j].height / 2 - 10)) && (end_point.y <= (Gates[j].y + Gates[j].height / 2 + 10))) {
 				to = j;
 
-	tempL->Drawline = drawline;
+				tempL->Drawline = drawline;
 				tempL->Finish = finish;
-	tempL->startGateIndex = from;
-	tempL->endGateIndex = to;
-	Lines.Add(*tempL);
+				tempL->startGateIndex = from;
+				tempL->BoolValue = Gates[from].outputArray[0];
+				tempL->endGateIndex = to;
+				Lines.Add(*tempL);
+
+				Gates[to].inputArray[0] = Gates[from].outputArray[0];
+				AfxMessageBox(Gates[to].lable);
+
+				if ((Gates[to].GateId == OUTPUTFALSE) || (Gates[to].GateId == OUTPUTTRUE)) {
+					if (Gates[to].inputArray[0] == true)
+						Gates[to].GateId = OUTPUTTRUE;
+					else if (Gates[to].inputArray[0] == false)
+						Gates[to].GateId = OUTPUTFALSE;
+				}
+
+				/*
+				if (Gates[to].inputArrayIndex < Gates[to].fixedInputIndex)
+					Gates[to].inputArray[Gates[to].inputArrayIndex++] = tempL->BoolValue;
+				else
+					AfxMessageBox(_T("잘못된 논리 회로 연결 입력값 할당"));
+					*/
+				
 
 			}
+
+		//라벨을 출력하는 부분
+		for (int k = 0; k < Lines.GetSize(); k++) {
+
+		
+
+			//Gate의 출력값 할당
+			/*
+			if (Lines[k].startGateIndex == j) {
+				if (Gates[j].outputArrayIndex < Gates[j].fixedOutputIndex)
+					Lines[k].BoolValue = Gates[j].outputArray[Gates[j].outputArrayIndex++];
+				else
+					AfxMessageBox(_T("잘못된 논리 회로 연결 출력값 할당"));
+			}else
+			*/
+			//Gate의 입력값 할당
+			if (Lines[k].endGateIndex == j) {
+				
+			}
+		}
 	}
 
 	drawline = FALSE;
@@ -566,11 +601,13 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 		if(((Clocks[i].clocktime)++)%Clocks[i].clocktype== 0){
 			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
 				Gates[Clocks[i].gateIndex].GateId = INPUTFALSE;
+				Gates[Clocks[i].gateIndex].outputArray[0] = false;
 				//하강 엣지 
 				Gates[Clocks[i].gateIndex].edge = false;
 			}
 			else if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
 				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
+				Gates[Clocks[i].gateIndex].outputArray[0] = true;
 				//상승 엣지
 				Gates[Clocks[i].gateIndex].edge = true;
 			}
