@@ -44,6 +44,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	//ON_BN_CLICKED(IDC_BUTTON1, &CWinProg3_testView::OnBnClickedButton1)
 	ON_COMMAND(ID_SET_LIB, &CWinProg3_testView::OnSetLib)
 	ON_COMMAND(ID_TFF, &CWinProg3_testView::OnTff)
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -653,4 +654,38 @@ void CWinProg3_testView::OnTff()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	typeOfGate = TFFSHAPE;
+}
+
+
+void CWinProg3_testView::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	
+
+
+	
+	for (int i = 0; i < Gates.GetSize(); i++) {
+		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
+			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+				if (Gates[i].GateId == OUTPUTTRUE || Gates[i].GateId == OUTPUTFALSE) {
+
+					CGraphInfoDialog dlg = new CGraphInfoDialog;
+
+					//대화 상자로 정보 초기화
+					dlg.istrue = Gates[i].inputArray[0];
+					int result = dlg.DoModal();
+					
+					if (result == IDOK) {
+						//대화상자로 부터 정보를 받음
+
+
+					}
+					else if (result == IDCANCEL) {
+						//Invalidate();
+					}
+				}
+			}
+	}
+
+	CView::OnLButtonDblClk(nFlags, point);
 }

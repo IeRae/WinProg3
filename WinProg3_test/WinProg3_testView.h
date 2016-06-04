@@ -94,6 +94,7 @@ public:
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnSetLib();
 	afx_msg void OnTff();
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

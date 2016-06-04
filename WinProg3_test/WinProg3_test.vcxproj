@@ -190,11 +190,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gate.h" />
+    <ClInclude Include="GraphInfoDialog.h" />
     <ClInclude Include="InfoDialog.h" />
     <ClInclude Include="InputInfoDialog.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="OScopeCtrl.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -204,11 +206,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="GraphInfoDialog.cpp" />
     <ClCompile Include="InfoDialog.cpp" />
     <ClCompile Include="InputInfoDialog.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="OScopeCtrl.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
