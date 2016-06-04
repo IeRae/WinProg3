@@ -57,3 +57,8 @@ bool Logic::JKFlipFlop_Opertor(bool A1, bool A2, bool A3)
 	}
 
 }*/
+
+bool Logic::TFlipFlop_Opertor(bool A1, bool A3) {
+	if (A1) { return A3; }
+	else { return !A3; }
+}

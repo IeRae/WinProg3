@@ -71,6 +71,10 @@ void Gate::fixedIndex() {
 		fixedInputIndex = 1;
 		fixedOutputIndex = 1;
 		break;
+	case TFFSHAPE:
+		fixedInputIndex = 2;
+		fixedOutputIndex = 2;
+		break;
 
 	default:
 		break;

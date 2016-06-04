@@ -43,6 +43,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_WM_TIMER()
 	//ON_BN_CLICKED(IDC_BUTTON1, &CWinProg3_testView::OnBnClickedButton1)
 	ON_COMMAND(ID_SET_LIB, &CWinProg3_testView::OnSetLib)
+	ON_COMMAND(ID_TFF, &CWinProg3_testView::OnTff)
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -67,7 +68,7 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 	return CView::PreCreateWindow(cs);
 }
 
-void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
+void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType bmindex) {
 	switch (bmindex)
 	{
 	case ANDSHAPE:
@@ -103,6 +104,9 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 		break;
 	case INPUTFALSE:
 		bit.LoadBitmapW(IDB_INPUT_FALSE);
+		break;
+	case TFFSHAPE:
+		bit.LoadBitmapW(IDB_TFF);
 		break;
 	default:
 		break;
@@ -170,19 +174,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 							Gates[i].GateId = OUTPUTFALSE;
 					}
 					
-						
-						
-
-/*
-					if ((Gates[i].GateId == INPUTFALSE) || (Gates[i].GateId == INPUTTRUE)) {
-						CString msg;
-						msg.Format(_T("%d"), Gates[i].outputArray[0]);
-						//AfxMessageBox(msg);
-					}
-							
-							*/
 					loadBitmap(bitmap, bminfo, Gates[i].GateId);
-				
+					
 					/*
 					if (rotate == TRUE) {
 						Bitmap *pBitmap3;
@@ -653,4 +646,11 @@ void CWinProg3_testView::OnSetLib()
 	}
 	*/
 	m_pTracker = new CRectTracker;
+}
+
+
+void CWinProg3_testView::OnTff()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	typeOfGate = TFFSHAPE;
 }

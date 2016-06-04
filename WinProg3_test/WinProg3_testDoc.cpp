@@ -101,7 +101,9 @@ bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 	case OUTPUTTRUE:
 		result =  Gates.inputArray[0];
 		break;
-
+	case TFFSHAPE:
+		result = LFunction.TFlipFlop_Opertor(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	default:
 		//AfxMessageBox(_T("error : not find gate number"));
 		return false;
