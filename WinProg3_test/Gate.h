@@ -18,7 +18,7 @@ public:
 	bool inputArray[MAX];
 	int inputArrayIndex;
 	int fixedInputIndex;
-
+	void addInputArray(bool* a, int index);
 	//출력값 정보
 	bool outputArray[MAX];
 	int outputArrayIndex;

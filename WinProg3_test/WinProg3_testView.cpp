@@ -122,11 +122,32 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
-		
+
+
 		//논리 회로 연산을 실행하는 부분
+		//Gate의 입력값 할당
 		for (int i = 0; i < Gates.GetSize(); i++) {
 			//pDoc->getLogic(Gates[i]);
-			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
+			bool a[5];
+			int ai = 0;
+			for (int j = 0; j < Lines.GetSize(); j++) {
+				if(i == Lines[j].endGateIndex){
+					a[ai] = Lines[j].BoolValue;
+					ai++;
+				}
+			}
+			Gates[i].addInputArray(a, ai);
+			
+			//Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i],Lines,i);
+		}
+		
+		//gate의 출력값을 line에 할당
+		for (int i = 0; i < Gates.GetSize(); i++) {
+			for (int j = 0; j < Lines.GetSize(); j++) {
+				if (i == Lines[j].startGateIndex) {
+					Lines[j].BoolValue = pDoc->getLogic(Gates[i]);
+				}
+			}
 		}
 		
 		CDC dcmem;
@@ -359,19 +380,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	if(m_pTracker){
-		
-
-		if (m_pTracker->TrackRubberBand(this, point, 0)) {
-
-		}
-
-		if (m_pTracker->HitTest(point) > 0) {
-			if (m_pTracker->Track(this, point, 0)) {
-			
-			}
-		}
-	}
+	
 
 	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
 	for (int i = 0; i < Gates.GetSize(); i++) {
@@ -385,7 +394,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 					AfxMessageBox(msg);
 				}*/
 				CString msg;
-				msg.Format(_T("%d"), Gates[i].outputArray[0]);
+				msg.Format(_T("%d"), Gates[i].inputArray[0]);
 				AfxMessageBox(msg);
 
 				//입력 gate 일때 입력 대화 상자 호출
@@ -551,46 +560,9 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 				tempL->endGateIndex = to;
 				Lines.Add(*tempL);
 
-				Gates[to].inputArray[0] = Gates[from].outputArray[0];
-				AfxMessageBox(Gates[to].lable);
-
-				if ((Gates[to].GateId == OUTPUTFALSE) || (Gates[to].GateId == OUTPUTTRUE)) {
-					if (Gates[to].inputArray[0] == true)
-						Gates[to].GateId = OUTPUTTRUE;
-					else if (Gates[to].inputArray[0] == false)
-						Gates[to].GateId = OUTPUTFALSE;
-				}
-
-				/*
-				if (Gates[to].inputArrayIndex < Gates[to].fixedInputIndex)
-					Gates[to].inputArray[Gates[to].inputArrayIndex++] = tempL->BoolValue;
-				else
-					AfxMessageBox(_T("잘못된 논리 회로 연결 입력값 할당"));
-					*/
-				
-
 			}
 
-		//라벨을 출력하는 부분
-		for (int k = 0; k < Lines.GetSize(); k++) {
-
-		
-
-			//Gate의 출력값 할당
-			/*
-			if (Lines[k].startGateIndex == j) {
-				if (Gates[j].outputArrayIndex < Gates[j].fixedOutputIndex)
-					Lines[k].BoolValue = Gates[j].outputArray[Gates[j].outputArrayIndex++];
-				else
-					AfxMessageBox(_T("잘못된 논리 회로 연결 출력값 할당"));
-			}else
-			*/
-			//Gate의 입력값 할당
-			if (Lines[k].endGateIndex == j) {
-				
-			}
 		}
-	}
 
 	drawline = FALSE;
 	Invalidate();

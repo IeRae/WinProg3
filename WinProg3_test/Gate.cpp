@@ -79,6 +79,12 @@ void Gate::fixedIndex() {
 	//inputArrayIndex = fixedInputIndex-1;
 }
 
+void Gate::addInputArray(bool* a, int index) {
+	
+	for (int i = 0; i < index; i++) {
+		inputArray[i] = a[i];
+	}
+}
 
 /*
 void Gate::SevenSegment()
