@@ -138,7 +138,6 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			}
 			Gates[i].addInputArray(a, ai);
 			
-			//Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i],Lines,i);
 		}
 		
 		//gate의 출력값을 line에 할당
@@ -164,10 +163,10 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 					
 					//output 게이트의 정보 확인
-					if ((Gates[i].GateId == OUTPUTFALSE) && (Gates[i].outputArray[0] == true)) {
+					if ((Gates[i].GateId == OUTPUTFALSE) && (Gates[i].inputArray[0] == true)) {
 						Gates[i].GateId = OUTPUTFALSE;
 					}
-					else if ((Gates[i].GateId == OUTPUTTRUE) && (Gates[i].outputArray[0] == false))
+					else if ((Gates[i].GateId == OUTPUTTRUE) && (Gates[i].inputArray[0] == false))
 						Gates[i].GateId = OUTPUTFALSE;
 						
 
@@ -319,6 +318,23 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 							//AfxMessageBox(_T("시작점 잘잡았네"));
 					}
 				}
+		}
+	}
+	else if (typeOfGate == NONE) {
+		for (int i = 0; i < Gates.GetSize(); i++) {
+
+			if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width))) {
+				if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+					if (Gates[i].GateId == INPUTTRUE) {
+						Gates[i].GateId = INPUTFALSE;
+						Gates[i].outputArray[0] = false;
+					}
+					else if (Gates[i].GateId == INPUTFALSE) {
+						Gates[i].GateId = INPUTTRUE;
+						Gates[i].outputArray[0] = false;
+					}
+				}
+			}
 		}
 	}
 		//AfxMessageBox(_T("시작점 종료"));
