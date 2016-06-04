@@ -106,7 +106,7 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType 
 		bit.LoadBitmapW(IDB_INPUT_FALSE);
 		break;
 	case TFFSHAPE:
-		bit.LoadBitmapW(IDB_TFF);
+		bit.LoadBitmapW(IDB_TFF); //tff Ãß°¡
 		break;
 	default:
 		break;
