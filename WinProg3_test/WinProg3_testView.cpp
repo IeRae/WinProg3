@@ -620,13 +620,13 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
 				Gates[Clocks[i].gateIndex].GateId = INPUTFALSE;
 				Gates[Clocks[i].gateIndex].outputArray[0] = false;
-				//ÇÏ°­ ¿§Áö 
+				//ÇÏ°­ ¿§Áö Æ®¸®°Å ¼³Á¤
 				Gates[Clocks[i].gateIndex].edge = false;
 			}
 			else if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
 				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
 				Gates[Clocks[i].gateIndex].outputArray[0] = true;
-				//»ó½Â ¿§Áö
+				//»ó½Â ¿§Áö Æ®¸®°Å ¼³Á¤
 				Gates[Clocks[i].gateIndex].edge = true;
 			}
 		}
