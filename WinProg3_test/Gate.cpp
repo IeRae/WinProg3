@@ -19,7 +19,7 @@ Gate::~Gate()
 {
 }
 
-Gate::Gate(int id, int a, int b) {
+Gate::Gate(BagicGateType id, int a, int b) {
 	GateId = id; 
 	x = a; y = b;
 	

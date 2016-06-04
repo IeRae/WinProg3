@@ -162,16 +162,16 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				if((Gates[i].GateId != LINESHAPE) || (Gates[i].GateId != NONE)){
 
-					/*
+					
 					//output 게이트의 정보 확인
 					if ((Gates[i].GateId == OUTPUTFALSE) && (Gates[i].outputArray[0] == true)) {
-						Gates[i].GateId = OUTPUTTRUE;
+						Gates[i].GateId = OUTPUTFALSE;
 					}
 					else if ((Gates[i].GateId == OUTPUTTRUE) && (Gates[i].outputArray[0] == false))
 						Gates[i].GateId = OUTPUTFALSE;
 						
 
-
+/*
 					if ((Gates[i].GateId == INPUTFALSE) || (Gates[i].GateId == INPUTTRUE)) {
 						CString msg;
 						msg.Format(_T("%d"), Gates[i].outputArray[0]);
@@ -286,7 +286,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	CView::OnLButtonDown(nFlags, point);
+	
 
 	//if (typeOfGate != LINESHAPE) {
 		//CString msg;
@@ -294,7 +294,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	start_x = point.x;
 	start_y = point.y;
 	
-	if (typeOfGate != LINESHAPE) {
+	if ((typeOfGate != LINESHAPE) && (typeOfGate != NONE)) {
 		Gate* temp = new Gate(typeOfGate, start_x, start_y);
 
 		Gates.Add(*temp);
@@ -323,7 +323,9 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	}
 		//AfxMessageBox(_T("시작점 종료"));
 		Invalidate();
-	
+		typeOfGate = NONE;
+
+		CView::OnLButtonDown(nFlags, point);
 }
 
 
@@ -524,6 +526,7 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 			Pen.DeleteObject(); //팬을 제거 한다. 
 			old_end_point = end_point;
 		}
+	Invalidate();
 	}
 		
 

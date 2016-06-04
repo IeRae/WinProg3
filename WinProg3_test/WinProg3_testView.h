@@ -47,7 +47,7 @@ public:
 	CArray<clockinfo, clockinfo&> Clocks;	//클럭 입력 게이트 리스트
 	
 
-	int typeOfGate;
+	BagicGateType typeOfGate;
 	
 	CRectTracker *m_pTracker;
 	

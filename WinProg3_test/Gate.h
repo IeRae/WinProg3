@@ -1,11 +1,13 @@
 #pragma once
+#include "stdafx.h"
+#include "Logic.h"
 
 #define MAX 1024
 
 class Gate {
 public:
 	//∫Ò∆Æ∏  ¡§∫∏
-	int GateId;
+	BagicGateType GateId;
 	int x;
 	int y;
 	int width;
@@ -36,6 +38,6 @@ public:
 
 	Gate();
 	~Gate();
-	Gate(int id, int x, int y);
+	Gate(BagicGateType id, int x, int y);
 	void SevenSegment();
 };
