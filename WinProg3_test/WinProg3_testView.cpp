@@ -163,11 +163,14 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 					
 					//output 게이트의 정보 확인
-					if ((Gates[i].GateId == OUTPUTFALSE) && (Gates[i].inputArray[0] == true)) {
-						Gates[i].GateId = OUTPUTFALSE;
+					if ((Gates[i].GateId == OUTPUTFALSE) || (Gates[i].GateId == OUTPUTTRUE)) {
+						if(Gates[i].inputArray[0] == true)
+							Gates[i].GateId = OUTPUTTRUE;
+						else if (Gates[i].inputArray[0] == false)
+							Gates[i].GateId = OUTPUTFALSE;
 					}
-					else if ((Gates[i].GateId == OUTPUTTRUE) && (Gates[i].inputArray[0] == false))
-						Gates[i].GateId = OUTPUTFALSE;
+					
+						
 						
 
 /*
@@ -296,6 +299,9 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 	if ((typeOfGate != LINESHAPE) && (typeOfGate != NONE)) {
 		Gate* temp = new Gate(typeOfGate, start_x, start_y);
 
+		if (typeOfGate == OUTPUTTRUE)
+			temp->inputArray[0] = true;
+
 		Gates.Add(*temp);
 
 	}else if(typeOfGate == LINESHAPE){
@@ -328,18 +334,21 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 					if (Gates[i].GateId == INPUTTRUE) {
 						Gates[i].GateId = INPUTFALSE;
 						Gates[i].outputArray[0] = false;
+						Gates[i].inputArray[0] = false;
 					}
 					else if (Gates[i].GateId == INPUTFALSE) {
 						Gates[i].GateId = INPUTTRUE;
-						Gates[i].outputArray[0] = false;
+						Gates[i].outputArray[0] = true;
+						Gates[i].inputArray[0] = true;
 					}
 				}
 			}
 		}
 	}
-		//AfxMessageBox(_T("시작점 종료"));
-		Invalidate();
-		typeOfGate = NONE;
+		
+	typeOfGate = NONE;
+	Invalidate();
+		
 
 		CView::OnLButtonDown(nFlags, point);
 }
