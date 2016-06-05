@@ -23,11 +23,15 @@ public:
 	CTreeCtrl m_tree;
 	//위치 지정 변수
 	int start_x;
+	int start_x2;
 	int start_y;
+	int start_y2;
 	bool drawline;
 	bool finish;
+	bool drawSeg;
 	int from, to;
 
+	int view_rote;
 	bool drawline2;
 	int count;
 
@@ -91,6 +95,9 @@ public:
 	void OnSevenSegment();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnDFF();
+	afx_msg void OnBranch();
+
 };
 
 #ifndef _DEBUG  // WinProg3_testView.cpp의 디버그 버전

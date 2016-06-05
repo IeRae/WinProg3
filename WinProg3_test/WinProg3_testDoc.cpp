@@ -8,8 +8,9 @@
 #ifndef SHARED_HANDLERS
 #include "WinProg3_test.h"
 #endif
-
+#include "MainFrm.h"
 #include "WinProg3_testDoc.h"
+#include "WinProg3_testView.h"
 
 #include <propkey.h>
 
@@ -56,8 +57,21 @@ BOOL CWinProg3_testDoc::OnNewDocument()
 
 void CWinProg3_testDoc::Serialize(CArchive& ar)
 {
+
+	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
+
+	CWinProg3_testView* pView = (CWinProg3_testView*)pFrame->GetActiveView();
+
 	if (ar.IsStoring())
 	{
+		ar << pView->Lines.GetSize();
+		if (true)	//객체 있으면
+		{
+			Serialize(ar);	//저장
+
+		}
+		//게이트도 저장
+
 		// TODO: 여기에 저장 코드를 추가합니다.
 	}
 	else
@@ -92,8 +106,34 @@ bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 		return false;
 	}
 
-	exit(1);
+	exit(1); 
 }
+
+
+void CWinProg3_testDoc::SevenSegment(bool& seg1, bool& seg2, bool& seg3, bool& seg4, bool& seg5, bool& seg6, bool& seg7, int& select)
+{
+		
+
+		seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = false;
+		switch (select)	//스위치문에 의해 세그먼트 결정
+		{
+		case 0: seg1 = seg2 = seg4 = seg5 = seg6 = seg7 = true;	break;
+		case 1:	seg6 = seg7 = true; break;
+		case 2: seg1 = seg6 = seg3 = seg5 = seg2 = true; break;
+		case 3: seg1 = seg6 = seg3 = seg7 = seg2 = true; break;
+		case 4: seg4 = seg3 = seg6 = seg7 = true;	break;
+		case 5: seg1 = seg4 = seg3 = seg7 = seg2 = true; break;
+		case 6: seg1 = seg4 = seg5 = seg2 = seg7 = seg3 = true; break;
+		case 7: seg1 = seg6 = seg7 = true; break;
+		case 8: seg1 = seg2 = seg3 = seg4 = seg5 = seg6 = seg7 = true; break;
+		case 9: seg1 = seg3 = seg4 = seg6 = seg7 = seg2 = true; break;
+		}
+
+
+
+	
+}
+
 
 bool CWinProg3_testDoc::test(int i) {
 	if (i == 3) return true;

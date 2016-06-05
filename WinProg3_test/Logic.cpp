@@ -25,14 +25,12 @@ bool Logic::Xor_Operator(bool A1, bool A2) { return A1^A2; }
 
 /*
 bool Logic::DFlipFlop_Operator(bool A1, bool A2) { 
-	if (((Clocks[i].clocktime)++) % Clocks[i].clocktype == 0) {
-		if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
-
+	if(Gates[Clocks[i].gateIndex].edge == true){
 			return A1;
 		}
-	}	
 }
 
+/
 bool Logic::JKFlipFlop_Opertor(bool A1, bool A2, bool A3)
 {
 	if (((Clocks[i].clocktime)++) % Clocks[i].clocktype == 0) {

@@ -10,6 +10,7 @@ public:
 	int y;
 	int width;
 	int height;	
+	int rota;
 
 	void setBmSize(int w, int h);
 	bool bmSizeFlag;

@@ -102,6 +102,10 @@ IDB_BITMAP1             BITMAP                  "res\\bmp00001.bmp"
 
 IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap6.bmp"
 
+IDB_BRANCH              BITMAP                  "res\\bitmap7.bmp"
+
+IDB_DFF                 BITMAP                  "res\\bmp00002.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -171,8 +175,9 @@ BEGIN
     BEGIN
         MENUITEM "입력",                          ID_INPUT_BUTTON
         MENUITEM "출력",                          ID_OUTPUT_BUTTON
-        MENUITEM "선",                           ID_LINE
         MENUITEM "7-세그먼트",                      ID_7SEGMENT
+        MENUITEM "선",                           ID_LINE, MENUBREAK
+        MENUITEM "분기",                          ID_Branch
     END
     POPUP "클럭"
     BEGIN
@@ -238,6 +243,11 @@ BEGIN
     LTEXT           "Logic Gate Infomation",IDC_STATIC,23,15,71,8
     EDITTEXT        IDC_EDIT1,64,29,73,13,ES_AUTOHSCROLL
     LTEXT           "Gate Name : ",IDC_STATIC,19,30,44,13
+    PUSHBUTTON      "남",IDC_BUTTON1,145,63,50,14
+    PUSHBUTTON      "서",IDC_BUTTON2,91,62,50,14
+    PUSHBUTTON      "북",IDC_BUTTON3,200,62,50,14
+    PUSHBUTTON      "동",IDC_BUTTON4,38,62,50,14
+    LTEXT           "게이트 방향",IDC_STATIC,14,50,43,11
 END
 
 IDD_DIALOG2 DIALOGEX 0, 0, 257, 128
@@ -345,6 +355,11 @@ BEGIN
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 100, 100,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0
 END

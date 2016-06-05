@@ -14,6 +14,7 @@ IMPLEMENT_DYNAMIC(CInfoDialog, CDialogEx)
 CInfoDialog::CInfoDialog(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG1, pParent)
 	, lable(_T(""))
+	, rotate(false)
 {
 
 }
@@ -26,6 +27,7 @@ void CInfoDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT1, lable);
+//	DDX_Control(pDX, IDC_BUTTON1, rotate);
 }
 
 
@@ -35,6 +37,9 @@ BEGIN_MESSAGE_MAP(CInfoDialog, CDialogEx)
 ON_BN_CLICKED(IDCANCEL, &CInfoDialog::OnBnClickedCancel)
 ON_EN_CHANGE(IDC_EDIT1, &CInfoDialog::OnEnChangeEdit1)
 ON_BN_CLICKED(IDC_BUTTON1, &CInfoDialog::OnBnClickedButton1)
+ON_BN_CLICKED(IDC_BUTTON2, &CInfoDialog::OnBnClickedButton2)
+ON_BN_CLICKED(IDC_BUTTON3, &CInfoDialog::OnBnClickedButton3)
+ON_BN_CLICKED(IDC_BUTTON4, &CInfoDialog::OnBnClickedButton4)
 END_MESSAGE_MAP()
 
 
@@ -107,7 +112,42 @@ void CInfoDialog::OnEnChangeEdit1()
 
 void CInfoDialog::OnBnClickedButton1()
 {
+	rote = 2;
+	UpdateData(true);
+	
+	/*
+	if (rote == false)
+		rote = true;
+	else
+		rote = false;
+		*/
+
+	// TODO: 여기에 컨트 알림 처리기 코드를 추가합니다.
+}
 
 
+void CInfoDialog::OnBnClickedButton2()
+{
+
+	rote = 1;
+	UpdateData(true);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+
+
+void CInfoDialog::OnBnClickedButton3()
+{
+	rote = 3;
+	UpdateData(true);
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CInfoDialog::OnBnClickedButton4()
+{
+	rote = 0;
+	UpdateData(true);;
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

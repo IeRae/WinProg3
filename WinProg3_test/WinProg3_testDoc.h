@@ -18,6 +18,7 @@ public:
 public:
 	bool getLogic(Gate& Gates);
 	bool test(int i);
+	void SevenSegment(bool& seg1, bool& seg2, bool& seg3, bool& seg4, bool& seg5, bool& seg6, bool& seg7, int& select);
 
 // 재정의입니다.
 public:
