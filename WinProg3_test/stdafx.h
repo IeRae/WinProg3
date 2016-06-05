@@ -37,6 +37,7 @@
 #include "Gate.h"
 #include "Line.h"
 #include "Logic.h"
+#include "GraphInfoDialog.h"
 
 
 

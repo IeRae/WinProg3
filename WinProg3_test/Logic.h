@@ -23,6 +23,7 @@ public:
 	bool Or_Operator(bool A1, bool A2);
 	bool DFlipFlop_Operator(bool A1, bool A2);
 	bool JKFlipFlop_Opertor(bool A1, bool A2, bool A3);
+	bool TFlipFlop_Opertor(bool A1, bool A3);
 
 };
 

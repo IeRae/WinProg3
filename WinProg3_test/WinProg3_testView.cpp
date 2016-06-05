@@ -44,6 +44,9 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_WM_LBUTTONUP()
 	ON_WM_TIMER()
 	//ON_BN_CLICKED(IDC_BUTTON1, &CWinProg3_testView::OnBnClickedButton1)
+	ON_COMMAND(ID_SET_LIB, &CWinProg3_testView::OnSetLib)
+	ON_COMMAND(ID_TFF, &CWinProg3_testView::OnTff)
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 // CWinProg3_testView 생성/소멸
@@ -68,7 +71,7 @@ BOOL CWinProg3_testView::PreCreateWindow(CREATESTRUCT& cs)
 	return CView::PreCreateWindow(cs);
 }
 
-void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
+void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType bmindex) {
 	switch (bmindex)
 	{
 	case ANDSHAPE:
@@ -110,6 +113,9 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo,int bmindex) {
 	case INPUTFALSE:
 		bit.LoadBitmapW(IDB_INPUT_FALSE);
 		break;
+	case TFFSHAPE:
+		bit.LoadBitmapW(IDB_TFF); //tff 추가
+		break;
 	default:
 		break;
 	}
@@ -129,10 +135,30 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 
 		
+
 		//논리 회로 연산을 실행하는 부분
+		//Gate의 입력값 할당
 		for (int i = 0; i < Gates.GetSize(); i++) {
 			//pDoc->getLogic(Gates[i]);
-			Gates[i].outputArray[Gates[i].outputArrayIndex] = pDoc->getLogic(Gates[i]);
+			bool a[5];
+			int ai = 0;
+			for (int j = 0; j < Lines.GetSize(); j++) {
+				if(i == Lines[j].endGateIndex){
+					a[ai] = Lines[j].BoolValue;
+					ai++;
+				}
+			}
+			Gates[i].addInputArray(a, ai);
+			
+		}
+		
+		//gate의 출력값을 line에 할당
+		for (int i = 0; i < Gates.GetSize(); i++) {
+			for (int j = 0; j < Lines.GetSize(); j++) {
+				if (i == Lines[j].startGateIndex) {
+					Lines[j].BoolValue = pDoc->getLogic(Gates[i]);
+				}
+			}
 		}
 		
 		CDC dcmem;
@@ -147,25 +173,17 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 				if((Gates[i].GateId != LINESHAPE) || (Gates[i].GateId != NONE)){
 
-					/*
+					
 					//output 게이트의 정보 확인
-					if ((Gates[i].GateId == OUTPUTFALSE) && (Gates[i].outputArray[0] == true)) {
+					if ((Gates[i].GateId == OUTPUTFALSE) || (Gates[i].GateId == OUTPUTTRUE)) {
+						if(Gates[i].inputArray[0] == true)
 						Gates[i].GateId = OUTPUTTRUE;
-					}
-					else if ((Gates[i].GateId == OUTPUTTRUE) && (Gates[i].outputArray[0] == false))
+						else if (Gates[i].inputArray[0] == false)
 						Gates[i].GateId = OUTPUTFALSE;
-						
-
-
-					if ((Gates[i].GateId == INPUTFALSE) || (Gates[i].GateId == INPUTTRUE)) {
-						CString msg;
-						msg.Format(_T("%d"), Gates[i].outputArray[0]);
-						//AfxMessageBox(msg);
-					}*/
+					}
 							
-
 					loadBitmap(bitmap, bminfo, Gates[i].GateId);
-						
+				
 					//CString msg;
 					//msg.Format(_T(" 불리언값 : %d "), rotate2);
 					//AfxMessageBox(msg);
@@ -175,7 +193,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 						//pBitmap3 = Bitmap::FromResource(AfxGetInstanceHandle(), (WCHAR*)MAKEINTRESOURCE(IDB_BITMAP2));
 						pBitmap3 = Bitmap::FromHBITMAP((HBITMAP)bitmap.m_hObject, NULL);
 						//	CClientDC dc(this);
-
+						
 			//			if (Gates[i].rota == true) {
 							switch (Gates[i].rota)
 							{
@@ -196,11 +214,11 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 							//	bitmap.CreateCompatibleBitmap(&(*pDC), pBitmap3->GetWidth(), pBitmap3->GetHeight());
 							//	memBitmap.CreateCompatibleBitmap(&(*pDC), pBitmap3->GetWidth(), pBitmap3->GetHeight());
 							dcmem.SelectObject(&bitmap);
-							Graphics graphicsMem(dcmem.GetSafeHdc());
-							graphicsMem.DrawImage(pBitmap3, 0, 0); //CBitmap 변수에 Bitmap 이미지를 그려줍니다.
-							delete pBitmap3; //기존에 pBitmap이 존재할 이유가 없으므로 delete 시킵니다.
+						Graphics graphicsMem(dcmem.GetSafeHdc());
+						graphicsMem.DrawImage(pBitmap3, 0, 0); //CBitmap 변수에 Bitmap 이미지를 그려줍니다.
+						delete pBitmap3; //기존에 pBitmap이 존재할 이유가 없으므로 delete 시킵니다.
 					//	}
-				
+	
 
 				//비트맵 크기를 지정하는 부분
 				if (Gates[i].bmSizeFlag == false) {
@@ -215,7 +233,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				
 				pDC->TextOut(Gates[i].x + 1, Gates[i].y + Gates[i].height + 5, Gates[i].lable);
 				}
-											
+				
 			//typeOfGate = LINESHAPE;
 			}
 		}
@@ -267,12 +285,12 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			if (seg3) {
 				pDC->SelectObject(red);
 				pDC->Polygon(point_3, 6);
-			}
+		}
 			else {
 				pDC->SelectObject(white);
 				pDC->Polygon(point_3, 6);
 			}
-
+		
 			if (seg4) {
 				pDC->SelectObject(red);
 				pDC->Polygon(point_4, 6);
@@ -311,7 +329,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			InvalidateRect(NULL, false);
 
 		}
-		
+
 		
 
 	//라인생성
@@ -329,7 +347,7 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 			}
 		}
 	}
-	
+
 
 
 
@@ -362,17 +380,19 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	CView::OnLButtonDown(nFlags, point);
+
 
 	//if (typeOfGate != LINESHAPE) {
 		//CString msg;
 
+	start_x = point.x;
+	start_y = point.y;
 	
-	if (typeOfGate != LINESHAPE && typeOfGate !=SEVENSEGMENT) {
-
-		start_x = point.x;
-		start_y = point.y;
+	if ((typeOfGate != LINESHAPE) && (typeOfGate != NONE)) {
 		Gate* temp = new Gate(typeOfGate, start_x, start_y);
+
+		if (typeOfGate == OUTPUTTRUE)
+			temp->inputArray[0] = true;
 
 		Gates.Add(*temp);
 
@@ -404,9 +424,31 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 
 	}
-		//AfxMessageBox(_T("시작점 종료"));
+	else if (typeOfGate == NONE) {
+		for (int i = 0; i < Gates.GetSize(); i++) {
+
+			if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width))) {
+				if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+					if (Gates[i].GateId == INPUTTRUE) {
+						Gates[i].GateId = INPUTFALSE;
+						Gates[i].outputArray[0] = false;
+						Gates[i].inputArray[0] = false;
+					}
+					else if (Gates[i].GateId == INPUTFALSE) {
+						Gates[i].GateId = INPUTTRUE;
+						Gates[i].outputArray[0] = true;
+						Gates[i].inputArray[0] = true;
+					}
+				}
+			}
+		}
+	}
+		
+	typeOfGate = NONE;
 		Invalidate();
 	
+
+		CView::OnLButtonDown(nFlags, point);
 }
 
 
@@ -475,17 +517,22 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
+	
+
 	//각 게이트에 맞는 대화 상자 호출 및 라벨 설정
 	for (int i = 0; i < Gates.GetSize(); i++) {
 
 		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
-
+				/*
 				if ((Gates[i].GateId == OUTPUTTRUE) || (Gates[i].GateId == OUTPUTFALSE)) {
 					CString msg;
 					msg.Format(_T("%d"), Gates[i].outputArray[0]);
 					AfxMessageBox(msg);
-				}
+				}*/
+				CString msg;
+				msg.Format(_T("%d"), Gates[i].inputArray[0]);
+				AfxMessageBox(msg);
 
 				//입력 gate 일때 입력 대화 상자 호출
 				if ((Gates[i].GateId == INPUTTRUE) || (Gates[i].GateId == INPUTFALSE)) {
@@ -547,7 +594,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 					//대화 상자로 정보 초기화
 					dlg.lable = Gates[i].lable;
-			
+
 					int result = dlg.DoModal();
 					if (result == IDOK) {
 						Gates[i].lable = dlg.lable;
@@ -581,7 +628,7 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 
 	dc.SelectObject(pen);
 	//drawline == FALSE;
-	
+
 
 	/*
 	if((typeOfGate == LINESHAPE) && (drawline == true)){
@@ -616,6 +663,7 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 			Pen.DeleteObject(); //팬을 제거 한다. 
 			old_end_point = end_point;
 		}
+	Invalidate();
 	}
 		
 
@@ -652,46 +700,9 @@ void CWinProg3_testView::OnLButtonUp(UINT nFlags, CPoint point)
 				tempL->endGateIndex = to;
 				Lines.Add(*tempL);
 
-				Gates[to].inputArray[0] = Gates[from].outputArray[0];
-				AfxMessageBox(Gates[to].lable);
-
-				if ((Gates[to].GateId == OUTPUTFALSE) || (Gates[to].GateId == OUTPUTTRUE)) {
-					if (Gates[to].inputArray[0] == true)
-						Gates[to].GateId = OUTPUTTRUE;
-					else if (Gates[to].inputArray[0] == false)
-						Gates[to].GateId = OUTPUTFALSE;
-				}
-
-				/*
-				if (Gates[to].inputArrayIndex < Gates[to].fixedInputIndex)
-					Gates[to].inputArray[Gates[to].inputArrayIndex++] = tempL->BoolValue;
-				else
-					AfxMessageBox(_T("잘못된 논리 회로 연결 입력값 할당"));
-					*/
-				
-
 			}
 
-		//라벨을 출력하는 부분
-		for (int k = 0; k < Lines.GetSize(); k++) {
-
-		
-
-			//Gate의 출력값 할당
-			/*
-			if (Lines[k].startGateIndex == j) {
-				if (Gates[j].outputArrayIndex < Gates[j].fixedOutputIndex)
-					Lines[k].BoolValue = Gates[j].outputArray[Gates[j].outputArrayIndex++];
-				else
-					AfxMessageBox(_T("잘못된 논리 회로 연결 출력값 할당"));
-			}else
-			*/
-			//Gate의 입력값 할당
-			if (Lines[k].endGateIndex == j) {
-				
 			}
-		}
-	}
 
 	drawline = FALSE;
 	Invalidate();
@@ -721,13 +732,13 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 			if (Gates[Clocks[i].gateIndex].GateId == INPUTTRUE) {
 				Gates[Clocks[i].gateIndex].GateId = INPUTFALSE;
 				Gates[Clocks[i].gateIndex].outputArray[0] = false;
-				//하강 엣지 
+				//하강 엣지 트리거 설정
 				Gates[Clocks[i].gateIndex].edge = false;
 			}
 			else if (Gates[Clocks[i].gateIndex].GateId == INPUTFALSE) {
 				Gates[Clocks[i].gateIndex].GateId = INPUTTRUE;
 				Gates[Clocks[i].gateIndex].outputArray[0] = true;
-				//상승 엣지
+				//상승 엣지 트리거 설정
 				Gates[Clocks[i].gateIndex].edge = true;
 			}
 		}
@@ -740,4 +751,59 @@ void CWinProg3_testView::OnTimer(UINT_PTR nIDEvent)
 	
 
 	CView::OnTimer(nIDEvent);
+}
+
+
+
+void CWinProg3_testView::OnSetLib()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_pTracker = new CRectTracker;
+	/*
+	if (m_pTracker->TrackRubberBand(this, POINT, 0)) {
+	
+	}
+	*/
+	m_pTracker = new CRectTracker;
+}
+
+
+void CWinProg3_testView::OnTff()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	typeOfGate = TFFSHAPE;
+}
+
+
+void CWinProg3_testView::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	
+
+
+	
+	for (int i = 0; i < Gates.GetSize(); i++) {
+		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
+			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+				if (Gates[i].GateId == OUTPUTTRUE || Gates[i].GateId == OUTPUTFALSE) {
+
+					CGraphInfoDialog dlg = new CGraphInfoDialog;
+
+					//대화 상자로 정보 초기화
+					dlg.istrue = Gates[i].inputArray[0];
+					int result = dlg.DoModal();
+					
+					if (result == IDOK) {
+						//대화상자로 부터 정보를 받음
+
+
+					}
+					else if (result == IDCANCEL) {
+						//Invalidate();
+					}
+				}
+			}
+	}
+
+	CView::OnLButtonDblClk(nFlags, point);
 }

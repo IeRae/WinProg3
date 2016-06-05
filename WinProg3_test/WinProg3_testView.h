@@ -51,12 +51,13 @@ public:
 	CArray<clockinfo, clockinfo&> Clocks;	//클럭 입력 게이트 리스트
 	
 
-	int typeOfGate;
+	BagicGateType typeOfGate;
 	
+	CRectTracker *m_pTracker;
 	
 	// 작업입니다.
 public:
-	void loadBitmap(CBitmap& bit, BITMAP& bminfo, int bmindex);
+	void loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType bmindex);
 	void RotateBitmap(Bitmap *pBitmap, int bmindex, CDC *pDC);
 
 	// 재정의입니다.
@@ -95,6 +96,9 @@ public:
 	void OnSevenSegment();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnSetLib();
+	afx_msg void OnTff();
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void OnDFF();
 	afx_msg void OnBranch();
 

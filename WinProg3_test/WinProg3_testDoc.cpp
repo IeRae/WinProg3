@@ -82,29 +82,47 @@ void CWinProg3_testDoc::Serialize(CArchive& ar)
 
 bool CWinProg3_testDoc::getLogic(Gate& Gates) {
 	Logic LFunction;
+	bool result;
+
 
 	switch (Gates.GateId)
 	{
 	case ANDSHAPE:
-		return LFunction.And_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		result =  LFunction.And_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	case ORSHAPE:
-		return LFunction.Or_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		result = LFunction.Or_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	case NANDSHAPE:
-		return LFunction.Nand_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		result = LFunction.Nand_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	case NOTSHAPE:
-		return LFunction.Not_Operator(Gates.inputArray[0]);
+		result = LFunction.Not_Operator(Gates.inputArray[0]);
+		break;
 	case NORSHAPE:
-		return LFunction.Nor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		result =  LFunction.Nor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	case XORSHAPE:
-		return LFunction.Xor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		result =  LFunction.Xor_Operator(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	case INPUTTRUE:
-		return true;
+		result = true;
+		break;
 	case INPUTFALSE:
-		return false;
+		result = false;
+		break;
+	case OUTPUTFALSE:
+	case OUTPUTTRUE:
+		result =  Gates.inputArray[0];
+		break;
+	case TFFSHAPE:
+		result = LFunction.TFlipFlop_Opertor(Gates.inputArray[0], Gates.inputArray[1]);
+		break;
 	default:
 		//AfxMessageBox(_T("error : not find gate number"));
 		return false;
 	}
+	return result;
 
 	exit(1); 
 }

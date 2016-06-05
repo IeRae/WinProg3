@@ -102,6 +102,7 @@ IDB_BITMAP1             BITMAP                  "res\\bmp00001.bmp"
 
 IDB_OUTPUT_FALSE        BITMAP                  "res\\bitmap6.bmp"
 
+IDB_TFF                 BITMAP                  "res\\bmp00002.bmp"
 IDB_BRANCH              BITMAP                  "res\\bitmap7.bmp"
 
 IDB_DFF                 BITMAP                  "res\\bmp00002.bmp"
@@ -191,6 +192,10 @@ BEGIN
         MENUITEM "JK-플립플롭",                     ID_JKFF
         MENUITEM "T-플립플롭",                      ID_TFF
     END
+    POPUP "라이브러리"
+    BEGIN
+        MENUITEM "지정",                          ID_SET_LIB
+END
 END
 
 
@@ -264,6 +269,16 @@ BEGIN
     COMBOBOX        IDC_COMBO1,64,46,46,45,CBS_DROPDOWNLIST | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
 END
 
+IDD_DIALOG3 DIALOGEX 0, 0, 437, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "확인",IDOK,328,179,50,14
+    PUSHBUTTON      "취소",IDCANCEL,380,179,50,14
+    CONTROL         "",IDC_GRAPH,"Static",SS_BLACKFRAME,7,7,423,173
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -335,6 +350,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 121
     END
+
+    IDD_DIALOG3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 430
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -374,6 +397,11 @@ BEGIN
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0
+END
+
+IDD_DIALOG3 AFX_DIALOG_LAYOUT
+BEGIN
+    0
 END
 
 
