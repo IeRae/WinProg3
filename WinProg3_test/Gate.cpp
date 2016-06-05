@@ -13,6 +13,7 @@ Gate::Gate() {
 
 	bmSizeFlag = false;
 	edge = false;
+	//
 }
 
 Gate::~Gate()
