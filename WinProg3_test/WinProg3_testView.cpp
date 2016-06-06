@@ -37,6 +37,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testView, CView)
 	ON_COMMAND(ID_INPUT_BUTTON, &CWinProg3_testView::OnInputButton)
 	ON_COMMAND(ID_LINE, &CWinProg3_testView::OnLine)
 	ON_COMMAND(ID_7SEGMENT, &CWinProg3_testView::OnSevenSegment)
+	ON_COMMAND(ID_LINE_BRANCH, &CWinProg3_testView::OnBranch)
 	ON_WM_RBUTTONDOWN()
 	ON_WM_MOUSEMOVE()
 	ON_WM_LBUTTONUP()
@@ -227,10 +228,8 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					{
 							for (int j = 0; j < Lines.GetSize(); j++) {
 								if (i == Lines[j].startGateIndex) {
-									Lines[j].Drawline = false;
-								}
-
-					
+					//				Lines[j].Drawline = false;
+								}					
 						}
 		//				Gates[i].rotate = 0;
 					}
@@ -368,6 +367,13 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				}
 			}
 		}
+
+
+
+
+
+
+
 	}
 
 
@@ -435,7 +441,7 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 		for (int i = 0; i < Gates.GetSize(); i++) {	//µ¿
 			//AfxMessageBox(_T("Å½»ö"));
 						
-			if ((point.x >= (Gates[i].x + Gates[i].width - 50)) && (point.x <= (Gates[i].x + Gates[i].width + 50))) {
+			if ((point.x >= (Gates[i].x + Gates[i].width - 20)) && (point.x <= (Gates[i].x + Gates[i].width + 20))) {
 				if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
 					//AfxMessageBox(_T("in"));
 					//	dc.MoveTo(point.x, point.y);	

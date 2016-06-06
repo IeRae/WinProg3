@@ -183,6 +183,7 @@ BEGIN
         MENUITEM "출력",                          ID_OUTPUT_BUTTON
         MENUITEM "선",                           ID_LINE
         MENUITEM "7-세그먼트",                      ID_7SEGMENT
+        MENUITEM "분기",                          ID_LINE_BRANCH
     END
     POPUP "클럭"
     BEGIN
