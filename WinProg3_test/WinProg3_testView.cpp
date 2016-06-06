@@ -238,100 +238,99 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 				
 							
 			//typeOfGate = LINESHAPE;
+				if (DrawSeg == true) {  //7세그먼트 그리기
+					time[0] = 0;
+					//펜 설정
+					CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
+					CBrush red = (RGB(255, 0, 0));
+					CBrush white = (RGB(255, 255, 255));
+					time[0] = 0;
+					int select;
+					X = start_x2;
+					//Y = 150;
+					Y = start_y2;
+
+					select = time[0];
+					CPoint point_1[6] = { { X,Y },{ X + 10,Y - 5 },{ X + 40,Y - 5 },{ X + 50,Y },{ X + 40,Y + 5 },{ X + 10,Y + 5 } };	//7세그먼트 모양 좌표 그리기
+					CPoint point_6[6] = { { X + 53,Y + 3 },{ X + 58,Y + 13 },{ X + 58,Y + 43 },{ X + 53,Y + 53 },{ X + 48,Y + 43 },{ X + 48,Y + 13 } };
+					CPoint point_7[6] = { { X + 53,Y + 59 },{ X + 58, Y + 69 },{ X + 58,Y + 99 },{ X + 53,Y + 109 },{ X + 48,Y + 99 },{ X + 48,Y + 69 } };
+					CPoint point_2[6] = { { X,Y + 112 },{ X + 10,Y + 107 },{ X + 40,Y + 107 },{ X + 50,Y + 112 },{ X + 40,Y + 117 },{ X + 10,Y + 117 } };
+					CPoint point_5[6] = { { X - 3,Y + 59 },{ X + 3,Y + 69 },{ X + 3,Y + 99 },{ X - 3,Y + 109 },{ X - 8,Y + 99 },{ X - 8,Y + 69 } };
+					CPoint point_4[6] = { { X - 3,Y + 3 },{ X + 3,Y + 13 },{ X + 3,Y + 43 },{ X - 3,Y + 53 },{ X - 8,Y + 43 },{ X - 8,Y + 13 } };
+					CPoint point_3[6] = { { X,Y + 56 },{ X + 10,Y + 51 },{ X + 40,Y + 51 },{ X + 50,Y + 56 },{ X + 40,Y + 61 },{ X + 10,Y + 61 } };
+					pDC->SelectObject(pen);
+
+					//함수호출
+					pDoc->SevenSegment(seg1, seg2, seg3, seg4, seg5, seg6, seg7, select);
+
+					if (seg1) {	//각 세그먼트별 동작설정
+						pDC->SelectObject(red);
+						pDC->Polygon(point_1, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_1, 6);
+					}
+
+					if (seg2) {
+						pDC->SelectObject(red);
+						pDC->Polygon(point_2, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_2, 6);
+					}
+
+					if (seg3) {
+						pDC->SelectObject(red);
+						pDC->Polygon(point_3, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_3, 6);
+					}
+
+					if (seg4) {
+						pDC->SelectObject(red);
+						pDC->Polygon(point_4, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_4, 6);
+					}
+
+					if (seg5) {
+						pDC->SelectObject(red);
+						pDC->Polygon(point_5, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_5, 6);
+					}
+
+					if (seg6) {
+						pDC->SelectObject(red);
+						pDC->Polygon(point_6, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_6, 6);
+					}
+
+					if (seg7) {
+						pDC->SelectObject(red);
+						pDC->Polygon(point_7, 6);
+					}
+					else {
+						pDC->SelectObject(white);
+						pDC->Polygon(point_7, 6);
+					}
+					InvalidateRect(NULL, false);
+
+				}
 			}
 		}
 		
-		if (typeOfGate == SEVENSEGMENT && start_x != 0) {	//7세그먼트 그리기
-			
-			time[0] = 0;
-			//펜 설정
-			CPen pen(PS_SOLID, 1, RGB(200, 200, 200));
-			CBrush red = (RGB(255, 0, 0));
-			CBrush white = (RGB(255, 255, 255));
-			time[0] = 0;
-			int select;
-			X = start_x2;
-			//Y = 150;
-			Y = start_y2;
-			
-			select = time[0];
-			CPoint point_1[6] = { { X,Y },{ X + 10,Y - 5 },{ X + 40,Y - 5 },{ X + 50,Y },{ X + 40,Y + 5 },{ X + 10,Y + 5 } };	//7세그먼트 모양 좌표 그리기
-			CPoint point_6[6] = { { X + 53,Y + 3 },{ X + 58,Y + 13 },{ X + 58,Y + 43 },{ X + 53,Y + 53 },{ X + 48,Y + 43 },{ X + 48,Y + 13 } };
-			CPoint point_7[6] = { { X + 53,Y + 59 },{ X + 58, Y + 69 },{ X + 58,Y + 99 },{ X + 53,Y + 109 },{ X + 48,Y + 99 },{ X + 48,Y + 69 } };
-			CPoint point_2[6] = { { X,Y + 112 },{ X + 10,Y + 107 },{ X + 40,Y + 107 },{ X + 50,Y + 112 },{ X + 40,Y + 117 },{ X + 10,Y + 117 } };
-			CPoint point_5[6] = { { X - 3,Y + 59 },{ X + 3,Y + 69 },{ X + 3,Y + 99 },{ X - 3,Y + 109 },{ X - 8,Y + 99 },{ X - 8,Y + 69 } };
-			CPoint point_4[6] = { { X - 3,Y + 3 },{ X + 3,Y + 13 },{ X + 3,Y + 43 },{ X - 3,Y + 53 },{ X - 8,Y + 43 },{ X - 8,Y + 13 } };
-			CPoint point_3[6] = { { X,Y + 56 },{ X + 10,Y + 51 },{ X + 40,Y + 51 },{ X + 50,Y + 56 },{ X + 40,Y + 61 },{ X + 10,Y + 61 } };
-			pDC->SelectObject(pen);
-			
-			//함수호출
-			pDoc->SevenSegment(seg1, seg2, seg3, seg4, seg5, seg6, seg7, select);
-
-			if (seg1) {	//각 세그먼트별 동작설정
-				pDC->SelectObject(red);
-				pDC->Polygon(point_1, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_1, 6);
-			}
-
-			if (seg2) {
-				pDC->SelectObject(red);
-				pDC->Polygon(point_2, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_2, 6);
-			}
-
-			if (seg3) {
-				pDC->SelectObject(red);
-				pDC->Polygon(point_3, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_3, 6);
-			}
-
-			if (seg4) {
-				pDC->SelectObject(red);
-				pDC->Polygon(point_4, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_4, 6);
-			}
-
-			if (seg5) {
-				pDC->SelectObject(red);
-				pDC->Polygon(point_5, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_5, 6);
-			}
-
-			if (seg6) {
-				pDC->SelectObject(red);
-				pDC->Polygon(point_6, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_6, 6);
-			}
-
-			if (seg7) {
-				pDC->SelectObject(red);
-				pDC->Polygon(point_7, 6);
-			}
-			else {
-				pDC->SelectObject(white);
-				pDC->Polygon(point_7, 6);
-			}
-			InvalidateRect(NULL, false);
-			
-		}
 		
 
 	//라인생성
@@ -378,7 +377,7 @@ CWinProg3_testDoc* CWinProg3_testView::GetDocument() const // 디버그되지 않은 버
 
 // CWinProg3_testView 메시지 처리기
 
-
+/*
 void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
@@ -451,6 +450,86 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 		CView::OnLButtonDown(nFlags, point);
 }
+*/
+
+
+
+void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+
+
+	//if (typeOfGate != LINESHAPE) {
+	//CString msg;
+
+	start_x = point.x;
+	start_y = point.y;
+
+	if ((typeOfGate != LINESHAPE) && (typeOfGate != NONE) && typeOfGate != SEVENSEGMENT) {
+		Gate* temp = new Gate(typeOfGate, start_x, start_y);
+
+		if (typeOfGate == OUTPUTTRUE)
+			temp->inputArray[0] = true;
+
+		Gates.Add(*temp);
+		typeOfGate = NONE;
+
+	}
+	else if (typeOfGate == SEVENSEGMENT) {
+		start_x2 = point.x;
+		start_y2 = point.y;
+
+
+	}
+	else if (typeOfGate == LINESHAPE && typeOfGate != SEVENSEGMENT) {
+		CClientDC dc(this);
+
+		drawline = FALSE;
+
+		//AfxMessageBox(_T("진입"));
+		//old_end_point = start_point;
+		for (int i = 0; i < Gates.GetSize(); i++) {
+			//AfxMessageBox(_T("탐색"));
+			if ((point.x >= (Gates[i].x + Gates[i].width - 50)) && (point.x <= (Gates[i].x + Gates[i].width + 50))) {
+				if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+					//AfxMessageBox(_T("in"));
+					//	dc.MoveTo(point.x, point.y);	
+
+					start_point = point;
+					drawline = TRUE;
+					from = i;
+					//AfxMessageBox(_T("시작점 잘잡았네"));
+				}
+			}
+		}
+	}
+	else if (typeOfGate == NONE && typeOfGate != SEVENSEGMENT) {
+		for (int i = 0; i < Gates.GetSize(); i++) {
+
+			if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width))) {
+				if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
+					if (Gates[i].GateId == INPUTTRUE) {
+						Gates[i].GateId = INPUTFALSE;
+						Gates[i].outputArray[0] = false;
+						Gates[i].inputArray[0] = false;
+					}
+					else if (Gates[i].GateId == INPUTFALSE) {
+						Gates[i].GateId = INPUTTRUE;
+						Gates[i].outputArray[0] = true;
+						Gates[i].inputArray[0] = true;
+					}
+				}
+			}
+		}
+	}
+
+	//typeOfGate = NONE;
+	Invalidate();
+
+
+	CView::OnLButtonDown(nFlags, point);
+}
 
 
 
@@ -513,13 +592,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 		if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width)))
 			if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
-				/*
-				if ((Gates[i].GateId == OUTPUTTRUE) || (Gates[i].GateId == OUTPUTFALSE)) {
-					CString msg;
-					msg.Format(_T("%d"), Gates[i].outputArray[0]);
-					AfxMessageBox(msg);
-				}*/
-
+				
 				
 				CString msg;
 				msg.Format(_T("%d"), Gates[i].inputArray[0]);
@@ -610,10 +683,11 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 
 void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 {
+
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CClientDC dc(this);
 	CPen pen;
-	
+
 	pen.CreatePen(PS_SOLID, 10, RGB(255, 255, 0));
 
 	dc.SelectObject(pen);
@@ -622,44 +696,42 @@ void CWinProg3_testView::OnMouseMove(UINT nFlags, CPoint point)
 
 	/*
 	if((typeOfGate == LINESHAPE) && (drawline == true)){
-		if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
-		{
-			
-			dc.MoveTo(start_x, start_y);
-			dc.LineTo(point.x, point.y);
-			Invalidate();
-		}
-	}*/
-
-	if ((typeOfGate == LINESHAPE) && (drawline == true)) {
 	if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
 	{
+
+	dc.MoveTo(start_x, start_y);
+	dc.LineTo(point.x, point.y);
+	Invalidate();
+	}
+	}*/
+
+
+
+	if ((typeOfGate == LINESHAPE) && (drawline == true)) {
+		if ((nFlags&&MK_LBUTTON) == MK_LBUTTON)
+		{
 
 			end_point = point;
 			CClientDC dc(this);
 
 			CPen Pen, WPen, *oldPen;
-			WPen.CreatePen(PS_SOLID, 2, RGB(255, 255, 255));//녹색의 선을 만든다.
-			Pen.CreatePen(PS_SOLID, 2, RGB(255, 5, 5));//검색의 선을 만든다.
-			oldPen = dc.SelectObject(&WPen);//old에 넣어준다.
+			WPen.CreatePen(PS_SOLID, 2, RGB(255, 255, 255));//g흰색 펜 만들기
+			Pen.CreatePen(PS_SOLID, 2, RGB(255, 5, 5));//검정색 펜 생성
+			oldPen = dc.SelectObject(&WPen);//oldPen에 흰색펜 할당
 			dc.MoveTo(start_point.x, start_point.y);
 			dc.LineTo(old_end_point.x, old_end_point.y);
-			dc.SelectObject(oldPen);//원위치로 돌려 놓는다. 
-			Pen.DeleteObject(); //팬을 제거 한다. 
-			oldPen = dc.SelectObject(&Pen);//old에 반드시 넣어준다.
+			dc.SelectObject(oldPen);//펜 복구
+			Pen.DeleteObject(); //팬을 제거 
+			oldPen = dc.SelectObject(&Pen);//검정색펜 할당
 			dc.MoveTo(start_point.x, start_point.y);
 			dc.LineTo(end_point.x, end_point.y);
-			dc.SelectObject(oldPen);//원위치로 돌려 놓는다. 
-			Pen.DeleteObject(); //팬을 제거 한다. 
+			dc.SelectObject(oldPen);//펜 복구 
+			Pen.DeleteObject(); //팬을 제거 
 			old_end_point = end_point;
 		}
-	Invalidate();
 	}
-		
-
-
 	
-	
+
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -708,6 +780,7 @@ void CWinProg3_testView::OnLine()
 void CWinProg3_testView::OnSevenSegment()
 {
 	typeOfGate = SEVENSEGMENT;
+	DrawSeg = true;
 	CClientDC dc(this);
 	OnDraw(&dc);
 }

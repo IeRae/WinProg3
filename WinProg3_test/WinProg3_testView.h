@@ -29,7 +29,7 @@ public:
 	bool drawline;
 	bool finish;
 	int from, to;
-
+	bool DrawSeg;
 	bool drawline2;
 	int count;
 
