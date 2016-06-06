@@ -110,13 +110,13 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType 
 		bit.LoadBitmapW(IDB_INPUT_FALSE);
 		break;
 	case TFFSHAPE:
-		bit.LoadBitmapW(IDB_TFF); //tff 추가
+		bit.LoadBitmapW(IDB_TFF); //tff 
 		break;
 	case DFFSHAPE:
-		bit.LoadBitmapW(IDB_TFF); 
+		bit.LoadBitmapW(IDB_DFF); 
 		break;
 	case JKFFSHAPE:
-		bit.LoadBitmapW(IDB_TFF); 
+		bit.LoadBitmapW(IDB_JKFF); 
 		break;
 	case LINEBRANCH:
 		bit.LoadBitmapW(IDB_BRANCH_LINE);
@@ -193,29 +193,31 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 					pBitmap3 = Bitmap::FromHBITMAP((HBITMAP)bitmap.m_hObject, NULL);
 					switch (Gates[i].rotate)
 					{
-					case 0:
-						break;
 					case 1:
-						pBitmap3->RotateFlip(Rotate180FlipNone);
 						break;
 					case 2:
-						pBitmap3->RotateFlip(Rotate90FlipNone);
+						pBitmap3->RotateFlip(Rotate180FlipNone);
 						break;
 					case 3:
+						pBitmap3->RotateFlip(Rotate90FlipNone);
+						break;
+					case 4:
 						pBitmap3->RotateFlip(Rotate90FlipY);
 						break;
 
 					}
-
 					/*
-					for (int i = 0; i < Gates.GetSize(); i++) {
-						for (int j = 0; j < Lines.GetSize(); j++) {
-							if (i == Lines[j].startGateIndex) {
-								Lines[j].BoolValue = pDoc->getLogic(Gates[i]);
+					if (Gates[i].rotate > 0)	//회전할시 라인 초기화
+					{
+						for (int i = 0; i < Gates.GetSize(); i++) {
+							for (int j = 0; j < Lines.GetSize(); j++) {
+								if (i == Lines[j].startGateIndex) {
+									Lines[j].Drawline = false;
+								}
 							}
 						}
 					}*/
-				
+
 					dcmem.SelectObject(&bitmap);
 					Graphics graphicsMem(dcmem.GetSafeHdc());
 					graphicsMem.DrawImage(pBitmap3, 0, 0); //CBitmap 변수에 Bitmap 이미지를 그리기

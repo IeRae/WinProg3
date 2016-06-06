@@ -9,8 +9,9 @@
 #include "WinProg3_test.h"
 #endif
 
+#include "MainFrm.h"
 #include "WinProg3_testDoc.h"
-
+#include "WinProg3_testView.h"
 #include <propkey.h>
 
 #ifdef _DEBUG
@@ -56,12 +57,17 @@ BOOL CWinProg3_testDoc::OnNewDocument()
 
 void CWinProg3_testDoc::Serialize(CArchive& ar)
 {
+
+	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
+	CWinProg3_testView* pView = (CWinProg3_testView*)pFrame->GetActiveView();
 	if (ar.IsStoring())
 	{
+
 		// TODO: 여기에 저장 코드를 추가합니다.
 	}
 	else
 	{
+
 		// TODO: 여기에 로딩 코드를 추가합니다.
 	}
 }

@@ -111,7 +111,7 @@ void CInfoDialog::OnEnChangeEdit1()
 void CInfoDialog::OnBnClickedButton1()
 {
 
-	rote = 0;
+	rote = 1;
 	UpdateData(true);
 
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
@@ -121,7 +121,7 @@ void CInfoDialog::OnBnClickedButton1()
 void CInfoDialog::OnBnClickedButton2()
 {
 
-	rote = 1;
+	rote = 2;
 	UpdateData(true);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
@@ -129,7 +129,7 @@ void CInfoDialog::OnBnClickedButton2()
 
 void CInfoDialog::OnBnClickedButton3()
 {
-	rote = 2;
+	rote = 3;
 	UpdateData(true);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
@@ -137,7 +137,7 @@ void CInfoDialog::OnBnClickedButton3()
 
 void CInfoDialog::OnBnClickedButton4()
 {
-	rote = 3;
+	rote = 4;
 	UpdateData(true);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

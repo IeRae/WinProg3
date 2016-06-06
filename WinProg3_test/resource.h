@@ -28,6 +28,9 @@
 #define IDD_DIALOG3                     334
 #define IDB_BITMAP6                     337
 #define IDB_BRANCH_LINE                 337
+#define IDB_DFF                         338
+#define IDB_BITMAP7                     339
+#define IDB_JKFF                        339
 #define IDC_EDIT1                       1000
 #define IDC_CHECK1                      1001
 #define IDC_BUTTON1                     1001
@@ -72,7 +75,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        338
+#define _APS_NEXT_RESOURCE_VALUE        340
 #define _APS_NEXT_COMMAND_VALUE         32801
 #define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           310

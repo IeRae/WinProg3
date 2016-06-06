@@ -106,6 +106,10 @@ IDB_TFF                 BITMAP                  "res\\bmp00002.bmp"
 
 IDB_BRANCH_LINE         BITMAP                  "res\\bmp00003.bmp"
 
+IDB_DFF                 BITMAP                  "res\\bitmap7.bmp"
+
+IDB_JKFF                BITMAP                  "res\\bmp00004.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
