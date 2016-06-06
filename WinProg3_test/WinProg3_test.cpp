@@ -25,9 +25,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testApp, CWinApp)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testApp::OnOutputButton)
 END_MESSAGE_MAP()
 
-
 // CWinProg3_testApp 생성
-
 CWinProg3_testApp::CWinProg3_testApp()
 {
 	// TODO: 아래 응용 프로그램 ID 문자열을 고유 ID 문자열로 바꾸십시오(권장).

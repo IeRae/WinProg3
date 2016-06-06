@@ -16,7 +16,7 @@ CInputInfoDialog::CInputInfoDialog(CWnd* pParent /*=NULL*/)
 	, inputLable(_T(""))
 	, checkClock(FALSE)
 {
-
+	InitCommonControls();
 }
 
 CInputInfoDialog::~CInputInfoDialog()

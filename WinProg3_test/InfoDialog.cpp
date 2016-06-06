@@ -14,7 +14,6 @@ IMPLEMENT_DYNAMIC(CInfoDialog, CDialogEx)
 CInfoDialog::CInfoDialog(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG1, pParent)
 	, lable(_T(""))
-	, rotate(false)
 {
 
 }
@@ -27,7 +26,6 @@ void CInfoDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT1, lable);
-//	DDX_Control(pDX, IDC_BUTTON1, rotate);
 }
 
 
@@ -112,17 +110,11 @@ void CInfoDialog::OnEnChangeEdit1()
 
 void CInfoDialog::OnBnClickedButton1()
 {
-	rote = 2;
-	UpdateData(true);
-	
-	/*
-	if (rote == false)
-		rote = true;
-	else
-		rote = false;
-		*/
 
-	// TODO: 여기에 컨트 알림 처리기 코드를 추가합니다.
+	rote = 0;
+	UpdateData(true);
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
 
 
@@ -135,11 +127,9 @@ void CInfoDialog::OnBnClickedButton2()
 }
 
 
-
-
 void CInfoDialog::OnBnClickedButton3()
 {
-	rote = 3;
+	rote = 2;
 	UpdateData(true);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
@@ -147,7 +137,7 @@ void CInfoDialog::OnBnClickedButton3()
 
 void CInfoDialog::OnBnClickedButton4()
 {
-	rote = 0;
-	UpdateData(true);;
+	rote = 3;
+	UpdateData(true);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

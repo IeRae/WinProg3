@@ -24,20 +24,18 @@
 #define IDB_BITMAP5                     328
 #define IDB_INPUT_FALSE                 328
 #define IDB_BITMAP1                     329
-#define IDB_BITMAP6                     330
-#define IDB_BRANCH                      331
-#define IDB_BITMAP7                     332
-#define IDB_DFF                         332
 #define IDB_TFF                         331
 #define IDD_DIALOG3                     334
+#define IDB_BITMAP6                     337
+#define IDB_BRANCH_LINE                 337
 #define IDC_EDIT1                       1000
 #define IDC_CHECK1                      1001
 #define IDC_BUTTON1                     1001
 #define IDC_COMBO1                      1002
 #define IDC_GRAPH                       1002
-#define IDC_BUTTON2                     1002
-#define IDC_BUTTON3                     1003
-#define IDC_BUTTON4                     1004
+#define IDC_BUTTON2                     1003
+#define IDC_BUTTON3                     1004
+#define IDC_BUTTON4                     1005
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -66,17 +64,17 @@
 #define ID_JKFF                         32795
 #define ID_DFF                          32796
 #define ID_32797                        32797
-#define ID_Branch                       32798
-#define ID_32797                        32797
 #define ID_SET_LIB                      32798
+#define ID_32799                        32799
+#define ID_BRANCH                       32800
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        337
-#define _APS_NEXT_COMMAND_VALUE         32799
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_RESOURCE_VALUE        338
+#define _APS_NEXT_COMMAND_VALUE         32801
+#define _APS_NEXT_CONTROL_VALUE         1006
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 BOOL CGraphInfoDialog::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-
+	InitCommonControls();
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	
 	// 오실로스코프 컨트롤이 위치할 영역 가져오기
@@ -103,3 +103,4 @@ void CGraphInfoDialog::OnDestroy()
 void CGraphInfoDialog::passingbool(bool a){
 	istrue = a;
 }
+
