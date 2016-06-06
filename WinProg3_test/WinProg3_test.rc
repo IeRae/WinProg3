@@ -110,6 +110,8 @@ IDB_DFF                 BITMAP                  "res\\bitmap7.bmp"
 
 IDB_JKFF                BITMAP                  "res\\bmp00004.bmp"
 
+IDB_BITMAP7             BITMAP                  "res\\bmp00005.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

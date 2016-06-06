@@ -94,6 +94,7 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType 
 		bit.LoadBitmapW(IDB_XOR);
 		break;
 	case SEVENSEGMENT:
+		bit.LoadBitmapW(IDB_BITMAP7);
 		break;		
 	case LINESHAPE:
 		break;
@@ -222,12 +223,14 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 
 					}
 				
-					if (Gates[i].rotate > 0)	//회전할시 라인 초기화
+					if (Gates[i].rotate > 0 )	//회전할시 라인 초기화
 					{
-						for (int j = 0; j < Lines.GetSize(); j++) {
-							if (i == Lines[j].startGateIndex) {
-								Lines[j].Drawline = false;
-							}
+							for (int j = 0; j < Lines.GetSize(); j++) {
+								if (i == Lines[j].startGateIndex) {
+									Lines[j].Drawline = false;
+								}
+
+					
 						}
 		//				Gates[i].rotate = 0;
 					}
@@ -429,8 +432,9 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 
 		//AfxMessageBox(_T("진입"));
 		//old_end_point = start_point;
-		for (int i = 0; i < Gates.GetSize(); i++) {
+		for (int i = 0; i < Gates.GetSize(); i++) {	//동
 			//AfxMessageBox(_T("탐색"));
+						
 			if ((point.x >= (Gates[i].x + Gates[i].width - 50)) && (point.x <= (Gates[i].x + Gates[i].width + 50))) {
 				if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
 					//AfxMessageBox(_T("in"));
@@ -443,6 +447,46 @@ void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 				}
 			}
 		}
+		for (int i = 0; i < Gates.GetSize(); i++) {	//서
+
+				for (int i = 0; i < Gates.GetSize(); i++) {
+					if ((point.x >= (Gates[i].x - 20)) && (point.x <= (Gates[i].x + 20))) {
+						if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
+							start_point = point;
+							drawline = TRUE;
+							from = i;
+						}
+					}
+				}
+
+		}
+		for (int i = 0; i < Gates.GetSize(); i++) {	//남
+
+			for (int i = 0; i < Gates.GetSize(); i++) {
+				if ((point.x >= (Gates[i].x + Gates[i].width / 2 - 20)) && (point.x <= (Gates[i].x + Gates[i].width / 2 + 20))) {
+					if ((point.y >= Gates[i].y + Gates[i].height - 10) && (point.y <= (Gates[i].y + Gates[i].height + 10))) {
+						start_point = point;
+						drawline = TRUE;
+						from = i;
+					}
+				}
+			}
+		}
+		for (int i = 0; i < Gates.GetSize(); i++) {	//북
+
+			for (int i = 0; i < Gates.GetSize(); i++) {
+				if ((point.x >= (Gates[i].x + Gates[i].width / 2 - 20)) && (point.x <= (Gates[i].x + Gates[i].width / 2 + 20))) {
+					if ((point.y >= Gates[i].y - 10) && (point.y <= (Gates[i].y + 10))) {
+						start_point = point;
+						drawline = TRUE;
+						from = i;
+					}
+				}
+			}
+		}
+
+
+
 	}
 	else if (typeOfGate == NONE && typeOfGate != SEVENSEGMENT) {
 		for (int i = 0; i < Gates.GetSize(); i++) {
@@ -552,6 +596,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 						Gates[i].lable = dlg.inputLable;
 						clocktype = dlg.clock_number;
 						Gates[i].rotate2 = dlg.rote2;
+						Invalidate();
 
 						clockinfo temp;
 						temp.gateIndex = i;
