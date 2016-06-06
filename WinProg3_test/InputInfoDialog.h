@@ -30,4 +30,9 @@ public:
 	int clock_number;
 	BOOL checkClock;
 	afx_msg void OnBnClickedCheck1();
+	afx_msg void OnBnClickedButton2();
+	int rote2;
+	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton5();
 };

@@ -60,14 +60,51 @@ void CWinProg3_testDoc::Serialize(CArchive& ar)
 
 	CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
 	CWinProg3_testView* pView = (CWinProg3_testView*)pFrame->GetActiveView();
-	if (ar.IsStoring())
+	if (ar.IsStoring())	//저장
 	{
+		/*
+		int count_line;
+		count_line = pView->Lines.GetCount();
+		ar << count_line;
+		for (int j = 0; j < count_line; j++) {
 
+			CArray<Line, Line&> Lines2;	//논리 회로 선 객체 리스트
+			//Line* tempL = new Line(TRUE, 1, 1, 0, 0);		
+			//Lines2 = pView->Lines;
+			Lines2.Serialize(ar);
+			
+		//	Lines.Add(*tempL);
+
+			pView->Lines.ElementAt(j);
+		}
+		int count_gate;
+		count_gate = pView->Lines.GetCount();
+		ar << count_gate;
+		for (int i = 0; i < count_gate; i++) {
+			pView->Gates.GetAt(i)->Serilaize(ar);
+		}
+		*/
 		// TODO: 여기에 저장 코드를 추가합니다.
 	}
-	else
-	{
+	else //불러오기
+	{ /*
+		int count_line;
+		int count_gate;
+		ar >> count_line;
+		for (int j = 0; j < count_line; j++) {
+			ar >> pView->Lines.GetAt[j];
+			Line* tempL = new Line(TRUE, 1, 1, 0, 0);
+			tempL->Serialze(ar);
 
+
+			Lines.Add(*tempL);
+
+			pView->Lines.GetAt[j]->Serilaize(ar);
+		}
+
+		ar >> count_gate;
+		ar << count_line;
+		*/
 		// TODO: 여기에 로딩 코드를 추가합니다.
 	}
 }

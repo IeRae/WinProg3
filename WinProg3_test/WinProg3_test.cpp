@@ -21,6 +21,7 @@ BEGIN_MESSAGE_MAP(CWinProg3_testApp, CWinApp)
 	ON_COMMAND(ID_APP_ABOUT, &CWinProg3_testApp::OnAppAbout)
 	// 표준 파일을 기초로 하는 문서 명령입니다.
 	ON_COMMAND(ID_FILE_NEW, &CWinApp::OnFileNew)
+	ON_COMMAND(ID_FILE_NEW, &OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinApp::OnFileOpen)
 	ON_COMMAND(ID_OUTPUT_BUTTON, &CWinProg3_testApp::OnOutputButton)
 END_MESSAGE_MAP()
@@ -117,6 +118,8 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 	virtual void OnOK();
+public:
+	afx_msg void OnFileNew();
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -129,6 +132,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+	ON_COMMAND(ID_FILE_NEW, &CAboutDlg::OnFileNew)
 END_MESSAGE_MAP()
 
 // 대화 상자를 실행하기 위한 응용 프로그램 명령입니다.
@@ -163,4 +167,10 @@ int CWinProg3_testApp::ExitInstance()
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	GdiplusShutdown(gdiplusToken);
 	return CWinApp::ExitInstance();
+}
+
+
+void CAboutDlg::OnFileNew()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }

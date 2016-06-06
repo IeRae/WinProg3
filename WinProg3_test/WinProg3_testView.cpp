@@ -113,7 +113,7 @@ void CWinProg3_testView::loadBitmap(CBitmap& bit, BITMAP& bminfo, BagicGateType 
 		bit.LoadBitmapW(IDB_TFF); //tff 
 		break;
 	case DFFSHAPE:
-		bit.LoadBitmapW(IDB_DFF); 
+		bit.LoadBitmapW(IDB_DFF); //dff
 		break;
 	case JKFFSHAPE:
 		bit.LoadBitmapW(IDB_JKFF); 
@@ -206,18 +206,32 @@ void CWinProg3_testView::OnDraw(CDC* pDC)
 						break;
 
 					}
-					/*
+					switch (Gates[i].rotate2)
+					{
+					case 1:
+						break;
+					case 2:
+						pBitmap3->RotateFlip(Rotate180FlipNone);
+						break;
+					case 3:
+						pBitmap3->RotateFlip(Rotate90FlipNone);
+						break;
+					case 4:
+						pBitmap3->RotateFlip(Rotate90FlipY);
+						break;
+
+					}
+				
 					if (Gates[i].rotate > 0)	//회전할시 라인 초기화
 					{
-						for (int i = 0; i < Gates.GetSize(); i++) {
-							for (int j = 0; j < Lines.GetSize(); j++) {
-								if (i == Lines[j].startGateIndex) {
-									Lines[j].Drawline = false;
-								}
+						for (int j = 0; j < Lines.GetSize(); j++) {
+							if (i == Lines[j].startGateIndex) {
+								Lines[j].Drawline = false;
 							}
 						}
-					}*/
-
+		//				Gates[i].rotate = 0;
+					}
+					
 					dcmem.SelectObject(&bitmap);
 					Graphics graphicsMem(dcmem.GetSafeHdc());
 					graphicsMem.DrawImage(pBitmap3, 0, 0); //CBitmap 변수에 Bitmap 이미지를 그리기
@@ -379,82 +393,6 @@ CWinProg3_testDoc* CWinProg3_testView::GetDocument() const // 디버그되지 않은 버
 
 // CWinProg3_testView 메시지 처리기
 
-/*
-void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
-{
-	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-
-	
-
-	//if (typeOfGate != LINESHAPE) {
-		//CString msg;
-
-	start_x = point.x;
-	start_y = point.y;
-	
-	if ((typeOfGate != LINESHAPE) && (typeOfGate != NONE)) {
-		Gate* temp = new Gate(typeOfGate, start_x, start_y);
-
-		if (typeOfGate == OUTPUTTRUE)
-			temp->inputArray[0] = true;
-
-		Gates.Add(*temp);
-
-	}else if(typeOfGate == LINESHAPE){
-		CClientDC dc(this);
-	
-		drawline = FALSE;
-			
-			//AfxMessageBox(_T("진입"));
-		//old_end_point = start_point;
-		for (int i = 0; i < Gates.GetSize(); i++) {
-				//AfxMessageBox(_T("탐색"));
-				if ((point.x >= (Gates[i].x + Gates[i].width - 50)) && (point.x <= (Gates[i].x + Gates[i].width + 50))){
-					if ((point.y >= Gates[i].y + Gates[i].height / 2 - 10) && (point.y <= (Gates[i].y + Gates[i].height / 2 + 10))) {
-						//AfxMessageBox(_T("in"));
-					//	dc.MoveTo(point.x, point.y);	
-						
-						start_point = point;
-						drawline = TRUE;
-						from = i;
-							//AfxMessageBox(_T("시작점 잘잡았네"));
-					}
-				}
-		}
-	}
-	else if (typeOfGate == SEVENSEGMENT) {
-		start_x2 = point.x;
-		start_y2 = point.y;
-	}
-	else if (typeOfGate == NONE) {
-		for (int i = 0; i < Gates.GetSize(); i++) {
-
-			if ((point.x >= Gates[i].x) && (point.x <= (Gates[i].x + Gates[i].width))) {
-				if ((point.y >= Gates[i].y) && (point.y <= (Gates[i].y + Gates[i].height))) {
-					if (Gates[i].GateId == INPUTTRUE) {
-						Gates[i].GateId = INPUTFALSE;
-						Gates[i].outputArray[0] = false;
-						Gates[i].inputArray[0] = false;
-					}
-					else if (Gates[i].GateId == INPUTFALSE) {
-						Gates[i].GateId = INPUTTRUE;
-						Gates[i].outputArray[0] = true;
-						Gates[i].inputArray[0] = true;
-					}
-				}
-			}
-		}
-	}
-		
-	typeOfGate = NONE;
-	Invalidate();
-		
-
-		CView::OnLButtonDown(nFlags, point);
-}
-*/
-
-
 
 void CWinProg3_testView::OnLButtonDown(UINT nFlags, CPoint point)
 {
@@ -613,6 +551,7 @@ void CWinProg3_testView::OnRButtonDown(UINT nFlags, CPoint point)
 						//대화상자로 부터 정보를 받음
 						Gates[i].lable = dlg.inputLable;
 						clocktype = dlg.clock_number;
+						Gates[i].rotate2 = dlg.rote2;
 
 						clockinfo temp;
 						temp.gateIndex = i;

@@ -34,6 +34,10 @@ void CInputInfoDialog::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CInputInfoDialog, CDialogEx)
 	ON_BN_CLICKED(IDC_CHECK1, &CInputInfoDialog::OnBnClickedCheck1)
+	ON_BN_CLICKED(IDC_BUTTON2, &CInputInfoDialog::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON3, &CInputInfoDialog::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON4, &CInputInfoDialog::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, &CInputInfoDialog::OnBnClickedButton5)
 END_MESSAGE_MAP()
 
 
@@ -100,4 +104,40 @@ void CInputInfoDialog::OnBnClickedCheck1()
 	{
 		GetDlgItem(IDC_COMBO1)->EnableWindow(false);
 	}
+}
+
+
+void CInputInfoDialog::OnBnClickedButton2()
+{
+	rote2 = 1;
+	UpdateData(true);
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CInputInfoDialog::OnBnClickedButton3()
+{
+	rote2 = 2;
+	UpdateData(true);
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CInputInfoDialog::OnBnClickedButton4()
+{
+	rote2 = 3;
+	UpdateData(true);
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}
+
+
+void CInputInfoDialog::OnBnClickedButton5()
+{
+	rote2 = 4;
+	UpdateData(true);
+
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
